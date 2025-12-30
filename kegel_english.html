@@ -870,8 +870,49 @@
         currentVideoIndex: 0,
         userProfile: {},
         dayProgress: {},
-        dayExercises: {}
+        dayExercises: {},
+        assessmentComplete: false,
+        exercisePlanGenerated: false
     };
+
+    // ==================== LOCAL STORAGE FUNCTIONS ====================
+    
+    function saveStateToLocalStorage() {
+        try {
+            localStorage.setItem('pelvicHealthAppState', JSON.stringify(appState));
+            console.log('State saved to localStorage');
+        } catch (error) {
+            console.error('Error saving to localStorage:', error);
+        }
+    }
+    
+    function loadStateFromLocalStorage() {
+        try {
+            const savedState = localStorage.getItem('pelvicHealthAppState');
+            if (savedState) {
+                const parsedState = JSON.parse(savedState);
+                
+                // Only load if assessment was in progress
+                if (parsedState.assessmentComplete !== true) {
+                    appState = parsedState;
+                    console.log('State loaded from localStorage');
+                    return true;
+                }
+            }
+        } catch (error) {
+            console.error('Error loading from localStorage:', error);
+        }
+        return false;
+    }
+    
+    function clearLocalStorage() {
+        try {
+            localStorage.removeItem('pelvicHealthAppState');
+            console.log('LocalStorage cleared');
+        } catch (error) {
+            console.error('Error clearing localStorage:', error);
+        }
+    }
 
     // ==================== EXPANDED GENDER-SPECIFIC EXERCISE LIBRARY ====================
     const exerciseLibrary = {
@@ -2691,7 +2732,20 @@
     // ==================== UI FUNCTIONS ====================
 
     function initApp() {
-        showQuestion();
+        // Try to load saved state
+        const hasSavedState = loadStateFromLocalStorage();
+        
+        if (hasSavedState && appState.assessmentComplete) {
+            // If assessment was complete, show exercise plan
+            showExercisePlan();
+        } else if (hasSavedState && appState.currentQuestion > 0) {
+            // If assessment was in progress, show current question
+            showQuestion();
+        } else {
+            // Fresh start
+            showQuestion();
+        }
+        
         setupEventListeners();
         // Show quiz background by default
         document.getElementById('quiz-bg').classList.remove('hidden');
@@ -2773,6 +2827,9 @@
         
         // Update background
         updateBackground('quiz');
+        
+        // Save state after showing question
+        saveStateToLocalStorage();
     }
 
     function handleAnswer(answer, question) {
@@ -2793,6 +2850,9 @@
             selectedOption.style.borderColor = 'var(--gold-primary)';
             selectedOption.querySelector('.w-2.h-2').classList.remove('opacity-0');
         }
+        
+        // Save state immediately
+        saveStateToLocalStorage();
         
         // Move to next question
         setTimeout(() => {
@@ -2842,6 +2902,9 @@
     }
 
     function generatePersonalizedProgram() {
+        // Mark assessment as complete
+        appState.assessmentComplete = true;
+        
         document.getElementById('quiz-section').classList.add('hidden');
         document.getElementById('analysis-section').classList.remove('hidden');
         
@@ -2868,6 +2931,9 @@
         
         // Generate analysis and solution points
         generateAnalysis();
+        
+        // Save state after generating program
+        saveStateToLocalStorage();
     }
 
     function analyzeUserProfile() {
@@ -3111,6 +3177,9 @@
                 currentCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }, 300);
+        
+        // Save state after rendering exercise plan
+        saveStateToLocalStorage();
     }
 
     function openExerciseVideo(exercise, index) {
@@ -3205,6 +3274,9 @@
         } else {
             renderExercisePlan();
         }
+        
+        // Save state after completing video
+        saveStateToLocalStorage();
     }
 
     function closeVideoModal() {
@@ -3215,6 +3287,9 @@
     }
 
     function restartAssessment() {
+        // Clear localStorage
+        clearLocalStorage();
+        
         // Reset all state
         appState = {
             currentQuestion: 0,
@@ -3233,7 +3308,9 @@
             currentVideoIndex: 0,
             userProfile: {},
             dayProgress: {},
-            dayExercises: {}
+            dayExercises: {},
+            assessmentComplete: false,
+            exercisePlanGenerated: false
         };
         
         // Reset UI
@@ -3325,6 +3402,9 @@
                 history.pushState(null, null, window.location.href);
             }
         });
+        
+        // Save state before page unload
+        window.addEventListener('beforeunload', saveStateToLocalStorage);
     }
 
     // Question popup functions (for future use)
