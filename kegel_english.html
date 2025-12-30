@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
     <title>S.T.I-KEGEL PRO 2025 | Next-Gen Pelvic Health</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -161,11 +162,11 @@
 
     <div class="fixed inset-0 pointer-events-none opacity-20" style="background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDQwaDQwVjBIMHY0MHptMS0xaDM4VjFIMXYzOHoiIGZpbGw9IiMzMzMiIGZpbGwtb3BhY2l0eT0iMC4xIi8+PC9nPjwvc3ZnPg==');"></div>
 
-    <div class="w-full max-w-[420px] glass-panel glass-panel-gold rounded-3xl overflow-hidden relative animate-fade-in flex flex-col h-[90vh]">
+    <div class="w-full max-w-[420px] glass-panel glass-panel-gold rounded-3xl overflow-hidden relative animate-fade-in flex flex-col h-auto max-h-[95vh]">
         
         <header class="pt-6 pb-4 px-6 text-center border-b border-white/5 relative z-10 shrink-0">
             <div class="inline-block relative">
-                <h1 class="text-2xl font-black italic tracking-tighter text-white">
+                <h1 class="text-2xl font-black tracking-tight text-white">
                     S.T.I <span class="text-glow text-[#FFD700]">PRO</span>
                 </h1>
                 <div class="absolute -bottom-1 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#FFD700] to-transparent"></div>
@@ -186,8 +187,8 @@
                     </div>
                 </div>
 
-                <div id="quiz-section" class="animate-fade-in min-h-[300px] flex flex-col justify-center">
-                    <h2 id="question-text" class="text-xl md:text-2xl font-bold text-white mb-8 leading-snug drop-shadow-md min-h-[60px]">
+                <div id="quiz-section" class="animate-fade-in flex flex-col justify-center">
+                    <h2 id="question-text" class="text-xl md:text-2xl font-bold text-white mb-8 leading-snug drop-shadow-md">
                         Loading System...
                     </h2>
                     <div id="options-container" class="space-y-3">
@@ -231,7 +232,7 @@
                     </button>
                 </div>
 
-                <div id="exercise-section" class="hidden animate-fade-in pb-10">
+                <div id="exercise-section" class="hidden animate-fade-in pb-2">
                     <div class="flex justify-between items-end mb-6 border-b border-white/10 pb-4">
                         <div>
                             <h2 class="text-lg font-bold text-white">Daily Protocol</h2>
@@ -257,25 +258,25 @@
     <div id="video-modal" class="fixed inset-0 z-50 hidden flex flex-col items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/95 backdrop-blur-xl transition-opacity duration-300" onclick="closeVideoModal()"></div>
         
-        <div class="w-full max-w-md z-10 relative animate-fade-in">
-            <div class="video-container relative rounded-2xl overflow-hidden border border-[#FFD700]/30 shadow-[0_0_50px_rgba(0,0,0,0.8)] bg-black">
+        <div class="w-full max-w-md z-10 relative animate-fade-in h-auto max-h-[95vh] flex flex-col">
+            <div class="video-container relative rounded-2xl overflow-hidden border border-[#FFD700]/30 shadow-[0_0_50px_rgba(0,0,0,0.8)] bg-black shrink-0">
                 <div class="aspect-ratio-16-9 relative pt-[56.25%] bg-gray-900" id="video-frame">
                     </div>
                 
-                <div class="p-4 bg-gradient-to-t from-black via-gray-900 to-transparent border-t border-white/10">
-                    <div class="video-progress h-1 bg-white/10 rounded-full mb-3 overflow-hidden">
+                <div class="p-4 bg-gradient-to-t from-black via-gray-900 to-transparent border-t border-white/10 overflow-y-auto max-h-[50vh] custom-scrollbar">
+                    <div class="video-progress h-1 bg-white/10 rounded-full mb-3 overflow-hidden shrink-0">
                         <div id="video-progress-fill" class="h-full bg-[#FFD700] w-0 transition-all duration-300 shadow-[0_0_10px_#FFD700]"></div>
                     </div>
                     
-                    <div class="flex justify-between text-[10px] font-mono-tech text-gray-400 mb-4">
+                    <div class="flex justify-between text-[10px] font-mono-tech text-gray-400 mb-4 shrink-0">
                         <span id="video-time-current">0:00</span>
                         <span id="video-time-total">0:00</span>
                     </div>
 
                     <h3 id="video-title" class="text-base font-bold text-white mb-1"></h3>
-                    <p id="video-description" class="text-xs text-gray-400 mb-4 line-clamp-2"></p>
+                    <p id="video-description" class="text-xs text-gray-400 mb-4"></p>
                     
-                    <div class="grid grid-cols-3 gap-2 mb-5">
+                    <div class="grid grid-cols-3 gap-2 mb-5 shrink-0">
                         <div class="bg-white/5 p-2 rounded text-center">
                             <i class="fas fa-clock text-[#FFD700] text-[10px] mb-1 block"></i>
                             <span id="video-duration" class="text-[10px] font-mono-tech"></span>
@@ -290,7 +291,7 @@
                         </div>
                     </div>
                     
-                    <button id="complete-btn" onclick="markCurrentExerciseComplete()" class="w-full btn-primary-glow py-4 rounded-xl text-xs font-bold disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-700 disabled:text-gray-400 disabled:box-shadow-none transition-all">
+                    <button id="complete-btn" onclick="markCurrentExerciseComplete()" class="w-full btn-primary-glow py-4 rounded-xl text-xs font-bold disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-700 disabled:text-gray-400 disabled:box-shadow-none transition-all shrink-0">
                         <i class="fas fa-circle-notch fa-spin mr-2 hidden" id="video-loading"></i>
                         <span id="complete-btn-text">INITIALIZING STREAM...</span>
                     </button>
@@ -335,7 +336,6 @@
     }
 
     // ==================== MASSIVE EXERCISE LIBRARY ====================
-    // NOTE: This library is identical to the original input.
     const exerciseLibrary = {
         control:[
 { id:"C1",name:"Elevator Wave Control",description:"Gradual intensity levels",category:"control",subcategory:"wave",difficulty:"intermediate",duration:"4:10",reps:"6 full waves",videoCode:"dQw4w9WgXcQ",benefit:"Precise intensity control. Fine motor skills.",solution:"Teaches graded muscle contraction control.",gender:"both"},
@@ -444,7 +444,6 @@ relaxation:[
     };
 
     // ==================== 50 COMPLETE ASSESSMENT QUESTIONS ====================
-    // NOTE: Questions are identical to the original input.
     const questions = [
         {
             id: 1,
