@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Pelvic Health Pro</title>
+    <title>S.T.I-KEGAL Pro | Pelvic Health Partner</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -35,7 +35,6 @@
             text-rendering: optimizeLegibility;
         }
 
-        /* Background Image Layers with 70% Visibility */
         .background-layer {
             position: fixed;
             top: 0;
@@ -46,715 +45,176 @@
             background: linear-gradient(145deg, #000000 70%, rgba(212, 175, 55, 0.05) 100%);
         }
         
-        .quiz-background {
+        .quiz-background, .analysis-background, .exercise-background, .modal-background, .question-popup-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.7; /* 70% visible */
-            z-index: -9;
-        }
-        
-        .analysis-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.7; /* 70% visible */
-            z-index: -9;
-        }
-        
-        .exercise-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.7; /* 70% visible */
-            z-index: -9;
-        }
-        
-        .modal-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.7; /* 70% visible */
+            opacity: 0.7;
             z-index: -9;
         }
 
-        /* Question Popup Background */
-        .question-popup-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.9; /* 70% visible */
-            z-index: -9;
-        }
-
-        /* iPhone 12 Mini Optimization */
-        @media (max-width: 375px) {
-            .container { padding: 12px !important; }
-            h1 { font-size: 1.5rem !important; }
-            h2 { font-size: 1.25rem !important; }
-            .btn { padding: 12px 16px !important; font-size: 14px !important; }
-            .card { padding: 14px !important; }
-        }
-
-        /* Main Container */
         .main-container {
             background: rgba(10, 10, 10, 0.85);
             border: 1px solid rgba(212, 175, 55, 0.25);
-            box-shadow: 
-                0 10px 40px rgba(0, 0, 0, 0.9),
-                0 0 24px rgba(212, 175, 55, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 24px rgba(212, 175, 55, 0.2);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
 
-        /* 3D Text Effects */
         .text-3d-gold {
-            text-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.1),
-                0 2px 0 rgba(255, 255, 255, 0.05),
-                0 3px 0 rgba(212, 175, 55, 0.1),
-                0 4px 0 rgba(212, 175, 55, 0.1),
-                0 5px 0 rgba(212, 175, 55, 0.08),
-                0 6px 1px rgba(0, 0, 0, 0.1),
-                0 0 5px rgba(0, 0, 0, 0.1),
-                0 1px 3px rgba(0, 0, 0, 0.3),
-                0 3px 5px rgba(0, 0, 0, 0.2),
-                0 5px 10px rgba(0, 0, 0, 0.25);
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 3px 0 rgba(212, 175, 55, 0.1), 0 5px 10px rgba(0, 0, 0, 0.25);
             color: var(--gold-light);
         }
-        
-        .text-3d-white {
-            text-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.1),
-                0 2px 0 rgba(255, 255, 255, 0.05),
-                0 3px 0 rgba(255, 255, 255, 0.05),
-                0 4px 0 rgba(255, 255, 255, 0.04),
-                0 5px 0 rgba(255, 255, 255, 0.03),
-                0 6px 1px rgba(0, 0, 0, 0.1),
-                0 0 5px rgba(0, 0, 0, 0.1),
-                0 1px 3px rgba(0, 0, 0, 0.3),
-                0 3px 5px rgba(0, 0, 0, 0.2);
-            color: #ffffff;
-        }
-        
-        .text-3d-secondary {
-            text-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.05),
-                0 2px 0 rgba(255, 255, 255, 0.04),
-                0 3px 0 rgba(212, 175, 55, 0.08),
-                0 0 5px rgba(0, 0, 0, 0.1),
-                0 1px 3px rgba(0, 0, 0, 0.2);
-            color: rgba(255, 255, 255, 0.9);
-        }
 
-        /* Gold Effects with 3D */
-        .gold-shimmer {
-            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 25%, #FFFFFF 50%, var(--gold-primary) 75%, var(--gold-light) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: shine 3s linear infinite;
-            text-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.1),
-                0 2px 0 rgba(255, 255, 255, 0.05),
-                0 3px 0 rgba(212, 175, 55, 0.1);
-        }
-
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-
-        /* Buttons with 3D Effects */
         .gold-btn {
             background: linear-gradient(135deg, var(--gold-secondary) 0%, var(--gold-primary) 100%);
             color: #000;
             font-weight: 800;
-            border: none;
-            transition: all 0.3s ease;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
-            box-shadow: 
-                0 4px 0 var(--gold-dark),
-                0 6px 10px rgba(212, 175, 55, 0.3),
-                0 10px 20px rgba(0, 0, 0, 0.2);
-            position: relative;
+            box-shadow: 0 4px 0 var(--gold-dark), 0 6px 10px rgba(212, 175, 55, 0.3);
+            transition: all 0.2s ease;
         }
         
-        .gold-btn:hover, .gold-btn:active {
-            transform: translateY(-2px);
-            box-shadow: 
-                0 6px 0 var(--gold-dark),
-                0 8px 15px rgba(212, 175, 55, 0.4),
-                0 12px 25px rgba(0, 0, 0, 0.25);
-        }
-        
-        .gold-btn:active {
-            transform: translateY(1px);
-            box-shadow: 
-                0 2px 0 var(--gold-dark),
-                0 3px 5px rgba(212, 175, 55, 0.3);
-        }
-        
-        .secondary-btn {
-            background: rgba(20, 20, 20, 0.95);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            color: var(--gold-light);
-            transition: all 0.3s ease;
-            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
-            box-shadow: 
-                0 3px 0 rgba(0, 0, 0, 0.3),
-                0 5px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .secondary-btn:hover, .secondary-btn:active {
-            background: rgba(212, 175, 55, 0.15);
-            border-color: var(--gold-primary);
-            box-shadow: 
-                0 4px 0 rgba(0, 0, 0, 0.3),
-                0 7px 15px rgba(0, 0, 0, 0.25);
-        }
+        .gold-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--gold-dark); }
 
         .option-btn {
             background: rgba(20, 20, 20, 0.95);
             border: 1px solid rgba(212, 175, 55, 0.2);
             transition: all 0.2s ease;
-            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
-            box-shadow: 
-                0 2px 0 rgba(0, 0, 0, 0.2),
-                0 3px 5px rgba(0, 0, 0, 0.1);
         }
         
-        .option-btn:hover, .option-btn:active {
-            border-color: var(--gold-primary);
-            background: rgba(212, 175, 55, 0.12);
-            transform: translateY(-1px);
-            box-shadow: 
-                0 3px 0 rgba(0, 0, 0, 0.2),
-                0 5px 8px rgba(0, 0, 0, 0.15);
-        }
+        .option-btn:active { border-color: var(--gold-primary); background: rgba(212, 175, 55, 0.12); }
 
-        /* Exercise Cards with 3D */
         .exercise-card {
             background: rgba(20, 20, 20, 0.9);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.1);
             transition: all 0.3s ease;
-            cursor: pointer;
-            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
-            box-shadow: 
-                0 3px 0 rgba(0, 0, 0, 0.2),
-                0 5px 10px rgba(0, 0, 0, 0.15);
         }
         
-        .exercise-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 
-                0 5px 0 rgba(0, 0, 0, 0.2),
-                0 8px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .exercise-card.current {
-            border-color: var(--gold-primary);
-            background: linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(212, 175, 55, 0.18));
-            animation: pulse-glow 2s infinite;
-            box-shadow: 
-                0 4px 0 rgba(212, 175, 55, 0.3),
-                0 6px 15px rgba(212, 175, 55, 0.25),
-                0 0 20px rgba(212, 175, 55, 0.1);
-        }
-        
-        .exercise-card.locked {
-            opacity: 0.4;
-            filter: grayscale(1);
-            pointer-events: none;
-        }
-        
-        .exercise-card.completed {
-            border-color: #10B981;
-            background: rgba(16, 185, 129, 0.12);
-            box-shadow: 
-                0 3px 0 rgba(16, 185, 129, 0.3),
-                0 5px 10px rgba(16, 185, 129, 0.15);
-        }
+        .exercise-card.current { border-color: var(--gold-primary); box-shadow: 0 0 20px rgba(212, 175, 55, 0.15); }
+        .exercise-card.locked { opacity: 0.4; pointer-events: none; }
+        .exercise-card.completed { border-color: #10B981; background: rgba(16, 185, 129, 0.05); }
 
-        @keyframes pulse-glow {
-            0%, 100% { 
-                box-shadow: 
-                    0 4px 0 rgba(212, 175, 55, 0.3),
-                    0 6px 15px rgba(212, 175, 55, 0.25),
-                    0 0 20px rgba(212, 175, 55, 0.1);
-            }
-            50% { 
-                box-shadow: 
-                    0 4px 0 rgba(212, 175, 55, 0.3),
-                    0 6px 20px rgba(212, 175, 55, 0.35),
-                    0 0 25px rgba(212, 175, 55, 0.15);
-            }
-        }
-
-        /* Progress Bar with 3D */
         .progress-bar {
             background: linear-gradient(90deg, var(--gold-secondary), var(--gold-primary));
-            background-size: 200% auto;
-            animation: shine 2s linear infinite;
             height: 8px;
             border-radius: 10px;
-            box-shadow: 
-                0 2px 0 rgba(212, 175, 55, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-        
-        .progress-bar-container {
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 
-                inset 0 2px 4px rgba(0, 0, 0, 0.5),
-                0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: width 0.4s ease;
         }
 
-        /* Badges with 3D */
-        .badge {
-            font-size: 0.7rem;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 12px;
-            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
-        }
-        
-        .badge-gold {
-            background: linear-gradient(135deg, var(--gold-secondary), var(--gold-primary));
-            color: black;
-            box-shadow: 
-                0 3px 0 var(--gold-dark),
-                0 5px 10px rgba(212, 175, 55, 0.2);
-        }
-
-        /* Video Container - Custom Player with 3D - 16:9 Aspect Ratio */
         .video-container {
             background: #000;
             border-radius: 16px;
-            overflow: hidden;
             border: 2px solid var(--gold-primary);
-            position: relative;
-            box-shadow: 
-                0 8px 0 rgba(0, 0, 0, 0.4),
-                0 15px 30px rgba(0, 0, 0, 0.5),
-                0 0 30px rgba(212, 175, 55, 0.2);
+            overflow: hidden;
         }
 
-        /* 16:9 Aspect Ratio Container */
-        .aspect-ratio-16-9 {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio (9/16 = 0.5625) */
-        }
+        .aspect-ratio-16-9 { position: relative; padding-top: 56.25%; }
+        .aspect-ratio-16-9 iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-        .aspect-ratio-16-9 iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--gold-primary); border-radius: 10px; }
+
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .scrollable-content { max-height: 70vh; overflow-y: auto; }
+        
+        .video-progress {
+            height: 4px;
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .video-progress-fill {
             height: 100%;
-            border: none;
-        }
-
-        /* Category Tags with 3D */
-        .category-tag {
-            font-size: 0.65rem;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 8px;
-            background: rgba(212, 175, 55, 0.2);
-            color: var(--gold-light);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
-            box-shadow: 
-                0 2px 0 rgba(0, 0, 0, 0.3),
-                0 3px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Solution Highlight with 3D */
-        .solution-highlight {
-            background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), transparent);
-            border-left: 3px solid var(--gold-primary);
-            box-shadow: 
-                0 3px 0 rgba(0, 0, 0, 0.2),
-                0 5px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Safe Areas */
-        .safe-area-top { padding-top: env(safe-area-inset-top); }
-        .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom); }
-
-        /* Animations */
-        .fade-in {
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Exercise Status with 3D */
-        .exercise-status {
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 6px;
-            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
-            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
-        }
-        
-        .status-current { 
-            background: rgba(212, 175, 55, 0.25); 
-            color: var(--gold-light); 
-            box-shadow: 0 2px 0 rgba(212, 175, 55, 0.3);
-        }
-        .status-completed { 
-            background: rgba(16, 185, 129, 0.25); 
-            color: #10B981; 
-            box-shadow: 0 2px 0 rgba(16, 185, 129, 0.3);
-        }
-
-        /* Number Indicators with 3D */
-        .number-indicator {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 0.85rem;
-            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
-            box-shadow: 
-                0 3px 0 rgba(0, 0, 0, 0.3),
-                0 5px 8px rgba(0, 0, 0, 0.2);
-        }
-        
-        .number-current {
-            background: linear-gradient(135deg, var(--gold-secondary), var(--gold-primary));
-            color: black;
-            animation: pulse 2s infinite;
-            box-shadow: 
-                0 3px 0 var(--gold-dark),
-                0 5px 10px rgba(212, 175, 55, 0.3);
-        }
-        
-        .number-completed {
-            background: #10B981;
-            color: white;
-            box-shadow: 
-                0 3px 0 #0A8F6E,
-                0 5px 10px rgba(16, 185, 129, 0.3);
-        }
-        
-        .number-locked {
-            background: rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 
-                0 2px 0 rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-        
-        @keyframes pulse {
-            0%, 100% { 
-                transform: scale(1);
-                box-shadow: 
-                    0 3px 0 var(--gold-dark),
-                    0 5px 10px rgba(212, 175, 55, 0.3);
-            }
-            50% { 
-                transform: scale(1.05);
-                box-shadow: 
-                    0 4px 0 var(--gold-dark),
-                    0 7px 15px rgba(212, 175, 55, 0.4);
-            }
-        }
-
-        /* Question Text with Enhanced Visibility */
-        .question-text {
-            text-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.1),
-                0 2px 0 rgba(255, 255, 255, 0.05),
-                0 0 10px rgba(212, 175, 55, 0.2),
-                0 0 20px rgba(212, 175, 55, 0.1);
-            color: #ffffff;
-            font-weight: 700;
-            line-height: 1.4;
-            letter-spacing: -0.01em;
-        }
-        
-        .hint-text {
-            text-shadow: 
-                0 1px 0 rgba(0, 0, 0, 0.5),
-                0 0 5px rgba(212, 175, 55, 0.2);
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        /* Section Labels */
-        .section-label {
-            text-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.1),
-                0 2px 0 rgba(212, 175, 55, 0.1),
-                0 0 8px rgba(212, 175, 55, 0.2);
-            color: var(--gold-light);
-            letter-spacing: 0.08em;
-        }
-
-        /* Score Display with 3D */
-        .score-display {
-            text-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.1),
-                0 2px 0 rgba(255, 255, 255, 0.05),
-                0 3px 0 rgba(212, 175, 55, 0.15),
-                0 4px 0 rgba(212, 175, 55, 0.1),
-                0 0 15px rgba(212, 175, 55, 0.3);
-            font-weight: 900;
-        }
-
-        /* Responsive Backgrounds - Ensure visibility on mobile */
-        @media (max-width: 768px) {
-            .quiz-background,
-            .analysis-background,
-            .exercise-background,
-            .modal-background,
-            .question-popup-bg {
-                background-attachment: scroll;
-                opacity: 0.7 !important; /* Force 70% on mobile */
-            }
-            
-            /* Make sure background covers properly on mobile */
-            .quiz-background::before,
-            .analysis-background::before,
-            .exercise-background::before,
-            .modal-background::before,
-            .question-popup-bg::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.3); /* Dark overlay for better text visibility */
-                z-index: -1;
-            }
-        }
-
-        /* Custom Scrollbar */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 4px;
-        }
-        
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-        }
-        
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: linear-gradient(var(--gold-secondary), var(--gold-primary));
-            border-radius: 10px;
-        }
-
-        /* Header Logo Glow */
-        .logo-glow {
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3))
-                    drop-shadow(0 0 20px rgba(212, 175, 55, 0.2))
-                    drop-shadow(0 0 30px rgba(212, 175, 55, 0.1));
-        }
-
-        /* Glass Effect for Cards */
-        .glass-effect {
-            background: rgba(15, 15, 15, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Ensure text is readable on background */
-        .text-on-bg {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Question Popup Container */
-        .question-popup-container {
-            background: rgba(10, 10, 10, 0.85);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            box-shadow: 
-                0 10px 40px rgba(0, 0, 0, 0.9),
-                0 0 24px rgba(212, 175, 55, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 16px;
-        }
-
-        /* Enhanced vertical scrolling */
-        .scrollable-content {
-            max-height: 70vh;
-            overflow-y: auto;
-            overflow-x: hidden;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        /* Exercise list with better scrolling */
-        .exercise-list-container {
-            max-height: 50vh;
-            overflow-y: auto;
-            overflow-x: hidden;
+            background: var(--gold-primary);
+            width: 0%;
+            transition: width 0.3s ease;
         }
     </style>
 </head>
 <body class="flex items-center justify-center p-0">
-    <!-- Background Layers - All with 70% opacity -->
     <div class="background-layer"></div>
     <div class="quiz-background" id="quiz-bg"></div>
     <div class="analysis-background hidden" id="analysis-bg"></div>
     <div class="exercise-background hidden" id="exercise-bg"></div>
     
-    <div class="w-full min-h-screen safe-area-top safe-area-bottom flex items-center justify-center px-3 text-on-bg">
+    <div class="w-full min-h-screen safe-area-top safe-area-bottom flex items-center justify-center px-3">
         <div class="w-full max-w-md main-container rounded-xl p-4 fade-in">
             
-            <!-- Header -->
             <header class="text-center mb-6">
-                <div class="flex justify-center mb-4">
-                    
-                </div>
-                <h1 class="text-2xl font-black text-3d-gold mb-2 tracking-tight">S.T.I-KEGAL</h1>
-                <p class="text-xs text-gold-light/80 font-bold uppercase tracking-wider text-3d-secondary">PELVIC HEALTH PARTNER</p>
+                <h1 class="text-2xl font-black text-3d-gold tracking-tight">S.T.I-KEGAL PRO</h1>
+                <p class="text-[10px] text-gold-light/60 font-bold uppercase tracking-wider">PELVIC HEALTH PARTNER</p>
             </header>
 
-            <!-- Main Content - Scrollable Area -->
             <div class="scrollable-content custom-scrollbar">
-                <main id="app-content" class="mb-4">
+                <main id="app-content">
                     <!-- Progress -->
                     <div id="progress-section" class="mb-5">
                         <div class="flex justify-between items-center mb-2">
-                            <span id="step-label" class="text-xs font-bold section-label uppercase tracking-wider">Medical Assessment</span>
-                            <span id="question-counter" class="text-xs font-bold text-gold-light text-3d-secondary">1/50</span>
+                            <span id="step-label" class="text-[10px] font-bold text-gold-light uppercase">Assessment</span>
+                            <span id="question-counter" class="text-[10px] font-bold text-white">1/50</span>
                         </div>
-                        <div class="progress-bar-container">
-                            <div id="progress-bar" class="progress-bar w-5"></div>
+                        <div class="w-full bg-black/50 h-2 rounded-full overflow-hidden">
+                            <div id="progress-bar" class="progress-bar w-0"></div>
                         </div>
-                        <p id="progress-text" class="text-xs text-gray-300 mt-1.5 text-center text-3d-secondary">Comprehensive health evaluation...</p>
                     </div>
 
                     <!-- Quiz Section -->
                     <div id="quiz-section" class="fade-in">
-                        <div class="mb-5">
-                            <h2 id="question-text" class="text-lg font-bold question-text mb-3"></h2>
-                            <p id="question-hint" class="text-xs hint-text hidden"></p>
-                        </div>
+                        <h2 id="question-text" class="text-lg font-bold text-white mb-5 leading-tight"></h2>
                         <div id="options-container" class="space-y-2.5"></div>
-                        <div id="custom-input-container" class="hidden mt-3 space-y-2">
-                            <textarea id="custom-input" rows="2" class="w-full bg-black/50 border border-gold-primary/30 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-gold-primary focus:ring-1 focus:ring-gold-primary/30 glass-effect" placeholder="Please provide details..."></textarea>
-                            <div class="flex gap-2">
-                                <button onclick="submitCustomAnswer()" class="flex-1 gold-btn py-3 rounded-lg text-sm font-bold">Submit</button>
-                                <button onclick="showCurrentQuestion()" class="py-3 px-4 bg-black/50 border border-gold-primary/30 text-gold-primary rounded-lg text-sm font-bold">Back</button>
-                            </div>
-                        </div>
                     </div>
 
                     <!-- Analysis Section -->
-                    <div id="analysis-section" class="hidden">
-                        <div class="text-center mb-5">
-                            <h2 class="text-xl font-black text-3d-gold mb-2">Assessment Complete!</h2>
-                            <p class="text-xs text-gold-light/80 font-bold mb-4 text-3d-secondary">Your Personalized Medical Report</p>
+                    <div id="analysis-section" class="hidden text-center fade-in">
+                        <h2 class="text-xl font-black text-3d-gold mb-2">Assessment Complete!</h2>
+                        <p class="text-xs text-gray-400 mb-6">Your Personalized Medical Report</p>
+                        
+                        <div class="grid grid-cols-3 gap-3 mb-6">
+                            <div class="bg-white/5 p-4 rounded-lg border border-gold-primary/10">
+                                <div class="text-[9px] uppercase text-gray-500 mb-2">Focus</div>
+                                <div id="focus-score" class="text-lg font-black text-gold-light">--</div>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-gold-primary/10">
+                                <div class="text-[9px] uppercase text-gray-500 mb-2">Urgency</div>
+                                <div id="urgency-score" class="text-lg font-black text-gold-light">--</div>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-gold-primary/10">
+                                <div class="text-[9px] uppercase text-gray-500 mb-2">Protocol</div>
+                                <div id="program-score" class="text-lg font-black text-gold-light">--</div>
+                            </div>
                         </div>
                         
-                        <div class="grid grid-cols-3 gap-3 mb-4">
-                            <div class="glass-effect p-4 rounded-lg border border-gold-primary/15 text-center">
-                                <div class="text-xs uppercase text-gray-400 mb-2 text-3d-secondary">Primary Focus</div>
-                                <div id="focus-score" class="text-lg font-black score-display">--</div>
-                            </div>
-                            <div class="glass-effect p-4 rounded-lg border border-gold-primary/15 text-center">
-                                <div class="text-xs uppercase text-gray-400 mb-2 text-3d-secondary">Urgency Level</div>
-                                <div id="urgency-score" class="text-lg font-black score-display">--</div>
-                            </div>
-                            <div class="glass-effect p-4 rounded-lg border border-gold-primary/15 text-center">
-                                <div class="text-xs uppercase text-gray-400 mb-2 text-3d-secondary">Program Length</div>
-                                <div id="program-score" class="text-lg font-black score-display">--</div>
-                            </div>
-                        </div>
-                        
-                        <div class="glass-effect p-4 rounded-lg border border-gold-primary/15 mb-5 solution-highlight">
-                            <h3 class="text-sm font-bold text-white mb-2 flex items-center text-3d-white">
-                                <i class="fas fa-stethoscope text-gold-primary mr-2"></i> Medical Solution Prescription
+                        <div class="bg-gold-primary/5 p-4 rounded-lg border border-gold-primary/20 mb-6 text-left">
+                            <h3 class="text-sm font-bold text-white mb-2 flex items-center">
+                                <i class="fas fa-stethoscope text-gold-primary mr-2"></i> Medical Prescription
                             </h3>
-                            <p id="analysis-text" class="text-sm text-gray-300 leading-relaxed text-3d-secondary">
-                                Analyzing your 50-point assessment for precise solution...
-                            </p>
-                            <div id="solution-points" class="mt-3 space-y-2"></div>
+                            <p id="analysis-text" class="text-xs text-gray-300 leading-relaxed"></p>
                         </div>
                         
-                        <button onclick="showExercisePlan()" class="w-full gold-btn py-3.5 rounded-lg text-sm font-bold">
-                            <i class="fas fa-clipboard-check mr-2"></i> View Prescribed Protocol
+                        <button onclick="showExercisePlan()" class="w-full gold-btn py-4 rounded-lg text-sm font-bold">
+                            VIEW PRESCRIBED PROTOCOL
                         </button>
                     </div>
 
                     <!-- Exercise Plan Section -->
-                    <div id="exercise-section" class="hidden">
-                        <div class="flex justify-between items-center mb-4">
+                    <div id="exercise-section" class="hidden fade-in">
+                        <div class="flex justify-between items-center mb-5">
                             <div>
-                                <h2 class="text-lg font-bold text-3d-white mb-1.5">Medical Protocol</h2>
-                                <div class="flex items-center">
-                                    <span class="badge badge-gold mr-2">Day <span id="current-day">1</span>/30</span>
-                                    <span id="completion-stats" class="text-xs text-gray-400 text-3d-secondary">0/6 completed</span>
-                                </div>
+                                <h2 class="text-lg font-bold text-white">Daily Protocol</h2>
+                                <span class="text-[10px] text-gold-primary font-bold">Day <span id="current-day">1</span> of 30</span>
                             </div>
-                            <div class="text-right">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-2.5 h-2.5 rounded-full bg-gold-primary animate-pulse"></div>
-                                    <span class="text-xs text-gold-primary font-bold text-3d-secondary">Current</span>
-                                </div>
-                            </div>
+                            <div id="completion-stats" class="text-[10px] text-gray-400 font-bold">0/6 Completed</div>
                         </div>
                         
-                        <div class="mb-4 p-3.5 bg-gradient-to-r from-black/50 to-gold-primary/10 rounded-lg border border-gold-primary/15 glass-effect">
-                            <h3 class="text-sm font-bold text-white mb-1.5 flex items-center text-3d-white">
-                                <i class="fas fa-prescription-bottle-alt text-gold-primary mr-2"></i> Medical Protocol Rules
-                            </h3>
-                            <p class="text-xs text-gray-300 text-3d-secondary">Complete exercises in prescribed order. Watch each video fully before proceeding.</p>
-                        </div>
+                        <div id="exercise-list" class="space-y-3 pb-4"></div>
                         
-                        <div id="exercise-list" class="exercise-list-container space-y-3 pr-1.5 pb-2 custom-scrollbar"></div>
-                        
-                        <button onclick="restartAssessment()" class="w-full mt-4 py-3 bg-black/50 border border-gold-primary/30 text-gold-primary rounded-lg text-sm font-bold glass-effect">
-                            <i class="fas fa-redo mr-2"></i> New Assessment
+                        <button onclick="restartAssessment()" class="w-full mt-4 py-3 bg-black/50 border border-gold-primary/30 text-gold-primary rounded-lg text-[10px] font-bold uppercase">
+                            <i class="fas fa-redo mr-2"></i> Reset Assessment
                         </button>
                     </div>
                 </main>
@@ -762,91 +222,34 @@
         </div>
     </div>
 
-    <!-- Question Popup Modal -->
-    <div id="question-popup-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3">
-        <!-- Question Popup Background -->
-        <div class="question-popup-bg"></div>
-        
+    <!-- Video Modal -->
+    <div id="video-modal" class="fixed inset-0 z-50 hidden flex flex-col items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/95 backdrop-blur-sm" onclick="closeVideoModal()"></div>
         <div class="w-full max-w-md z-10">
-            <div class="question-popup-container p-4">
-                <div class="text-center mb-4">
-                    <h2 class="text-xl font-black text-3d-gold mb-2">Medical Assessment</h2>
-                    <p class="text-xs text-gold-light/80 font-bold mb-3 text-3d-secondary">Question <span id="popup-question-number">1</span> of 50</p>
-                </div>
-                
-                <div class="mb-4">
-                    <h3 id="popup-question-text" class="text-lg font-bold question-text mb-3"></h3>
-                    <p id="popup-question-hint" class="text-xs hint-text hidden"></p>
-                </div>
-                
-                <div id="popup-options-container" class="space-y-2.5 mb-4"></div>
-                
-                <div id="popup-custom-input-container" class="hidden mt-3 space-y-2">
-                    <textarea id="popup-custom-input" rows="2" class="w-full bg-black/50 border border-gold-primary/30 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-gold-primary focus:ring-1 focus:ring-gold-primary/30 glass-effect" placeholder="Please provide details..."></textarea>
-                    <div class="flex gap-2">
-                        <button onclick="submitPopupCustomAnswer()" class="flex-1 gold-btn py-3 rounded-lg text-sm font-bold">Submit</button>
-                        <button onclick="closeQuestionPopup()" class="py-3 px-4 bg-black/50 border border-gold-primary/30 text-gold-primary rounded-lg text-sm font-bold">Cancel</button>
+            <div class="video-container mb-4">
+                <div class="aspect-ratio-16-9" id="video-frame"></div>
+                <div class="p-3 bg-black/80">
+                    <div class="video-progress mb-2">
+                        <div id="video-progress-fill" class="video-progress-fill"></div>
                     </div>
-                </div>
-                
-                <div class="flex gap-2">
-                    <button onclick="closeQuestionPopup()" class="flex-1 secondary-btn py-3 rounded-lg text-sm font-bold">
-                        <i class="fas fa-times mr-1.5"></i> Close
-                    </button>
-                    <button onclick="nextQuestionFromPopup()" class="flex-1 gold-btn py-3 rounded-lg text-sm font-bold">
-                        Next <i class="fas fa-arrow-right ml-1.5"></i>
-                    </button>
+                    <div class="flex justify-between text-[10px] text-gray-400">
+                        <span id="video-time-current">0:00</span>
+                        <span id="video-time-total">0:00</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Video Modal with Next Button - VERTICALLY CENTERED -->
-    <div id="video-modal" class="fixed inset-0 z-50 hidden flex flex-col items-center justify-center p-3">
-        <!-- Modal Background -->
-        <div class="modal-background"></div>
-        
-        <!-- Vertical Centering Container -->
-        <div class="flex-1 flex flex-col items-center justify-center w-full">
-            <div class="w-full max-w-md z-10 text-on-bg">
-                <div class="video-container">
-                    <div class="relative">
-                        <button onclick="closeVideoModal()" class="absolute top-3 right-3 z-20 bg-black/90 p-2.5 rounded-full border border-gold-primary/20">
-                            <i class="fas fa-times text-white text-sm"></i>
-                        </button>
-                        <!-- 16:9 Aspect Ratio Container -->
-                        <div class="aspect-ratio-16-9" id="video-frame">
-                            <!-- YouTube iframe will be inserted here -->
-                        </div>
-                    </div>
+            <div class="bg-black/90 p-5 rounded-xl border border-gold-primary/20">
+                <h3 id="video-title" class="text-sm font-bold text-white mb-2"></h3>
+                <p id="video-description" class="text-[11px] text-gray-400 mb-4"></p>
+                <div class="flex justify-between text-[10px] text-gray-500 mb-6">
+                    <span><i class="fas fa-clock mr-1"></i> <span id="video-duration"></span></span>
+                    <span><i class="fas fa-redo mr-1"></i> <span id="video-reps"></span></span>
+                    <span id="video-category" class="text-gold-primary uppercase font-bold"></span>
                 </div>
-                
-                <div class="mt-4 p-4 bg-black/95 rounded-lg border border-gold-primary/20 glass-effect">
-                    <h3 id="video-title" class="text-sm font-bold text-white mb-2 text-3d-white"></h3>
-                    <p id="video-description" class="text-xs text-gray-300 mb-3 text-3d-secondary"></p>
-                    <div class="flex items-center justify-between text-xs text-gray-400 mb-4">
-                        <span class="flex items-center"><i class="fas fa-clock mr-1.5"></i> Duration: <span id="video-duration" class="font-bold ml-1">2:30</span></span>
-                        <span class="flex items-center"><i class="fas fa-redo mr-1.5"></i> Reps: <span id="video-reps" class="font-bold ml-1">10x</span></span>
-                        <span class="category-tag" id="video-category"></span>
-                    </div>
-                    
-                    <div id="solution-benefit" class="mb-4 p-3 rounded bg-black/60 border border-gold-primary/15">
-                        <div class="flex items-center mb-1.5">
-                            <i class="fas fa-lightbulb text-gold-primary mr-2"></i>
-                            <span class="text-xs font-bold text-gold-light text-3d-secondary">Solution Benefit:</span>
-                        </div>
-                        <p id="solution-text" class="text-xs text-gray-300 text-3d-secondary"></p>
-                    </div>
-                    
-                    <div class="flex gap-3">
-                        <button onclick="repeatCurrentVideo()" class="flex-1 secondary-btn py-3 rounded-lg text-sm font-bold">
-                            <i class="fas fa-redo mr-1.5"></i> Repeat
-                        </button>
-                        <button onclick="nextVideo()" class="flex-1 gold-btn py-3 rounded-lg text-sm font-bold">
-                            Next <i class="fas fa-arrow-right ml-1.5"></i>
-                        </button>
-                    </div>
-                </div>
+                <button id="complete-btn" onclick="markCurrentExerciseComplete()" class="w-full gold-btn py-3.5 rounded-lg text-xs font-bold" disabled>
+                    <i class="fas fa-spinner fa-spin mr-2 hidden" id="video-loading"></i>
+                    <span id="complete-btn-text">VIDEO MUST BE COMPLETED FIRST</span>
+                </button>
             </div>
         </div>
     </div>
@@ -856,1517 +259,142 @@
     let appState = {
         currentQuestion: 0,
         gender: null,
-        age: null,
-        primaryGoal: null,
-        condition: null,
-        experience: null,
-        symptoms: [],
-        scores: { leakage: 0, pain: 0, sexual: 0, strength: 0, endurance: 0, control: 0 },
-        currentDay: 1,
-        completedExercises: [],
-        totalQuestions: 50,
-        selectedCategory: null,
-        selectedExercises: [],
-        currentVideoIndex: 0,
-        userProfile: {},
-        dayProgress: {},
-        dayExercises: {},
+        scores: { leakage: 0, pain: 0, sexual: 0, strength: 0, control: 0 },
+        categoryScores: { demographic: 0, symptoms: 0, lifestyle: 0, sexual: 0, experience: 0, goals: 0, medical: 0 },
         assessmentComplete: false,
-        exercisePlanGenerated: false
+        currentDay: 1,
+        dayExercises: {}, 
+        dayProgress: {},  
+        userProfile: {},
+        lastSave: Date.now(),
+        videoProgress: {}
     };
 
-    // ==================== LOCAL STORAGE FUNCTIONS ====================
-    
-    function saveStateToLocalStorage() {
-        try {
-            localStorage.setItem('pelvicHealthAppState', JSON.stringify(appState));
-            console.log('State saved to localStorage');
-        } catch (error) {
-            console.error('Error saving to localStorage:', error);
-        }
+    // ==================== STORAGE FUNCTIONS ====================
+    function saveState() {
+        appState.lastSave = Date.now();
+        localStorage.setItem('STI_KEGAL_PRO_DATA', JSON.stringify(appState));
     }
-    
-    function loadStateFromLocalStorage() {
-        try {
-            const savedState = localStorage.getItem('pelvicHealthAppState');
-            if (savedState) {
-                const parsedState = JSON.parse(savedState);
-                
-                // Only load if assessment was in progress
-                if (parsedState.assessmentComplete !== true) {
-                    appState = parsedState;
-                    console.log('State loaded from localStorage');
-                    return true;
-                }
-            }
-        } catch (error) {
-            console.error('Error loading from localStorage:', error);
+
+    function loadState() {
+        const saved = localStorage.getItem('STI_KEGAL_PRO_DATA');
+        if (saved) {
+            appState = JSON.parse(saved);
+            return true;
         }
         return false;
     }
-    
-    function clearLocalStorage() {
-        try {
-            localStorage.removeItem('pelvicHealthAppState');
-            console.log('LocalStorage cleared');
-        } catch (error) {
-            console.error('Error clearing localStorage:', error);
-        }
-    }
 
-    // ==================== EXPANDED GENDER-SPECIFIC EXERCISE LIBRARY ====================
+    // ==================== MASSIVE EXERCISE LIBRARY ====================
     const exerciseLibrary = {
-        // 1️⃣ BASIC / FOUNDATIONAL KEGELS - GENDER NEUTRAL (12 exercises)
-        foundational: [
-            {
-                id: "F1",
-                name: "Classic Hold Kegel",
-                description: "Basic contraction hold for muscle identification",
-                category: "foundational",
-                subcategory: "slow",
-                difficulty: "beginner",
-                duration: "2:45",
-                reps: "10 holds × 5s",
-                videoCode: "9X5_U4D1uDk",
-                benefit: "Identifies pelvic floor muscles. Essential starting point.",
-                solution: "Teaches muscle awareness. Foundation for all exercises.",
-                gender: "both"
-            },
-            {
-                id: "F2",
-                name: "Timed Hold Progression",
-                description: "Gradual increase from 3s to 10s holds",
-                category: "foundational",
-                subcategory: "slow",
-                difficulty: "beginner",
-                duration: "3:10",
-                reps: "8 progressions",
-                videoCode: "fD3XitN08nQ",
-                benefit: "Builds endurance gradually. Prevents fatigue.",
-                solution: "Progressive overload principle for safe strength building.",
-                gender: "both"
-            },
-            {
-                id: "F3",
-                name: "Quick Flick Kegels",
-                description: "Rapid contractions for muscle response",
-                category: "foundational",
-                subcategory: "fast",
-                difficulty: "beginner",
-                duration: "2:20",
-                reps: "20 quick flicks",
-                videoCode: "ub3X7mC-7i4",
-                benefit: "Improves reaction time. Good for urge control.",
-                solution: "Trains fast-twitch muscle fibers for quick response.",
-                gender: "both"
-            },
-            {
-                id: "F4",
-                name: "Pulse Kegels",
-                description: "Rhythmic pulsing for muscle tone",
-                category: "foundational",
-                subcategory: "fast",
-                difficulty: "beginner",
-                duration: "3:00",
-                reps: "15 pulse cycles",
-                videoCode: "bQ8p8pL2eH4",
-                benefit: "Enhances muscle tone. Improves blood circulation.",
-                solution: "Pumping action increases blood flow and oxygenation.",
-                gender: "both"
-            },
-            {
-                id: "F5",
-                name: "Micro Contractions",
-                description: "Small, precise muscle engagements",
-                category: "foundational",
-                subcategory: "fast",
-                difficulty: "beginner",
-                duration: "2:50",
-                reps: "25 micro reps",
-                videoCode: "zQpGZfWqWw4",
-                benefit: "Precision training. Isolates specific fibers.",
-                solution: "Develops fine motor control in pelvic muscles.",
-                gender: "both"
-            },
-            {
-                id: "F6",
-                name: "Long-Hold Static",
-                description: "Extended 15-second holds",
-                category: "foundational",
-                subcategory: "slow",
-                difficulty: "intermediate",
-                duration: "4:15",
-                reps: "6 × 15s holds",
-                videoCode: "Lx7p6Y2qJq4",
-                benefit: "Builds endurance capacity. Increases stamina.",
-                solution: "Extended holds build type-1 muscle fibers for endurance.",
-                gender: "both"
-            },
-            {
-                id: "F7",
-                name: "Progressive Hold (3-5-10)",
-                description: "Systematic increase in hold times",
-                category: "foundational",
-                subcategory: "slow",
-                difficulty: "beginner",
-                duration: "3:30",
-                reps: "3 sets progressive",
-                videoCode: "mN3p7q4VvT4",
-                benefit: "Structured progression. Measurable improvement.",
-                solution: "Step-by-step progression prevents plateaus.",
-                gender: "both"
-            },
-            {
-                id: "F8",
-                name: "Rapid Fire Series",
-                description: "Quick succession of contractions",
-                category: "foundational",
-                subcategory: "fast",
-                difficulty: "intermediate",
-                duration: "2:55",
-                reps: "30 rapid reps",
-                videoCode: "pQrR7qRqRq4",
-                benefit: "Speed development. Muscle reactivity.",
-                solution: "Improves neural drive to pelvic muscles.",
-                gender: "both"
-            },
-            {
-                id: "F9",
-                name: "Contraction Awareness",
-                description: "Focus on muscle sensation",
-                category: "foundational",
-                subcategory: "slow",
-                difficulty: "beginner",
-                duration: "3:15",
-                reps: "10 awareness reps",
-                videoCode: "qWrR7qRqRq4",
-                benefit: "Mind-muscle connection. Sensory awareness.",
-                solution: "Critical for proper technique and progress.",
-                gender: "both"
-            },
-            {
-                id: "F10",
-                name: "Basic Rhythm Training",
-                description: "Establish contraction rhythm",
-                category: "foundational",
-                subcategory: "fast",
-                difficulty: "beginner",
-                duration: "2:40",
-                reps: "20 rhythm reps",
-                videoCode: "rWrR7qRqRq4",
-                benefit: "Consistent timing. Predictable patterns.",
-                solution: "Establishes consistent contraction rhythm.",
-                gender: "both"
-            },
-            {
-                id: "F11",
-                name: "Foundation Builder",
-                description: "Core strength development",
-                category: "foundational",
-                subcategory: "slow",
-                difficulty: "beginner",
-                duration: "3:20",
-                reps: "12 foundation reps",
-                videoCode: "sWrR7qRqRq4",
-                benefit: "Builds core stability. Muscle coordination.",
-                solution: "Develops foundational pelvic strength.",
-                gender: "both"
-            },
-            {
-                id: "F12",
-                name: "Beginner's Breath Sync",
-                description: "Breathing coordination for beginners",
-                category: "foundational",
-                subcategory: "slow",
-                difficulty: "beginner",
-                duration: "3:45",
-                reps: "15 breath cycles",
-                videoCode: "tWrR7qRqRq4",
-                benefit: "Breath-muscle coordination. Relaxation technique.",
-                solution: "Teaches proper breathing with pelvic exercises.",
-                gender: "both"
-            }
-        ],
+        control:[
+{ id:"C1",name:"Elevator Wave Control",description:"Gradual intensity levels",category:"control",subcategory:"wave",difficulty:"intermediate",duration:"4:10",reps:"6 full waves",videoCode:"dQw4w9WgXcQ",benefit:"Precise intensity control. Fine motor skills.",solution:"Teaches graded muscle contraction control.",gender:"both"},
+{ id:"C2",name:"Front-to-Back Sequencing",description:"Sequential muscle activation",category:"control",subcategory:"wave",difficulty:"intermediate",duration:"4:30",reps:"8 sequences",videoCode:"dQw4w9WgXcQ",benefit:"Muscle isolation. Selective control.",solution:"Trains separate control of different pelvic areas.",gender:"both"},
+{ id:"C3",name:"Rolling Pelvic Wave",description:"Circular muscle engagement",category:"control",subcategory:"wave",difficulty:"advanced",duration:"4:45",reps:"6 rolling waves",videoCode:"dQw4w9WgXcQ",benefit:"Complete muscle control. 360° engagement.",solution:"Comprehensive pelvic muscle coordination.",gender:"both"},
+{ id:"C4",name:"Stop-Start Precision",description:"Rapid on-off control",category:"control",subcategory:"stop-start",difficulty:"intermediate",duration:"3:45",reps:"12 precision reps",videoCode:"dQw4w9WgXcQ",benefit:"Immediate control. Quick response.",solution:"Trains rapid muscle activation/deactivation.",gender:"both"},
+{ id:"C5",name:"Interrupted Flow Training",description:"Urinary flow control practice",category:"control",subcategory:"stop-start",difficulty:"intermediate",duration:"4:15",reps:"8 interruptions",videoCode:"dQw4w9WgXcQ",benefit:"Practical bladder control. Real-world application.",solution:"Direct training for urinary control.",gender:"both"},
+{ id:"C6",name:"Multi-Level Coordination",description:"Complex control patterns",category:"control",subcategory:"wave",difficulty:"advanced",duration:"5:00",reps:"5 patterns",videoCode:"dQw4w9WgXcQ",benefit:"Advanced coordination. Master-level control.",solution:"Develops sophisticated muscle coordination.",gender:"both"},
+{ id:"C7",name:"Precision Control Mastery",description:"Advanced control techniques",category:"control",subcategory:"wave",difficulty:"advanced",duration:"4:55",reps:"8 mastery reps",videoCode:"dQw4w9WgXcQ",benefit:"Master-level control. Precision skills.",solution:"Advanced training for precise muscle control.",gender:"both"},
+{ id:"C8",name:"Rhythmic Control Patterns",description:"Complex rhythmic patterns",category:"control",subcategory:"stop-start",difficulty:"intermediate",duration:"4:20",reps:"10 rhythmic patterns",videoCode:"dQw4w9WgXcQ",benefit:"Rhythmic control. Pattern recognition.",solution:"Develops rhythmic control patterns.",gender:"both"}
+],
 
-        // 2️⃣ STRENGTH-FOCUSED KEGELS - GENDER NEUTRAL (10 exercises)
-        strength: [
-            {
-                id: "S1",
-                name: "Full Squeeze Max",
-                description: "100% maximum contraction",
-                category: "strength",
-                subcategory: "max-contraction",
-                difficulty: "intermediate",
-                duration: "3:45",
-                reps: "8 max squeezes",
-                videoCode: "sWrR7qRqRq4",
-                benefit: "Maximum strength development. Peak power.",
-                solution: "Builds type-2 muscle fibers for strength.",
-                gender: "both"
-            },
-            {
-                id: "S2",
-                name: "Peak Hold Challenge",
-                description: "Hold at maximum contraction",
-                category: "strength",
-                subcategory: "max-contraction",
-                difficulty: "intermediate",
-                duration: "4:20",
-                reps: "5 peak holds",
-                videoCode: "tWrR7qRqRq4",
-                benefit: "Sustained strength. Endurance at peak.",
-                solution: "Improves ability to maintain maximum contraction.",
-                gender: "both"
-            },
-            {
-                id: "S3",
-                name: "Clench & Release Power",
-                description: "Explosive contraction and release",
-                category: "strength",
-                subcategory: "max-contraction",
-                difficulty: "intermediate",
-                duration: "3:30",
-                reps: "10 explosive reps",
-                videoCode: "uWrR7qRqRq4",
-                benefit: "Power development. Fast strength.",
-                solution: "Trains explosive power for sudden needs.",
-                gender: "both"
-            },
-            {
-                id: "S4",
-                name: "Kegel Ball Training",
-                description: "Resistance-based strengthening",
-                category: "strength",
-                subcategory: "resistance",
-                difficulty: "intermediate",
-                duration: "4:45",
-                reps: "3 sets of 10",
-                videoCode: "vWrR7qRqRq4",
-                benefit: "Progressive resistance. Measurable strength gains.",
-                solution: "Adds external resistance for strength progression.",
-                gender: "both"
-            },
-            {
-                id: "S5",
-                name: "Male Pelvic Strengthener",
-                description: "Male-specific strength training",
-                category: "strength",
-                subcategory: "resistance",
-                difficulty: "advanced",
-                duration: "5:10",
-                reps: "8 weighted reps",
-                videoCode: "wWrR7qRqRq4",
-                benefit: "Male pelvic health. Targeted strength.",
-                solution: "Specifically for male pelvic muscle strengthening.",
-                gender: "Male"
-            },
-            {
-                id: "S6",
-                name: "Female Pelvic Strengthener",
-                description: "Female-specific strength training",
-                category: "strength",
-                subcategory: "resistance",
-                difficulty: "advanced",
-                duration: "5:15",
-                reps: "8 female reps",
-                videoCode: "xWrR7qRqRq4",
-                benefit: "Female pelvic health. Targeted strength.",
-                solution: "Specifically for female pelvic muscle strengthening.",
-                gender: "Female"
-            },
-            {
-                id: "S7",
-                name: "Progressive Resistance",
-                description: "Increasing resistance over time",
-                category: "strength",
-                subcategory: "resistance",
-                difficulty: "intermediate",
-                duration: "4:30",
-                reps: "Progressive sets",
-                videoCode: "yWrR7qRqRq4",
-                benefit: "Continuous strength gains. Avoids plateaus.",
-                solution: "Systematic overload principle application.",
-                gender: "both"
-            },
-            {
-                id: "S8",
-                name: "Strength Endurance Combo",
-                description: "Combines strength and endurance",
-                category: "strength",
-                subcategory: "max-contraction",
-                difficulty: "advanced",
-                duration: "5:30",
-                reps: "6 combo reps",
-                videoCode: "zWrR7qRqRq4",
-                benefit: "Balanced development. Functional strength.",
-                solution: "Combines strength and endurance training.",
-                gender: "both"
-            },
-            {
-                id: "S9",
-                name: "Isometric Strength Hold",
-                description: "Static hold at 80% maximum",
-                category: "strength",
-                subcategory: "max-contraction",
-                difficulty: "intermediate",
-                duration: "4:00",
-                reps: "5 isometric holds",
-                videoCode: "aXrR7qRqRq4",
-                benefit: "Sustained strength. Muscle density.",
-                solution: "Builds isometric strength capacity.",
-                gender: "both"
-            },
-            {
-                id: "S10",
-                name: "Power Contraction Series",
-                description: "High-intensity strength building",
-                category: "strength",
-                subcategory: "max-contraction",
-                difficulty: "advanced",
-                duration: "4:50",
-                reps: "10 power reps",
-                videoCode: "bXrR7qRqRq4",
-                benefit: "Maximum power output. High intensity.",
-                solution: "Develops maximum contraction power.",
-                gender: "both"
-            }
-        ],
+functional:[
+{ id:"FU1",name:"Walking Integration",description:"Kegels while walking",category:"functional",subcategory:"activity-linked",difficulty:"beginner",duration:"3:30",reps:"During 5-min walk",videoCode:"dQw4w9WgXcQ",benefit:"Real-world application. Daily life integration.",solution:"Trains pelvic control during movement.",gender:"both"},
+{ id:"FU2",name:"Sitting Posture Kegels",description:"Engage while sitting properly",category:"functional",subcategory:"activity-linked",difficulty:"beginner",duration:"3:15",reps:"10 sitting reps",videoCode:"dQw4w9WgXcQ",benefit:"Posture correction. Desk job solution.",solution:"Combines pelvic health with posture correction.",gender:"both"},
+{ id:"FU3",name:"Standing Stability",description:"Pelvic engagement while standing",category:"functional",subcategory:"activity-linked",difficulty:"beginner",duration:"3:00",reps:"8 standing reps",videoCode:"dQw4w9WgXcQ",benefit:"Standing stability. Core integration.",solution:"Improves stability during standing activities.",gender:"both"},
+{ id:"FU4",name:"Cough Guard Reflex",description:"Pre-activation before cough/sneeze",category:"functional",subcategory:"stress-response",difficulty:"beginner",duration:"2:45",reps:"10 reflex reps",videoCode:"dQw4w9WgXcQ",benefit:"Leakage prevention. Stress incontinence solution.",solution:"Trains protective reflex for cough/sneeze.",gender:"both"},
+{ id:"FU5",name:"Laugh Guard Protection",description:"Control during laughter",category:"functional",subcategory:"stress-response",difficulty:"intermediate",duration:"3:20",reps:"8 laugh reps",videoCode:"dQw4w9WgXcQ",benefit:"Social confidence. Laughter control.",solution:"Prevents leakage during laughter.",gender:"both"},
+{ id:"FU6",name:"Lift Support Training",description:"Engage during lifting",category:"functional",subcategory:"stress-response",difficulty:"intermediate",duration:"3:45",reps:"6 lift reps",videoCode:"dQw4w9WgXcQ",benefit:"Heavy load protection. Core stability.",solution:"Protects pelvic floor during heavy lifting.",gender:"both"},
+{ id:"FU7",name:"Car Driving Integration",description:"Kegels while driving",category:"functional",subcategory:"activity-linked",difficulty:"beginner",duration:"3:10",reps:"During 10-min drive",videoCode:"dQw4w9WgXcQ",benefit:"Daily commute training. Time efficiency.",solution:"Utilizes driving time for pelvic training.",gender:"both"},
+{ id:"FU8",name:"Desk Work Integration",description:"Office-friendly kegels",category:"functional",subcategory:"activity-linked",difficulty:"beginner",duration:"3:25",reps:"15 desk reps",videoCode:"dQw4w9WgXcQ",benefit:"Office-friendly. Discreet training.",solution:"Allows training during office hours.",gender:"both"}
+],
 
-        // 3️⃣ CONTROL & COORDINATION KEGELS - GENDER NEUTRAL (8 exercises)
-        control: [
-            {
-                id: "C1",
-                name: "Elevator Wave Control",
-                description: "Gradual intensity levels",
-                category: "control",
-                subcategory: "wave",
-                difficulty: "intermediate",
-                duration: "4:10",
-                reps: "6 full waves",
-                videoCode: "aXrR7qRqRq4",
-                benefit: "Precise intensity control. Fine motor skills.",
-                solution: "Teaches graded muscle contraction control.",
-                gender: "both"
-            },
-            {
-                id: "C2",
-                name: "Front-to-Back Sequencing",
-                description: "Sequential muscle activation",
-                category: "control",
-                subcategory: "wave",
-                difficulty: "intermediate",
-                duration: "4:30",
-                reps: "8 sequences",
-                videoCode: "bXrR7qRqRq4",
-                benefit: "Muscle isolation. Selective control.",
-                solution: "Trains separate control of different pelvic areas.",
-                gender: "both"
-            },
-            {
-                id: "C3",
-                name: "Rolling Pelvic Wave",
-                description: "Circular muscle engagement",
-                category: "control",
-                subcategory: "wave",
-                difficulty: "advanced",
-                duration: "4:45",
-                reps: "6 rolling waves",
-                videoCode: "cXrR7qRqRq4",
-                benefit: "Complete muscle control. 360° engagement.",
-                solution: "Comprehensive pelvic muscle coordination.",
-                gender: "both"
-            },
-            {
-                id: "C4",
-                name: "Stop-Start Precision",
-                description: "Rapid on-off control",
-                category: "control",
-                subcategory: "stop-start",
-                difficulty: "intermediate",
-                duration: "3:45",
-                reps: "12 precision reps",
-                videoCode: "dXrR7qRqRq4",
-                benefit: "Immediate control. Quick response.",
-                solution: "Trains rapid muscle activation/deactivation.",
-                gender: "both"
-            },
-            {
-                id: "C5",
-                name: "Interrupted Flow Training",
-                description: "Urinary flow control practice",
-                category: "control",
-                subcategory: "stop-start",
-                difficulty: "intermediate",
-                duration: "4:15",
-                reps: "8 interruptions",
-                videoCode: "eXrR7qRqRq4",
-                benefit: "Practical bladder control. Real-world application.",
-                solution: "Direct training for urinary control.",
-                gender: "both"
-            },
-            {
-                id: "C6",
-                name: "Multi-Level Coordination",
-                description: "Complex control patterns",
-                category: "control",
-                subcategory: "wave",
-                difficulty: "advanced",
-                duration: "5:00",
-                reps: "5 patterns",
-                videoCode: "fXrR7qRqRq4",
-                benefit: "Advanced coordination. Master-level control.",
-                solution: "Develops sophisticated muscle coordination.",
-                gender: "both"
-            },
-            {
-                id: "C7",
-                name: "Precision Control Mastery",
-                description: "Advanced control techniques",
-                category: "control",
-                subcategory: "wave",
-                difficulty: "advanced",
-                duration: "4:55",
-                reps: "8 mastery reps",
-                videoCode: "gXrR7qRqRq4",
-                benefit: "Master-level control. Precision skills.",
-                solution: "Advanced training for precise muscle control.",
-                gender: "both"
-            },
-            {
-                id: "C8",
-                name: "Rhythmic Control Patterns",
-                description: "Complex rhythmic patterns",
-                category: "control",
-                subcategory: "stop-start",
-                difficulty: "intermediate",
-                duration: "4:20",
-                reps: "10 rhythmic patterns",
-                videoCode: "hXrR7qRqRq4",
-                benefit: "Rhythmic control. Pattern recognition.",
-                solution: "Develops rhythmic control patterns.",
-                gender: "both"
-            }
-        ],
+breathing:[
+{ id:"B1",name:"Diaphragmatic Synchronization",description:"Coordination with deep breathing",category:"breathing",subcategory:"breath-sync",difficulty:"intermediate",duration:"4:15",reps:"10 breath cycles",videoCode:"dQw4w9WgXcQ",benefit:"Breath-muscle harmony. Stress reduction.",solution:"Integrates pelvic health with breathing patterns.",gender:"both"},
+{ id:"B2",name:"Inhale Relax/Exhale Contract",description:"Natural breathing rhythm",category:"breathing",subcategory:"breath-sync",difficulty:"beginner",duration:"3:30",reps:"12 natural cycles",videoCode:"dQw4w9WgXcQ",benefit:"Automatic integration. Relaxation response.",solution:"Makes pelvic exercises natural and automatic.",gender:"both"},
+{ id:"B3",name:"Mula Bandha Mastery",description:"Yogic root lock technique",category:"breathing",subcategory:"pranayama",difficulty:"advanced",duration:"5:00",reps:"8 yogic holds",videoCode:"dQw4w9WgXcQ",benefit:"Energy control. Deep mind-body connection.",solution:"Traditional yogic technique for pelvic health.",gender:"both"},
+{ id:"B4",name:"Root Lock Energy Flow",description:"Energy awareness with breath",category:"breathing",subcategory:"pranayama",difficulty:"advanced",duration:"4:45",reps:"6 energy flows",videoCode:"dQw4w9WgXcQ",benefit:"Energetic awareness. Vitality enhancement.",solution:"Combines physical and energetic aspects.",gender:"both"},
+{ id:"B5",name:"4-7-8 Breathing Pattern",description:"Therapeutic breathing rhythm",category:"breathing",subcategory:"breath-sync",difficulty:"intermediate",duration:"4:30",reps:"5 breathing patterns",videoCode:"dQw4w9WgXcQ",benefit:"Anxiety reduction. Deep relaxation.",solution:"Therapeutic breathing for pelvic relaxation.",gender:"both"},
+{ id:"B6",name:"Breath Control Mastery",description:"Advanced breath coordination",category:"breathing",subcategory:"breath-sync",difficulty:"advanced",duration:"5:15",reps:"8 mastery cycles",videoCode:"dQw4w9WgXcQ",benefit:"Advanced coordination. Deep control.",solution:"Master-level breath-pelvic coordination.",gender:"both"},
+{ id:"B7",name:"Relaxation Breathing",description:"Stress-reduction breathing",category:"breathing",subcategory:"pranayama",difficulty:"beginner",duration:"4:05",reps:"10 relaxation cycles",videoCode:"dQw4w9WgXcQ",benefit:"Stress reduction. Muscle relaxation.",solution:"Promotes relaxation in pelvic muscles.",gender:"both"},
+{ id:"B8",name:"Power Breathing Technique",description:"Strength-building breath work",category:"breathing",subcategory:"breath-sync",difficulty:"intermediate",duration:"4:40",reps:"8 power breaths",videoCode:"dQw4w9WgXcQ",benefit:"Power enhancement. Strength building.",solution:"Uses breathing to enhance contraction power.",gender:"both"}
+],
 
-        // 4️⃣ FUNCTIONAL / DAILY-LIFE KEGELS - GENDER NEUTRAL (8 exercises)
-        functional: [
-            {
-                id: "FU1",
-                name: "Walking Integration",
-                description: "Kegels while walking",
-                category: "functional",
-                subcategory: "activity-linked",
-                difficulty: "beginner",
-                duration: "3:30",
-                reps: "During 5-min walk",
-                videoCode: "gXrR7qRqRq4",
-                benefit: "Real-world application. Daily life integration.",
-                solution: "Trains pelvic control during movement.",
-                gender: "both"
-            },
-            {
-                id: "FU2",
-                name: "Sitting Posture Kegels",
-                description: "Engage while sitting properly",
-                category: "functional",
-                subcategory: "activity-linked",
-                difficulty: "beginner",
-                duration: "3:15",
-                reps: "10 sitting reps",
-                videoCode: "hXrR7qRqRq4",
-                benefit: "Posture correction. Desk job solution.",
-                solution: "Combines pelvic health with posture correction.",
-                gender: "both"
-            },
-            {
-                id: "FU3",
-                name: "Standing Stability",
-                description: "Pelvic engagement while standing",
-                category: "functional",
-                subcategory: "activity-linked",
-                difficulty: "beginner",
-                duration: "3:00",
-                reps: "8 standing reps",
-                videoCode: "iXrR7qRqRq4",
-                benefit: "Standing stability. Core integration.",
-                solution: "Improves stability during standing activities.",
-                gender: "both"
-            },
-            {
-                id: "FU4",
-                name: "Cough Guard Reflex",
-                description: "Pre-activation before cough/sneeze",
-                category: "functional",
-                subcategory: "stress-response",
-                difficulty: "beginner",
-                duration: "2:45",
-                reps: "10 reflex reps",
-                videoCode: "jXrR7qRqRq4",
-                benefit: "Leakage prevention. Stress incontinence solution.",
-                solution: "Trains protective reflex for cough/sneeze.",
-                gender: "both"
-            },
-            {
-                id: "FU5",
-                name: "Laugh Guard Protection",
-                description: "Control during laughter",
-                category: "functional",
-                subcategory: "stress-response",
-                difficulty: "intermediate",
-                duration: "3:20",
-                reps: "8 laugh reps",
-                videoCode: "kXrR7qRqRq4",
-                benefit: "Social confidence. Laughter control.",
-                solution: "Prevents leakage during laughter.",
-                gender: "both"
-            },
-            {
-                id: "FU6",
-                name: "Lift Support Training",
-                description: "Engage during lifting",
-                category: "functional",
-                subcategory: "stress-response",
-                difficulty: "intermediate",
-                duration: "3:45",
-                reps: "6 lift reps",
-                videoCode: "lXrR7qRqRq4",
-                benefit: "Heavy load protection. Core stability.",
-                solution: "Protects pelvic floor during heavy lifting.",
-                gender: "both"
-            },
-            {
-                id: "FU7",
-                name: "Car Driving Integration",
-                description: "Kegels while driving",
-                category: "functional",
-                subcategory: "activity-linked",
-                difficulty: "beginner",
-                duration: "3:10",
-                reps: "During 10-min drive",
-                videoCode: "mXrR7qRqRq4",
-                benefit: "Daily commute training. Time efficiency.",
-                solution: "Utilizes driving time for pelvic training.",
-                gender: "both"
-            },
-            {
-                id: "FU8",
-                name: "Desk Work Integration",
-                description: "Office-friendly kegels",
-                category: "functional",
-                subcategory: "activity-linked",
-                difficulty: "beginner",
-                duration: "3:25",
-                reps: "15 desk reps",
-                videoCode: "nXrR7qRqRq4",
-                benefit: "Office-friendly. Discreet training.",
-                solution: "Allows training during office hours.",
-                gender: "both"
-            }
-        ],
+sexual:[
+{ id:"SPM1",name:"Erectile Strength Builder",description:"Specific for erectile quality improvement",category:"sexual",subcategory:"male",difficulty:"intermediate",duration:"4:00",reps:"10 erectile reps",videoCode:"dQw4w9WgXcQ",benefit:"Improved erection quality. Enhanced stiffness.",solution:"Specifically targets erectile muscle groups in males.",gender:"Male"},
+{ id:"SPM2",name:"Ejaculation Control Mastery",description:"Timing and control training for males",category:"sexual",subcategory:"male",difficulty:"advanced",duration:"4:30",reps:"8 control reps",videoCode:"dQw4w9WgXcQ",benefit:"Extended duration. Better ejaculation control.",solution:"Trains control over ejaculation reflex in males.",gender:"Male"},
+{ id:"SPM3",name:"Prostate Health Circulation",description:"Prostate-specific blood flow improvement",category:"sexual",subcategory:"male",difficulty:"intermediate",duration:"3:45",reps:"10 prostate reps",videoCode:"dQw4w9WgXcQ",benefit:"Prostate health. Improved circulation.",solution:"Promotes prostate health through exercise for males.",gender:"Male"},
+{ id:"SPM4",name:"Male Sexual Stamina",description:"Endurance training for sexual performance",category:"sexual",subcategory:"male",difficulty:"advanced",duration:"4:20",reps:"8 stamina reps",videoCode:"dQw4w9WgXcQ",benefit:"Increased stamina. Longer performance.",solution:"Builds sexual endurance specifically for males.",gender:"Male"},
+{ id:"SPM5",name:"Male Pelvic Power",description:"Power training for male sexual function",category:"sexual",subcategory:"male",difficulty:"intermediate",duration:"4:10",reps:"10 power reps",videoCode:"dQw4w9WgXcQ",benefit:"Enhanced power. Stronger contractions.",solution:"Develops power in male pelvic muscles.",gender:"Male"},
+{ id:"SPM6",name:"Male Recovery Boost",description:"Post-activity recovery enhancement",category:"sexual",subcategory:"male",difficulty:"beginner",duration:"3:50",reps:"8 recovery reps",videoCode:"dQw4w9WgXcQ",benefit:"Faster recovery. Reduced refractory period.",solution:"Improves recovery time specifically for males.",gender:"Male"},
+{ id:"SPF1",name:"Vaginal Tightening & Tone",description:"Tone and sensation enhancement for women",category:"sexual",subcategory:"female",difficulty:"intermediate",duration:"4:15",reps:"12 tightening reps",videoCode:"dQw4w9WgXcQ",benefit:"Increased sensation. Enhanced tightness.",solution:"Specifically for vaginal muscle tone in females.",gender:"Female"},
+{ id:"SPF2",name:"Orgasm Intensity Amplifier",description:"Enhances orgasmic experience for women",category:"sexual",subcategory:"female",difficulty:"advanced",duration:"4:45",reps:"6 intensity reps",videoCode:"dQw4w9WgXcQ",benefit:"Stronger orgasms. Better control.",solution:"Trains muscles involved in female orgasm.",gender:"Female"},
+{ id:"SPF3",name:"Female Arousal Enhancement",description:"Improves arousal and lubrication",category:"sexual",subcategory:"female",difficulty:"intermediate",duration:"4:05",reps:"10 arousal reps",videoCode:"dQw4w9WgXcQ",benefit:"Enhanced arousal. Natural lubrication.",solution:"Promotes arousal response in females.",gender:"Female"},
+{ id:"SPF4",name:"G-Spot Awareness Training",description:"G-spot muscle control for women",category:"sexual",subcategory:"female",difficulty:"advanced",duration:"4:30",reps:"8 G-spot reps",videoCode:"dQw4w9WgXcQ",benefit:"G-spot sensitivity. Enhanced pleasure.",solution:"Develops control over G-spot muscles.",gender:"Female"},
+{ id:"SPF5",name:"Female Sexual Confidence",description:"Confidence-building exercises",category:"sexual",subcategory:"female",difficulty:"beginner",duration:"3:55",reps:"10 confidence reps",videoCode:"dQw4w9WgXcQ",benefit:"Increased confidence. Better body awareness.",solution:"Builds sexual confidence specifically for females.",gender:"Female"},
+{ id:"SPF6",name:"Postpartum Sexual Recovery",description:"Sexual function recovery after childbirth",category:"sexual",subcategory:"female",difficulty:"intermediate",duration:"4:15",reps:"8 recovery reps",videoCode:"dQw4w9WgXcQ",benefit:"Postpartum recovery. Restored function.",solution:"Specifically designed for postpartum sexual recovery.",gender:"Female"}
+],
 
-        // 5️⃣ BREATHING-INTEGRATED KEGELS - GENDER NEUTRAL (8 exercises)
-        breathing: [
-            {
-                id: "B1",
-                name: "Diaphragmatic Synchronization",
-                description: "Coordination with deep breathing",
-                category: "breathing",
-                subcategory: "breath-sync",
-                difficulty: "intermediate",
-                duration: "4:15",
-                reps: "10 breath cycles",
-                videoCode: "mXrR7qRqRq4",
-                benefit: "Breath-muscle harmony. Stress reduction.",
-                solution: "Integrates pelvic health with breathing patterns.",
-                gender: "both"
-            },
-            {
-                id: "B2",
-                name: "Inhale Relax/Exhale Contract",
-                description: "Natural breathing rhythm",
-                category: "breathing",
-                subcategory: "breath-sync",
-                difficulty: "beginner",
-                duration: "3:30",
-                reps: "12 natural cycles",
-                videoCode: "nXrR7qRqRq4",
-                benefit: "Automatic integration. Relaxation response.",
-                solution: "Makes pelvic exercises natural and automatic.",
-                gender: "both"
-            },
-            {
-                id: "B3",
-                name: "Mula Bandha Mastery",
-                description: "Yogic root lock technique",
-                category: "breathing",
-                subcategory: "pranayama",
-                difficulty: "advanced",
-                duration: "5:00",
-                reps: "8 yogic holds",
-                videoCode: "oXrR7qRqRq4",
-                benefit: "Energy control. Deep mind-body connection.",
-                solution: "Traditional yogic technique for pelvic health.",
-                gender: "both"
-            },
-            {
-                id: "B4",
-                name: "Root Lock Energy Flow",
-                description: "Energy awareness with breath",
-                category: "breathing",
-                subcategory: "pranayama",
-                difficulty: "advanced",
-                duration: "4:45",
-                reps: "6 energy flows",
-                videoCode: "pXrR7qRqRq4",
-                benefit: "Energetic awareness. Vitality enhancement.",
-                solution: "Combines physical and energetic aspects.",
-                gender: "both"
-            },
-            {
-                id: "B5",
-                name: "4-7-8 Breathing Pattern",
-                description: "Therapeutic breathing rhythm",
-                category: "breathing",
-                subcategory: "breath-sync",
-                difficulty: "intermediate",
-                duration: "4:30",
-                reps: "5 breathing patterns",
-                videoCode: "qXrR7qRqRq4",
-                benefit: "Anxiety reduction. Deep relaxation.",
-                solution: "Therapeutic breathing for pelvic relaxation.",
-                gender: "both"
-            },
-            {
-                id: "B6",
-                name: "Breath Control Mastery",
-                description: "Advanced breath coordination",
-                category: "breathing",
-                subcategory: "breath-sync",
-                difficulty: "advanced",
-                duration: "5:15",
-                reps: "8 mastery cycles",
-                videoCode: "rXrR7qRqRq4",
-                benefit: "Advanced coordination. Deep control.",
-                solution: "Master-level breath-pelvic coordination.",
-                gender: "both"
-            },
-            {
-                id: "B7",
-                name: "Relaxation Breathing",
-                description: "Stress-reduction breathing",
-                category: "breathing",
-                subcategory: "pranayama",
-                difficulty: "beginner",
-                duration: "4:05",
-                reps: "10 relaxation cycles",
-                videoCode: "sXrR7qRqRq4",
-                benefit: "Stress reduction. Muscle relaxation.",
-                solution: "Promotes relaxation in pelvic muscles.",
-                gender: "both"
-            },
-            {
-                id: "B8",
-                name: "Power Breathing Technique",
-                description: "Strength-building breath work",
-                category: "breathing",
-                subcategory: "breath-sync",
-                difficulty: "intermediate",
-                duration: "4:40",
-                reps: "8 power breaths",
-                videoCode: "tXrR7qRqRq4",
-                benefit: "Power enhancement. Strength building.",
-                solution: "Uses breathing to enhance contraction power.",
-                gender: "both"
-            }
-        ],
+rehab:[
+{ id:"R1",name:"Post-Delivery Gentle Start",description:"Safe postpartum beginning",category:"rehab",subcategory:"post-surgery",difficulty:"beginner",duration:"3:30",reps:"8 gentle reps",videoCode:"dQw4w9WgXcQ",benefit:"Safe recovery. Gradual rebuilding.",solution:"Specifically designed for postpartum recovery.",gender:"Female"},
+{ id:"R2",name:"Post-Prostate Surgery Recovery",description:"Post-surgical recovery protocol for men",category:"rehab",subcategory:"post-surgery",difficulty:"beginner",duration:"4:00",reps:"10 recovery reps",videoCode:"dQw4w9WgXcQ",benefit:"Surgical recovery. Function restoration.",solution:"Tailored for post-prostate surgery recovery in males.",gender:"Male"},
+{ id:"R3",name:"Urge Suppression Training",description:"Controls sudden urges",category:"rehab",subcategory:"incontinence",difficulty:"intermediate",duration:"4:15",reps:"10 suppression holds",videoCode:"dQw4w9WgXcQ",benefit:"Reduces urgency. Better control.",solution:"Specifically for urge incontinence.",gender:"both"},
+{ id:"R4",name:"Stress Leakage Prevention",description:"Prevents leakage under stress",category:"rehab",subcategory:"incontinence",difficulty:"intermediate",duration:"3:45",reps:"8 stress reps",videoCode:"dQw4w9WgXcQ",benefit:"Confidence in movement. No more leaks.",solution:"Targets stress incontinence specifically.",gender:"both"},
+{ id:"R5",name:"Bowel Control Training",description:"Improves anal sphincter control",category:"rehab",subcategory:"incontinence",difficulty:"intermediate",duration:"4:30",reps:"10 bowel reps",videoCode:"dQw4w9WgXcQ",benefit:"Better bowel control. Reduced accidents.",solution:"Specifically for fecal incontinence.",gender:"both"},
+{ id:"R6",name:"Pelvic Injury Recovery",description:"General pelvic rehabilitation",category:"rehab",subcategory:"post-surgery",difficulty:"beginner",duration:"4:00",reps:"8 rehab reps",videoCode:"dQw4w9WgXcQ",benefit:"Injury recovery. Function restoration.",solution:"General protocol for pelvic injury recovery.",gender:"both"},
+{ id:"R7",name:"Male Post-Surgical Protocol",description:"Male-specific post-surgery rehabilitation",category:"rehab",subcategory:"post-surgery",difficulty:"beginner",duration:"4:20",reps:"10 male rehab reps",videoCode:"dQw4w9WgXcQ",benefit:"Male surgical recovery. Faster healing.",solution:"Specifically designed for male post-surgical recovery.",gender:"Male"},
+{ id:"R8",name:"Female Post-Surgical Protocol",description:"Female-specific post-surgery rehabilitation",category:"rehab",subcategory:"post-surgery",difficulty:"beginner",duration:"4:25",reps:"10 female rehab reps",videoCode:"dQw4w9WgXcQ",benefit:"Female surgical recovery. Gentle healing.",solution:"Specifically designed for female post-surgical recovery.",gender:"Female"},
+{ id:"R9",name:"Chronic Pain Management",description:"Pain relief techniques",category:"rehab",subcategory:"pain-management",difficulty:"intermediate",duration:"4:40",reps:"8 pain relief reps",videoCode:"dQw4w9WgXcQ",benefit:"Pain reduction. Improved comfort.",solution:"Techniques for managing chronic pelvic pain.",gender:"both"},
+{ id:"R10",name:"Recovery Progression System",description:"Structured recovery program",category:"rehab",subcategory:"post-surgery",difficulty:"intermediate",duration:"5:00",reps:"Progressive recovery",videoCode:"dQw4w9WgXcQ",benefit:"Structured recovery. Measurable progress.",solution:"Systematic approach to rehabilitation.",gender:"both"}
+],
 
-        // 6️⃣ SEXUAL PERFORMANCE KEGELS - GENDER SPECIFIC (12 exercises)
-        sexual: [
-            // MALE SPECIFIC (6 exercises)
-            {
-                id: "SPM1",
-                name: "Erectile Strength Builder",
-                description: "Specific for erectile quality improvement",
-                category: "sexual",
-                subcategory: "male",
-                difficulty: "intermediate",
-                duration: "4:00",
-                reps: "10 erectile reps",
-                videoCode: "rXrR7qRqRq4",
-                benefit: "Improved erection quality. Enhanced stiffness.",
-                solution: "Specifically targets erectile muscle groups in males.",
-                gender: "Male"
-            },
-            {
-                id: "SPM2",
-                name: "Ejaculation Control Mastery",
-                description: "Timing and control training for males",
-                category: "sexual",
-                subcategory: "male",
-                difficulty: "advanced",
-                duration: "4:30",
-                reps: "8 control reps",
-                videoCode: "sXrR7qRqRq4",
-                benefit: "Extended duration. Better ejaculation control.",
-                solution: "Trains control over ejaculation reflex in males.",
-                gender: "Male"
-            },
-            {
-                id: "SPM3",
-                name: "Prostate Health Circulation",
-                description: "Prostate-specific blood flow improvement",
-                category: "sexual",
-                subcategory: "male",
-                difficulty: "intermediate",
-                duration: "3:45",
-                reps: "10 prostate reps",
-                videoCode: "vXrR7qRqRq4",
-                benefit: "Prostate health. Improved circulation.",
-                solution: "Promotes prostate health through exercise for males.",
-                gender: "Male"
-            },
-            {
-                id: "SPM4",
-                name: "Male Sexual Stamina",
-                description: "Endurance training for sexual performance",
-                category: "sexual",
-                subcategory: "male",
-                difficulty: "advanced",
-                duration: "4:20",
-                reps: "8 stamina reps",
-                videoCode: "wXrR7qRqRq4",
-                benefit: "Increased stamina. Longer performance.",
-                solution: "Builds sexual endurance specifically for males.",
-                gender: "Male"
-            },
-            {
-                id: "SPM5",
-                name: "Male Pelvic Power",
-                description: "Power training for male sexual function",
-                category: "sexual",
-                subcategory: "male",
-                difficulty: "intermediate",
-                duration: "4:10",
-                reps: "10 power reps",
-                videoCode: "xXrR7qRqRq4",
-                benefit: "Enhanced power. Stronger contractions.",
-                solution: "Develops power in male pelvic muscles.",
-                gender: "Male"
-            },
-            {
-                id: "SPM6",
-                name: "Male Recovery Boost",
-                description: "Post-activity recovery enhancement",
-                category: "sexual",
-                subcategory: "male",
-                difficulty: "beginner",
-                duration: "3:50",
-                reps: "8 recovery reps",
-                videoCode: "yXrR7qRqRq4",
-                benefit: "Faster recovery. Reduced refractory period.",
-                solution: "Improves recovery time specifically for males.",
-                gender: "Male"
-            },
-            // FEMALE SPECIFIC (6 exercises)
-            {
-                id: "SPF1",
-                name: "Vaginal Tightening & Tone",
-                description: "Tone and sensation enhancement for women",
-                category: "sexual",
-                subcategory: "female",
-                difficulty: "intermediate",
-                duration: "4:15",
-                reps: "12 tightening reps",
-                videoCode: "tXrR7qRqRq4",
-                benefit: "Increased sensation. Enhanced tightness.",
-                solution: "Specifically for vaginal muscle tone in females.",
-                gender: "Female"
-            },
-            {
-                id: "SPF2",
-                name: "Orgasm Intensity Amplifier",
-                description: "Enhances orgasmic experience for women",
-                category: "sexual",
-                subcategory: "female",
-                difficulty: "advanced",
-                duration: "4:45",
-                reps: "6 intensity reps",
-                videoCode: "uXrR7qRqRq4",
-                benefit: "Stronger orgasms. Better control.",
-                solution: "Trains muscles involved in female orgasm.",
-                gender: "Female"
-            },
-            {
-                id: "SPF3",
-                name: "Female Arousal Enhancement",
-                description: "Improves arousal and lubrication",
-                category: "sexual",
-                subcategory: "female",
-                difficulty: "intermediate",
-                duration: "4:05",
-                reps: "10 arousal reps",
-                videoCode: "zXrR7qRqRq4",
-                benefit: "Enhanced arousal. Natural lubrication.",
-                solution: "Promotes arousal response in females.",
-                gender: "Female"
-            },
-            {
-                id: "SPF4",
-                name: "G-Spot Awareness Training",
-                description: "G-spot muscle control for women",
-                category: "sexual",
-                subcategory: "female",
-                difficulty: "advanced",
-                duration: "4:30",
-                reps: "8 G-spot reps",
-                videoCode: "aYrR7qRqRq4",
-                benefit: "G-spot sensitivity. Enhanced pleasure.",
-                solution: "Develops control over G-spot muscles.",
-                gender: "Female"
-            },
-            {
-                id: "SPF5",
-                name: "Female Sexual Confidence",
-                description: "Confidence-building exercises",
-                category: "sexual",
-                subcategory: "female",
-                difficulty: "beginner",
-                duration: "3:55",
-                reps: "10 confidence reps",
-                videoCode: "bYrR7qRqRq4",
-                benefit: "Increased confidence. Better body awareness.",
-                solution: "Builds sexual confidence specifically for females.",
-                gender: "Female"
-            },
-            {
-                id: "SPF6",
-                name: "Postpartum Sexual Recovery",
-                description: "Sexual function recovery after childbirth",
-                category: "sexual",
-                subcategory: "female",
-                difficulty: "intermediate",
-                duration: "4:15",
-                reps: "8 recovery reps",
-                videoCode: "cYrR7qRqRq4",
-                benefit: "Postpartum recovery. Restored function.",
-                solution: "Specifically designed for postpartum sexual recovery.",
-                gender: "Female"
-            }
-        ],
+endurance:[
+{ id:"E1",name:"30-Second Marathon Hold",description:"Extended duration challenge",category:"endurance",subcategory:"long-duration",difficulty:"intermediate",duration:"5:30",reps:"4 × 30s holds",videoCode:"dQw4w9WgXcQ",benefit:"Extended endurance. Muscle stamina.",solution:"Builds capacity for sustained contraction.",gender:"both"},
+{ id:"E2",name:"1-Minute Ultimate Hold",description:"Maximum endurance challenge",category:"endurance",subcategory:"long-duration",difficulty:"advanced",duration:"6:45",reps:"3 × 60s holds",videoCode:"dQw4w9WgXcQ",benefit:"Maximum endurance. Peak stamina.",solution:"Ultimate endurance building exercise.",gender:"both"},
+{ id:"E3",name:"High-Rep Endurance (50+)",description:"High repetition training",category:"endurance",subcategory:"repetition",difficulty:"advanced",duration:"7:00",reps:"50+ reps",videoCode:"dQw4w9WgXcQ",benefit:"Repetition endurance. Fatigue resistance.",solution:"Builds resistance to muscle fatigue.",gender:"both"},
+{ id:"E4",name:"Ladder Progression (10-20-30)",description:"Systematic increase in reps",category:"endurance",subcategory:"repetition",difficulty:"intermediate",duration:"5:15",reps:"Ladder sets",videoCode:"dQw4w9WgXcQ",benefit:"Structured progression. Measurable gains.",solution:"Systematic approach to endurance building.",gender:"both"},
+{ id:"E5",name:"Endurance-Power Combo",description:"Combines endurance and strength",category:"endurance",subcategory:"long-duration",difficulty:"advanced",duration:"6:30",reps:"5 combo reps",videoCode:"dQw4w9WgXcQ",benefit:"Complete development. Balanced capacity.",solution:"Combines endurance and strength training.",gender:"both"},
+{ id:"E6",name:"Stamina Builder Pro",description:"Professional stamina training",category:"endurance",subcategory:"long-duration",difficulty:"advanced",duration:"6:15",reps:"6 stamina reps",videoCode:"dQw4w9WgXcQ",benefit:"Professional stamina. Competition-level.",solution:"Advanced stamina building techniques.",gender:"both"},
+{ id:"E7",name:"Endurance Circuit Training",description:"Circuit-based endurance",category:"endurance",subcategory:"repetition",difficulty:"intermediate",duration:"5:45",reps:"Circuit training",videoCode:"dQw4w9WgXcQ",benefit:"Circuit endurance. Variety training.",solution:"Circuit training approach to endurance.",gender:"both"},
+{ id:"E8",name:"Fatigue Resistance Protocol",description:"Builds resistance to fatigue",category:"endurance",subcategory:"long-duration",difficulty:"advanced",duration:"6:50",reps:"8 fatigue reps",videoCode:"dQw4w9WgXcQ",benefit:"Fatigue resistance. Lasting endurance.",solution:"Specifically targets fatigue resistance.",gender:"both"}
+],
 
-        // 7️⃣ REHAB & MEDICAL KEGELS - GENDER SPECIFIC (10 exercises)
-        rehab: [
-            // GENDER NEUTRAL (4 exercises)
-            {
-                id: "R1",
-                name: "Post-Delivery Gentle Start",
-                description: "Safe postpartum beginning",
-                category: "rehab",
-                subcategory: "post-surgery",
-                difficulty: "beginner",
-                duration: "3:30",
-                reps: "8 gentle reps",
-                videoCode: "xXrR7qRqRq4",
-                benefit: "Safe recovery. Gradual rebuilding.",
-                solution: "Specifically designed for postpartum recovery.",
-                gender: "Female"
-            },
-            {
-                id: "R2",
-                name: "Post-Prostate Surgery Recovery",
-                description: "Post-surgical recovery protocol for men",
-                category: "rehab",
-                subcategory: "post-surgery",
-                difficulty: "beginner",
-                duration: "4:00",
-                reps: "10 recovery reps",
-                videoCode: "yXrR7qRqRq4",
-                benefit: "Surgical recovery. Function restoration.",
-                solution: "Tailored for post-prostate surgery recovery in males.",
-                gender: "Male"
-            },
-            {
-                id: "R3",
-                name: "Urge Suppression Training",
-                description: "Controls sudden urges",
-                category: "rehab",
-                subcategory: "incontinence",
-                difficulty: "intermediate",
-                duration: "4:15",
-                reps: "10 suppression holds",
-                videoCode: "zXrR7qRqRq4",
-                benefit: "Reduces urgency. Better control.",
-                solution: "Specifically for urge incontinence.",
-                gender: "both"
-            },
-            {
-                id: "R4",
-                name: "Stress Leakage Prevention",
-                description: "Prevents leakage under stress",
-                category: "rehab",
-                subcategory: "incontinence",
-                difficulty: "intermediate",
-                duration: "3:45",
-                reps: "8 stress reps",
-                videoCode: "aYrR7qRqRq4",
-                benefit: "Confidence in movement. No more leaks.",
-                solution: "Targets stress incontinence specifically.",
-                gender: "both"
-            },
-            {
-                id: "R5",
-                name: "Bowel Control Training",
-                description: "Improves anal sphincter control",
-                category: "rehab",
-                subcategory: "incontinence",
-                difficulty: "intermediate",
-                duration: "4:30",
-                reps: "10 bowel reps",
-                videoCode: "bYrR7qRqRq4",
-                benefit: "Better bowel control. Reduced accidents.",
-                solution: "Specifically for fecal incontinence.",
-                gender: "both"
-            },
-            {
-                id: "R6",
-                name: "Pelvic Injury Recovery",
-                description: "General pelvic rehabilitation",
-                category: "rehab",
-                subcategory: "post-surgery",
-                difficulty: "beginner",
-                duration: "4:00",
-                reps: "8 rehab reps",
-                videoCode: "cYrR7qRqRq4",
-                benefit: "Injury recovery. Function restoration.",
-                solution: "General protocol for pelvic injury recovery.",
-                gender: "both"
-            },
-            {
-                id: "R7",
-                name: "Male Post-Surgical Protocol",
-                description: "Male-specific post-surgery rehabilitation",
-                category: "rehab",
-                subcategory: "post-surgery",
-                difficulty: "beginner",
-                duration: "4:20",
-                reps: "10 male rehab reps",
-                videoCode: "dYrR7qRqRq4",
-                benefit: "Male surgical recovery. Faster healing.",
-                solution: "Specifically designed for male post-surgical recovery.",
-                gender: "Male"
-            },
-            {
-                id: "R8",
-                name: "Female Post-Surgical Protocol",
-                description: "Female-specific post-surgery rehabilitation",
-                category: "rehab",
-                subcategory: "post-surgery",
-                difficulty: "beginner",
-                duration: "4:25",
-                reps: "10 female rehab reps",
-                videoCode: "eYrR7qRqRq4",
-                benefit: "Female surgical recovery. Gentle healing.",
-                solution: "Specifically designed for female post-surgical recovery.",
-                gender: "Female"
-            },
-            {
-                id: "R9",
-                name: "Chronic Pain Management",
-                description: "Pain relief techniques",
-                category: "rehab",
-                subcategory: "pain-management",
-                difficulty: "intermediate",
-                duration: "4:40",
-                reps: "8 pain relief reps",
-                videoCode: "fYrR7qRqRq4",
-                benefit: "Pain reduction. Improved comfort.",
-                solution: "Techniques for managing chronic pelvic pain.",
-                gender: "both"
-            },
-            {
-                id: "R10",
-                name: "Recovery Progression System",
-                description: "Structured recovery program",
-                category: "rehab",
-                subcategory: "post-surgery",
-                difficulty: "intermediate",
-                duration: "5:00",
-                reps: "Progressive recovery",
-                videoCode: "gYrR7qRqRq4",
-                benefit: "Structured recovery. Measurable progress.",
-                solution: "Systematic approach to rehabilitation.",
-                gender: "both"
-            }
-        ],
+mindfulness:[
+{ id:"M1",name:"Flower Visualization",description:"Imagine opening/closing flower",category:"mindfulness",subcategory:"imagery",difficulty:"beginner",duration:"3:45",reps:"8 visualizations",videoCode:"dQw4w9WgXcQ",benefit:"Mental imagery. Deep connection.",solution:"Uses visualization for better muscle connection.",gender:"both"},
+{ id:"M2",name:"Elevator Visualization",description:"Mental floor-by-floor control",category:"mindfulness",subcategory:"imagery",difficulty:"intermediate",duration:"4:15",reps:"6 elevator rides",videoCode:"dQw4w9WgXcQ",benefit:"Mental control. Precision imagery.",solution:"Mental rehearsal for precise control.",gender:"both"},
+{ id:"M3",name:"Root Energy Awareness",description:"Energy flow visualization",category:"mindfulness",subcategory:"imagery",difficulty:"advanced",duration:"4:45",reps:"5 energy flows",videoCode:"dQw4w9WgXcQ",benefit:"Energetic awareness. Vitality.",solution:"Combines physical and energetic awareness.",gender:"both"},
+{ id:"M4",name:"Sensory Focus Meditation",description:"Focus on muscle sensations",category:"mindfulness",subcategory:"meditative",difficulty:"beginner",duration:"4:00",reps:"5 min focus",videoCode:"dQw4w9WgXcQ",benefit:"Sensory awareness. Mindful connection.",solution:"Develops sensory awareness of pelvic area.",gender:"both"},
+{ id:"M5",name:"Body Scan Integration",description:"Full body awareness",category:"mindfulness",subcategory:"meditative",difficulty:"intermediate",duration:"5:15",reps:"1 full scan",videoCode:"dQw4w9WgXcQ",benefit:"Whole-body integration. Complete awareness.",solution:"Integrates pelvic awareness with whole body.",gender:"both"},
+{ id:"M6",name:"Mindful Contraction Practice",description:"Conscious contraction training",category:"mindfulness",subcategory:"meditative",difficulty:"intermediate",duration:"4:30",reps:"10 mindful reps",videoCode:"dQw4w9WgXcQ",benefit:"Conscious control. Mindful practice.",solution:"Develops conscious control over contractions.",gender:"both"},
+{ id:"M7",name:"Visualization Mastery",description:"Advanced visualization techniques",category:"mindfulness",subcategory:"imagery",difficulty:"advanced",duration:"5:20",reps:"6 mastery visualizations",videoCode:"dQw4w9WgXcQ",benefit:"Advanced visualization. Deep connection.",solution:"Master-level visualization techniques.",gender:"both"},
+{ id:"M8",name:"Meditative Release Practice",description:"Mindful relaxation techniques",category:"mindfulness",subcategory:"meditative",difficulty:"beginner",duration:"4:10",reps:"8 release cycles",videoCode:"dQw4w9WgXcQ",benefit:"Mindful relaxation. Stress reduction.",solution:"Teaches mindful relaxation of pelvic muscles.",gender:"both"}
+],
 
-        // 8️⃣ ENDURANCE & TIME-BASED KEGELS - GENDER NEUTRAL (8 exercises)
-        endurance: [
-            {
-                id: "E1",
-                name: "30-Second Marathon Hold",
-                description: "Extended duration challenge",
-                category: "endurance",
-                subcategory: "long-duration",
-                difficulty: "intermediate",
-                duration: "5:30",
-                reps: "4 × 30s holds",
-                videoCode: "dYrR7qRqRq4",
-                benefit: "Extended endurance. Muscle stamina.",
-                solution: "Builds capacity for sustained contraction.",
-                gender: "both"
-            },
-            {
-                id: "E2",
-                name: "1-Minute Ultimate Hold",
-                description: "Maximum endurance challenge",
-                category: "endurance",
-                subcategory: "long-duration",
-                difficulty: "advanced",
-                duration: "6:45",
-                reps: "3 × 60s holds",
-                videoCode: "eYrR7qRqRq4",
-                benefit: "Maximum endurance. Peak stamina.",
-                solution: "Ultimate endurance building exercise.",
-                gender: "both"
-            },
-            {
-                id: "E3",
-                name: "High-Rep Endurance (50+)",
-                description: "High repetition training",
-                category: "endurance",
-                subcategory: "repetition",
-                difficulty: "advanced",
-                duration: "7:00",
-                reps: "50+ reps",
-                videoCode: "fYrR7qRqRq4",
-                benefit: "Repetition endurance. Fatigue resistance.",
-                solution: "Builds resistance to muscle fatigue.",
-                gender: "both"
-            },
-            {
-                id: "E4",
-                name: "Ladder Progression (10-20-30)",
-                description: "Systematic increase in reps",
-                category: "endurance",
-                subcategory: "repetition",
-                difficulty: "intermediate",
-                duration: "5:15",
-                reps: "Ladder sets",
-                videoCode: "gYrR7qRqRq4",
-                benefit: "Structured progression. Measurable gains.",
-                solution: "Systematic approach to endurance building.",
-                gender: "both"
-            },
-            {
-                id: "E5",
-                name: "Endurance-Power Combo",
-                description: "Combines endurance and strength",
-                category: "endurance",
-                subcategory: "long-duration",
-                difficulty: "advanced",
-                duration: "6:30",
-                reps: "5 combo reps",
-                videoCode: "hYrR7qRqRq4",
-                benefit: "Complete development. Balanced capacity.",
-                solution: "Combines endurance and strength training.",
-                gender: "both"
-            },
-            {
-                id: "E6",
-                name: "Stamina Builder Pro",
-                description: "Professional stamina training",
-                category: "endurance",
-                subcategory: "long-duration",
-                difficulty: "advanced",
-                duration: "6:15",
-                reps: "6 stamina reps",
-                videoCode: "iYrR7qRqRq4",
-                benefit: "Professional stamina. Competition-level.",
-                solution: "Advanced stamina building techniques.",
-                gender: "both"
-            },
-            {
-                id: "E7",
-                name: "Endurance Circuit Training",
-                description: "Circuit-based endurance",
-                category: "endurance",
-                subcategory: "repetition",
-                difficulty: "intermediate",
-                duration: "5:45",
-                reps: "Circuit training",
-                videoCode: "jYrR7qRqRq4",
-                benefit: "Circuit endurance. Variety training.",
-                solution: "Circuit training approach to endurance.",
-                gender: "both"
-            },
-            {
-                id: "E8",
-                name: "Fatigue Resistance Protocol",
-                description: "Builds resistance to fatigue",
-                category: "endurance",
-                subcategory: "long-duration",
-                difficulty: "advanced",
-                duration: "6:50",
-                reps: "8 fatigue reps",
-                videoCode: "kYrR7qRqRq4",
-                benefit: "Fatigue resistance. Lasting endurance.",
-                solution: "Specifically targets fatigue resistance.",
-                gender: "both"
-            }
-        ],
+hybrid:[
+{ id:"H1",name:"Kegel + Plank Fusion",description:"Combines with core plank",category:"hybrid",subcategory:"core-integrated",difficulty:"advanced",duration:"5:00",reps:"3 × 30s fusions",videoCode:"dQw4w9WgXcQ",benefit:"Core integration. Whole-body strength.",solution:"Integrates pelvic and core strength.",gender:"both"},
+{ id:"H2",name:"Kegel + Squat Combo",description:"Integrates with squat movement",category:"hybrid",subcategory:"core-integrated",difficulty:"intermediate",duration:"4:30",reps:"10 combo reps",videoCode:"dQw4w9WgXcQ",benefit:"Functional strength. Real-world application.",solution:"Combines pelvic strength with leg movement.",gender:"both"},
+{ id:"H3",name:"Kegel + Bridge Integration",description:"Combines with glute bridge",category:"hybrid",subcategory:"core-integrated",difficulty:"intermediate",duration:"4:45",reps:"8 bridge reps",videoCode:"dQw4w9WgXcQ",benefit:"Glute-pelvic coordination. Posterior chain.",solution:"Coordinates pelvic and glute muscles.",gender:"both"},
+{ id:"H4",name:"Jump Control Training",description:"Maintains engagement during jumps",category:"hybrid",subcategory:"dynamic-load",difficulty:"advanced",duration:"5:30",reps:"8 jump sequences",videoCode:"dQw4w9WgXcQ",benefit:"Impact control. Athletic stability.",solution:"Trains pelvic control during impact.",gender:"both"},
+{ id:"H5",name:"Athletic Stability Protocol",description:"For sports performance",category:"hybrid",subcategory:"dynamic-load",difficulty:"advanced",duration:"6:00",reps:"6 athletic reps",videoCode:"dQw4w9WgXcQ",benefit:"Sports performance. Athletic control.",solution:"Specifically for athletic performance.",gender:"both"},
+{ id:"H6",name:"Dynamic Movement Integration",description:"Kegels during dynamic movements",category:"hybrid",subcategory:"dynamic-load",difficulty:"advanced",duration:"5:45",reps:"8 dynamic reps",videoCode:"dQw4w9WgXcQ",benefit:"Dynamic control. Movement integration.",solution:"Integrates kegels with dynamic movements.",gender:"both"},
+{ id:"H7",name:"Multi-Muscle Coordination",description:"Coordinates multiple muscle groups",category:"hybrid",subcategory:"core-integrated",difficulty:"advanced",duration:"5:15",reps:"6 coordination reps",videoCode:"dQw4w9WgXcQ",benefit:"Muscle coordination. Integrated function.",solution:"Trains coordination between multiple muscle groups.",gender:"both"},
+{ id:"H8",name:"Functional Fitness Fusion",description:"Combines with functional fitness",category:"hybrid",subcategory:"core-integrated",difficulty:"intermediate",duration:"4:55",reps:"10 fusion reps",videoCode:"dQw4w9WgXcQ",benefit:"Functional fitness. Practical application.",solution:"Integrates pelvic training with functional fitness.",gender:"both"}
+],
 
-        // 9️⃣ MINDFULNESS & VISUALIZATION - GENDER NEUTRAL (8 exercises)
-        mindfulness: [
-            {
-                id: "M1",
-                name: "Flower Visualization",
-                description: "Imagine opening/closing flower",
-                category: "mindfulness",
-                subcategory: "imagery",
-                difficulty: "beginner",
-                duration: "3:45",
-                reps: "8 visualizations",
-                videoCode: "iYrR7qRqRq4",
-                benefit: "Mental imagery. Deep connection.",
-                solution: "Uses visualization for better muscle connection.",
-                gender: "both"
-            },
-            {
-                id: "M2",
-                name: "Elevator Visualization",
-                description: "Mental floor-by-floor control",
-                category: "mindfulness",
-                subcategory: "imagery",
-                difficulty: "intermediate",
-                duration: "4:15",
-                reps: "6 elevator rides",
-                videoCode: "jYrR7qRqRq4",
-                benefit: "Mental control. Precision imagery.",
-                solution: "Mental rehearsal for precise control.",
-                gender: "both"
-            },
-            {
-                id: "M3",
-                name: "Root Energy Awareness",
-                description: "Energy flow visualization",
-                category: "mindfulness",
-                subcategory: "imagery",
-                difficulty: "advanced",
-                duration: "4:45",
-                reps: "5 energy flows",
-                videoCode: "kYrR7qRqRq4",
-                benefit: "Energetic awareness. Vitality.",
-                solution: "Combines physical and energetic awareness.",
-                gender: "both"
-            },
-            {
-                id: "M4",
-                name: "Sensory Focus Meditation",
-                description: "Focus on muscle sensations",
-                category: "mindfulness",
-                subcategory: "meditative",
-                difficulty: "beginner",
-                duration: "4:00",
-                reps: "5 min focus",
-                videoCode: "lYrR7qRqRq4",
-                benefit: "Sensory awareness. Mindful connection.",
-                solution: "Develops sensory awareness of pelvic area.",
-                gender: "both"
-            },
-            {
-                id: "M5",
-                name: "Body Scan Integration",
-                description: "Full body awareness",
-                category: "mindfulness",
-                subcategory: "meditative",
-                difficulty: "intermediate",
-                duration: "5:15",
-                reps: "1 full scan",
-                videoCode: "mYrR7qRqRq4",
-                benefit: "Whole-body integration. Complete awareness.",
-                solution: "Integrates pelvic awareness with whole body.",
-                gender: "both"
-            },
-            {
-                id: "M6",
-                name: "Mindful Contraction Practice",
-                description: "Conscious contraction training",
-                category: "mindfulness",
-                subcategory: "meditative",
-                difficulty: "intermediate",
-                duration: "4:30",
-                reps: "10 mindful reps",
-                videoCode: "nYrR7qRqRq4",
-                benefit: "Conscious control. Mindful practice.",
-                solution: "Develops conscious control over contractions.",
-                gender: "both"
-            },
-            {
-                id: "M7",
-                name: "Visualization Mastery",
-                description: "Advanced visualization techniques",
-                category: "mindfulness",
-                subcategory: "imagery",
-                difficulty: "advanced",
-                duration: "5:20",
-                reps: "6 mastery visualizations",
-                videoCode: "oYrR7qRqRq4",
-                benefit: "Advanced visualization. Deep connection.",
-                solution: "Master-level visualization techniques.",
-                gender: "both"
-            },
-            {
-                id: "M8",
-                name: "Meditative Release Practice",
-                description: "Mindful relaxation techniques",
-                category: "mindfulness",
-                subcategory: "meditative",
-                difficulty: "beginner",
-                duration: "4:10",
-                reps: "8 release cycles",
-                videoCode: "pYrR7qRqRq4",
-                benefit: "Mindful relaxation. Stress reduction.",
-                solution: "Teaches mindful relaxation of pelvic muscles.",
-                gender: "both"
-            }
-        ],
-
-        // 🔟 ADVANCED HYBRID KEGELS - GENDER NEUTRAL (8 exercises)
-        hybrid: [
-            {
-                id: "H1",
-                name: "Kegel + Plank Fusion",
-                description: "Combines with core plank",
-                category: "hybrid",
-                subcategory: "core-integrated",
-                difficulty: "advanced",
-                duration: "5:00",
-                reps: "3 × 30s fusions",
-                videoCode: "nYrR7qRqRq4",
-                benefit: "Core integration. Whole-body strength.",
-                solution: "Integrates pelvic and core strength.",
-                gender: "both"
-            },
-            {
-                id: "H2",
-                name: "Kegel + Squat Combo",
-                description: "Integrates with squat movement",
-                category: "hybrid",
-                subcategory: "core-integrated",
-                difficulty: "intermediate",
-                duration: "4:30",
-                reps: "10 combo reps",
-                videoCode: "oYrR7qRqRq4",
-                benefit: "Functional strength. Real-world application.",
-                solution: "Combines pelvic strength with leg movement.",
-                gender: "both"
-            },
-            {
-                id: "H3",
-                name: "Kegel + Bridge Integration",
-                description: "Combines with glute bridge",
-                category: "hybrid",
-                subcategory: "core-integrated",
-                difficulty: "intermediate",
-                duration: "4:45",
-                reps: "8 bridge reps",
-                videoCode: "pYrR7qRqRq4",
-                benefit: "Glute-pelvic coordination. Posterior chain.",
-                solution: "Coordinates pelvic and glute muscles.",
-                gender: "both"
-            },
-            {
-                id: "H4",
-                name: "Jump Control Training",
-                description: "Maintains engagement during jumps",
-                category: "hybrid",
-                subcategory: "dynamic-load",
-                difficulty: "advanced",
-                duration: "5:30",
-                reps: "8 jump sequences",
-                videoCode: "qYrR7qRqRq4",
-                benefit: "Impact control. Athletic stability.",
-                solution: "Trains pelvic control during impact.",
-                gender: "both"
-            },
-            {
-                id: "H5",
-                name: "Athletic Stability Protocol",
-                description: "For sports performance",
-                category: "hybrid",
-                subcategory: "dynamic-load",
-                difficulty: "advanced",
-                duration: "6:00",
-                reps: "6 athletic reps",
-                videoCode: "rYrR7qRqRq4",
-                benefit: "Sports performance. Athletic control.",
-                solution: "Specifically for athletic performance.",
-                gender: "both"
-            },
-            {
-                id: "H6",
-                name: "Dynamic Movement Integration",
-                description: "Kegels during dynamic movements",
-                category: "hybrid",
-                subcategory: "dynamic-load",
-                difficulty: "advanced",
-                duration: "5:45",
-                reps: "8 dynamic reps",
-                videoCode: "sYrR7qRqRq4",
-                benefit: "Dynamic control. Movement integration.",
-                solution: "Integrates kegels with dynamic movements.",
-                gender: "both"
-            },
-            {
-                id: "H7",
-                name: "Multi-Muscle Coordination",
-                description: "Coordinates multiple muscle groups",
-                category: "hybrid",
-                subcategory: "core-integrated",
-                difficulty: "advanced",
-                duration: "5:15",
-                reps: "6 coordination reps",
-                videoCode: "tYrR7qRqRq4",
-                benefit: "Muscle coordination. Integrated function.",
-                solution: "Trains coordination between multiple muscle groups.",
-                gender: "both"
-            },
-            {
-                id: "H8",
-                name: "Functional Fitness Fusion",
-                description: "Combines with functional fitness",
-                category: "hybrid",
-                subcategory: "core-integrated",
-                difficulty: "intermediate",
-                duration: "4:55",
-                reps: "10 fusion reps",
-                videoCode: "uYrR7qRqRq4",
-                benefit: "Functional fitness. Practical application.",
-                solution: "Integrates pelvic training with functional fitness.",
-                gender: "both"
-            }
-        ],
-
-        // 1️⃣1️⃣ NEGATIVE / RELAXATION KEGELS - GENDER NEUTRAL (8 exercises)
-        relaxation: [
-            {
-                id: "RL1",
-                name: "Pelvic Drop Release",
-                description: "Complete muscle relaxation",
-                category: "relaxation",
-                subcategory: "reverse",
-                difficulty: "beginner",
-                duration: "3:30",
-                reps: "8 release cycles",
-                videoCode: "sYrR7qRqRq4",
-                benefit: "Muscle relaxation. Tension release.",
-                solution: "Essential for overactive pelvic floor.",
-                gender: "both"
-            },
-            {
-                id: "RL2",
-                name: "Reverse Kegel Push",
-                description: "Gentle outward pressure",
-                category: "relaxation",
-                subcategory: "reverse",
-                difficulty: "intermediate",
-                duration: "4:00",
-                reps: "10 reverse pushes",
-                videoCode: "tYrR7qRqRq4",
-                benefit: "Balance training. Relaxation skill.",
-                solution: "Trains relaxation response in pelvic muscles.",
-                gender: "both"
-            },
-            {
-                id: "RL3",
-                name: "Stretch-Based Release",
-                description: "Combines with stretching",
-                category: "relaxation",
-                subcategory: "lengthening",
-                difficulty: "beginner",
-                duration: "4:30",
-                reps: "6 stretch-holds",
-                videoCode: "uYrR7qRqRq4",
-                benefit: "Muscle lengthening. Flexibility.",
-                solution: "Combines stretching with pelvic relaxation.",
-                gender: "both"
-            },
-            {
-                id: "RL4",
-                name: "Pelvic Floor Massage",
-                description: "Self-massage technique",
-                category: "relaxation",
-                subcategory: "lengthening",
-                difficulty: "intermediate",
-                duration: "5:15",
-                reps: "Massage routine",
-                videoCode: "vYrR7qRqRq4",
-                benefit: "Muscle release. Tension relief.",
-                solution: "Self-massage for pelvic tension.",
-                gender: "both"
-            },
-            {
-                id: "RL5",
-                name: "Complete Let-Go Training",
-                description: "Total relaxation protocol",
-                category: "relaxation",
-                subcategory: "reverse",
-                difficulty: "beginner",
-                duration: "4:45",
-                reps: "5 let-go cycles",
-                videoCode: "wYrR7qRqRq4",
-                benefit: "Deep relaxation. Stress relief.",
-                solution: "Complete protocol for pelvic relaxation.",
-                gender: "both"
-            },
-            {
-                id: "RL6",
-                name: "Deep Relaxation Protocol",
-                description: "Advanced relaxation techniques",
-                category: "relaxation",
-                subcategory: "reverse",
-                difficulty: "intermediate",
-                duration: "5:30",
-                reps: "6 deep relaxation cycles",
-                videoCode: "xYrR7qRqRq4",
-                benefit: "Deep relaxation. Stress management.",
-                solution: "Advanced techniques for deep relaxation.",
-                gender: "both"
-            },
-            {
-                id: "RL7",
-                name: "Tension Release Mastery",
-                description: "Master-level tension release",
-                category: "relaxation",
-                subcategory: "lengthening",
-                difficulty: "advanced",
-                duration: "6:00",
-                reps: "5 mastery releases",
-                videoCode: "yYrR7qRqRq4",
-                benefit: "Complete tension release. Mastery level.",
-                solution: "Master-level techniques for tension release.",
-                gender: "both"
-            },
-            {
-                id: "RL8",
-                name: "Mind-Body Relaxation",
-                description: "Holistic relaxation approach",
-                category: "relaxation",
-                subcategory: "reverse",
-                difficulty: "intermediate",
-                duration: "5:10",
-                reps: "8 mind-body cycles",
-                videoCode: "zYrR7qRqRq4",
-                benefit: "Holistic relaxation. Mind-body connection.",
-                solution: "Combines mental and physical relaxation.",
-                gender: "both"
-            }
-        ]
+relaxation:[
+{ id:"RL1",name:"Pelvic Drop Release",description:"Complete muscle relaxation",category:"relaxation",subcategory:"reverse",difficulty:"beginner",duration:"3:30",reps:"8 release cycles",videoCode:"dQw4w9WgXcQ",benefit:"Muscle relaxation. Tension release.",solution:"Essential for overactive pelvic floor.",gender:"both"},
+{ id:"RL2",name:"Reverse Kegel Push",description:"Gentle outward pressure",category:"relaxation",subcategory:"reverse",difficulty:"intermediate",duration:"4:00",reps:"10 reverse pushes",videoCode:"dQw4w9WgXcQ",benefit:"Balance training. Relaxation skill.",solution:"Trains relaxation response in pelvic muscles.",gender:"both"},
+{ id:"RL3",name:"Stretch-Based Release",description:"Combines with stretching",category:"relaxation",subcategory:"lengthening",difficulty:"beginner",duration:"4:30",reps:"6 stretch-holds",videoCode:"dQw4w9WgXcQ",benefit:"Muscle lengthening. Flexibility.",solution:"Combines stretching with pelvic relaxation.",gender:"both"},
+{ id:"RL4",name:"Pelvic Floor Massage",description:"Self-massage technique",category:"relaxation",subcategory:"lengthening",difficulty:"intermediate",duration:"5:15",reps:"Massage routine",videoCode:"dQw4w9WgXcQ",benefit:"Muscle release. Tension relief.",solution:"Self-massage for pelvic tension.",gender:"both"},
+{ id:"RL5",name:"Complete Let-Go Training",description:"Total relaxation protocol",category:"relaxation",subcategory:"reverse",difficulty:"beginner",duration:"4:45",reps:"5 let-go cycles",videoCode:"dQw4w9WgXcQ",benefit:"Deep relaxation. Stress relief.",solution:"Complete protocol for pelvic relaxation.",gender:"both"},
+{ id:"RL6",name:"Deep Relaxation Protocol",description:"Advanced relaxation techniques",category:"relaxation",subcategory:"reverse",difficulty:"intermediate",duration:"5:30",reps:"6 deep relaxation cycles",videoCode:"dQw4w9WgXcQ",benefit:"Deep relaxation. Stress management.",solution:"Advanced techniques for deep relaxation.",gender:"both"},
+{ id:"RL7",name:"Tension Release Mastery",description:"Master-level tension release",category:"relaxation",subcategory:"lengthening",difficulty:"advanced",duration:"6:00",reps:"5 mastery releases",videoCode:"dQw4w9WgXcQ",benefit:"Complete tension release. Mastery level.",solution:"Master-level techniques for tension release.",gender:"both"},
+{ id:"RL8",name:"Mind-Body Relaxation",description:"Holistic relaxation approach",category:"relaxation",subcategory:"reverse",difficulty:"intermediate",duration:"5:10",reps:"8 mind-body cycles",videoCode:"dQw4w9WgXcQ",benefit:"Holistic relaxation. Mind-body connection.",solution:"Combines mental and physical relaxation.",gender:"both"}
+]
     };
 
-    // ==================== COMPREHENSIVE 50 QUESTIONS ====================
+    // ==================== 50 COMPLETE ASSESSMENT QUESTIONS ====================
     const questions = [
-        // Section 1: Personal & Demographic (5 questions)
         {
             id: 1,
             text: "What is your biological gender?",
@@ -2386,7 +414,8 @@
             text: "Have you been pregnant? (Females only)",
             options: ["Never", "1 pregnancy", "2 pregnancies", "3+ pregnancies", "Currently pregnant"],
             category: "demographic",
-            scoreMap: { "Never": 0, "1 pregnancy": 10, "2 pregnancies": 15, "3+ pregnancies": 20, "Currently pregnant": 25 }
+            scoreMap: { "Never": 0, "1 pregnancy": 10, "2 pregnancies": 15, "3+ pregnancies": 20, "Currently pregnant": 25 },
+            skipIfGender: "Male"
         },
         {
             id: 4,
@@ -2560,14 +589,16 @@
             text: "Erection quality (Males)?",
             options: ["Excellent", "Good", "Fair", "Poor", "No erection"],
             category: "sexual",
-            scoreMap: { "Excellent": 0, "Good": 5, "Fair": 15, "Poor": 25, "No erection": 35 }
+            scoreMap: { "Excellent": 0, "Good": 5, "Fair": 15, "Poor": 25, "No erection": 35 },
+            skipIfGender: "Female"
         },
         {
             id: 28,
             text: "Vaginal dryness (Females)?",
             options: ["Never", "Occasionally", "Sometimes", "Often", "Always"],
             category: "sexual",
-            scoreMap: { "Never": 0, "Occasionally": 5, "Sometimes": 15, "Often": 25, "Always": 35 }
+            scoreMap: { "Never": 0, "Occasionally": 5, "Sometimes": 15, "Often": 25, "Always": 35 },
+            skipIfGender: "Male"
         },
         {
             id: 29,
@@ -2676,14 +707,16 @@
             text: "Prostate issues (Males)?",
             options: ["None", "Mild enlargement", "Moderate enlargement", "Severe enlargement", "Cancer history"],
             category: "medical",
-            scoreMap: { "None": 0, "Mild enlargement": 10, "Moderate enlargement": 20, "Severe enlargement": 30, "Cancer history": 40 }
+            scoreMap: { "None": 0, "Mild enlargement": 10, "Moderate enlargement": 20, "Severe enlargement": 30, "Cancer history": 40 },
+            skipIfGender: "Female"
         },
         {
             id: 44,
             text: "Menstrual issues (Females)?",
             options: ["None", "Mild cramps", "Moderate pain", "Severe pain", "Endometriosis"],
             category: "medical",
-            scoreMap: { "None": 0, "Mild cramps": 5, "Moderate pain": 15, "Severe pain": 25, "Endometriosis": 35 }
+            scoreMap: { "None": 0, "Mild cramps": 5, "Moderate pain": 15, "Severe pain": 25, "Endometriosis": 35 },
+            skipIfGender: "Male"
         },
         {
             id: 45,
@@ -2729,619 +762,476 @@
         }
     ];
 
-    // ==================== UI FUNCTIONS ====================
-
+    // ==================== CORE APP LOGIC ====================
+    let youtubePlayer = null;
+    let videoCheckInterval = null;
+    let currentVideoId = null;
+    
     function initApp() {
-        // Try to load saved state
-        const hasSavedState = loadStateFromLocalStorage();
+        const hasSavedData = loadState();
         
-        if (hasSavedState && appState.assessmentComplete) {
-            // If assessment was complete, show exercise plan
-            showExercisePlan();
-        } else if (hasSavedState && appState.currentQuestion > 0) {
-            // If assessment was in progress, show current question
-            showQuestion();
+        if (hasSavedData) {
+            if (appState.assessmentComplete) {
+                showExercisePlan();
+            } else {
+                renderQuestion();
+            }
         } else {
-            // Fresh start
-            showQuestion();
+            renderQuestion();
         }
-        
-        setupEventListeners();
-        // Show quiz background by default
-        document.getElementById('quiz-bg').classList.remove('hidden');
     }
 
-    function showQuestion() {
-        if (appState.currentQuestion >= appState.totalQuestions) {
-            generatePersonalizedProgram();
-            return;
+    function renderQuestion() {
+        // Skip gender-specific questions
+        while (appState.currentQuestion < questions.length) {
+            const q = questions[appState.currentQuestion];
+            
+            // Check if we should skip this question based on gender
+            if (q.skipIfGender && appState.gender === q.skipIfGender) {
+                appState.currentQuestion++;
+                continue;
+            }
+            
+            break;
         }
         
-        const question = questions[appState.currentQuestion];
-        document.getElementById('question-text').textContent = question.text;
-        
-        // Skip gender-specific questions if not applicable
-        if (question.id === 3 && appState.gender !== "Female") {
-            // Skip pregnancy question for males
-            appState.userProfile[`q${question.id}`] = "Not applicable";
-            appState.currentQuestion++;
-            setTimeout(showQuestion, 100);
+        if (appState.currentQuestion >= questions.length) {
+            completeAssessment();
             return;
         }
+
+        const q = questions[appState.currentQuestion];
+        document.getElementById('question-text').textContent = q.text;
+        document.getElementById('question-counter').textContent = `${appState.currentQuestion + 1}/${questions.length}`;
         
-        if ((question.id === 27 && appState.gender !== "Male") || 
-            (question.id === 28 && appState.gender !== "Female")) {
-            // Skip gender-specific questions
-            appState.userProfile[`q${question.id}`] = "Not applicable";
-            appState.currentQuestion++;
-            setTimeout(showQuestion, 100);
-            return;
-        }
-        
-        if ((question.id === 43 && appState.gender !== "Male") || 
-            (question.id === 44 && appState.gender !== "Female")) {
-            // Skip gender-specific medical questions
-            appState.userProfile[`q${question.id}`] = "Not applicable";
-            appState.currentQuestion++;
-            setTimeout(showQuestion, 100);
-            return;
-        }
-        
-        // Update progress
-        const progressPercent = ((appState.currentQuestion + 1) / appState.totalQuestions) * 100;
-        document.getElementById('progress-bar').style.width = `${progressPercent}%`;
-        document.getElementById('question-counter').textContent = `${appState.currentQuestion + 1}/${appState.totalQuestions}`;
-        
-        // Update section label
-        const sections = ["Demographics", "Symptoms", "Lifestyle", "Sexual Health", "Goals", "Medical History"];
-        const sectionIndex = Math.floor(appState.currentQuestion / 10);
-        document.getElementById('step-label').textContent = sections[sectionIndex] || "Assessment";
-        document.getElementById('progress-text').textContent = `Section ${sectionIndex + 1} of 6 - ${sections[sectionIndex]}`;
-        
-        // Clear and show options
+        const progress = ((appState.currentQuestion) / questions.length) * 100;
+        document.getElementById('progress-bar').style.width = `${progress}%`;
+
         const container = document.getElementById('options-container');
         container.innerHTML = '';
-        
-        question.options.forEach((option, index) => {
+
+        q.options.forEach(opt => {
             const btn = document.createElement('button');
-            btn.className = "w-full option-btn p-3.5 rounded-lg text-sm font-bold flex justify-between items-center mb-1.5";
-            btn.innerHTML = `
-                <span class="text-left">${option}</span>
-                <div class="w-5 h-5 rounded-full border border-gold-primary/40 flex items-center justify-center">
-                    <div class="w-2 h-2 rounded-full bg-gold-primary opacity-0"></div>
-                </div>
-            `;
-            
-            // Add animation delay for staggered appearance
-            btn.style.animationDelay = `${index * 0.05}s`;
-            btn.classList.add('fade-in');
-            
-            btn.onclick = () => handleAnswer(option, question);
+            btn.className = "w-full option-btn p-4 rounded-xl text-sm font-semibold text-left text-white flex justify-between items-center fade-in";
+            btn.innerHTML = `<span>${opt}</span><i class="far fa-circle text-gold-primary/30"></i>`;
+            btn.onclick = () => handleAnswer(opt);
             container.appendChild(btn);
         });
-        
-        // Show quiz section
-        document.getElementById('quiz-section').classList.remove('hidden');
-        document.getElementById('analysis-section').classList.add('hidden');
-        document.getElementById('exercise-section').classList.add('hidden');
-        
-        // Update background
-        updateBackground('quiz');
-        
-        // Save state after showing question
-        saveStateToLocalStorage();
+
+        saveState();
     }
 
-    function handleAnswer(answer, question) {
-        // Store in user profile
-        appState.userProfile[`q${question.id}`] = answer;
+    function handleAnswer(answer) {
+        const currentQ = questions[appState.currentQuestion];
         
-        // Store gender and age
-        if (question.id === 1) appState.gender = answer;
-        if (question.id === 2) appState.age = answer;
-        
-        // Update scores based on answers
-        updateScores(answer, question);
-        
-        // Add visual feedback
-        const selectedOption = event.target.closest('.option-btn');
-        if (selectedOption) {
-            selectedOption.classList.add('bg-gold-primary/20');
-            selectedOption.style.borderColor = 'var(--gold-primary)';
-            selectedOption.querySelector('.w-2.h-2').classList.remove('opacity-0');
+        if (currentQ.id === 1) {
+            appState.gender = answer;
         }
         
-        // Save state immediately
-        saveStateToLocalStorage();
+        // Store answer in user profile
+        appState.userProfile[`q${currentQ.id}`] = answer;
         
-        // Move to next question
-        setTimeout(() => {
-            appState.currentQuestion++;
-            showQuestion();
-        }, 300);
-    }
-
-    function updateScores(answer, question) {
-        // Use score map for accurate scoring
-        if (question.scoreMap && question.scoreMap[answer] !== undefined) {
-            const score = question.scoreMap[answer];
-            
-            // Categorize scores based on question type
-            if (question.category === "symptoms") {
-                if (question.id === 6 || question.id === 7 || question.id === 8 || 
-                    question.id === 9 || question.id === 10 || question.id === 11) {
-                    appState.scores.leakage += score;
-                }
-                if (question.id === 12 || question.id === 13 || question.id === 14 || question.id === 15) {
-                    appState.scores.pain += score;
-                }
+        // Update category scores using scoreMap
+        if (currentQ.scoreMap && currentQ.scoreMap[answer] !== undefined) {
+            const category = currentQ.category;
+            if (!appState.categoryScores[category]) {
+                appState.categoryScores[category] = 0;
             }
-            
-            if (question.category === "sexual") {
-                appState.scores.sexual += score;
-            }
-            
-            if (question.category === "lifestyle") {
-                if (question.id === 16 || question.id === 17 || question.id === 18 || question.id === 19) {
-                    appState.scores.strength += score;
-                    appState.scores.endurance += score;
-                }
-            }
-            
-            if (question.category === "experience") {
-                appState.scores.control += (30 - score); // Inverse: less experience = more need for control
-            }
-            
-            if (question.category === "goals") {
-                // Goals influence all scores
-                appState.scores.leakage += score * 0.5;
-                appState.scores.pain += score * 0.5;
-                appState.scores.sexual += score * 0.5;
+            appState.categoryScores[category] += currentQ.scoreMap[answer];
+        }
+        
+        // Update specific scores based on question
+        if (currentQ.id >= 6 && currentQ.id <= 10) {
+            if (answer.includes("Daily") || answer.includes("Often") || answer.includes("Always")) {
+                appState.scores.leakage += 15;
             }
         }
+        
+        appState.currentQuestion++;
+        renderQuestion();
     }
 
-    function generatePersonalizedProgram() {
-        // Mark assessment as complete
+    function calculateScores() {
+        // Calculate total scores
+        let totalScore = 0;
+        let maxPossible = 0;
+        
+        // Calculate maximum possible scores for each category
+        const categoryMax = {};
+        questions.forEach(q => {
+            if (!categoryMax[q.category]) categoryMax[q.category] = 0;
+            const maxValue = Math.max(...Object.values(q.scoreMap));
+            categoryMax[q.category] += maxValue;
+        });
+        
+        // Calculate percentages for each category
+        const categoryPercentages = {};
+        for (const category in appState.categoryScores) {
+            if (categoryMax[category] > 0) {
+                categoryPercentages[category] = (appState.categoryScores[category] / categoryMax[category]) * 100;
+            } else {
+                categoryPercentages[category] = 0;
+            }
+        }
+        
+        // Calculate final scores
+        const focusScore = Math.round(
+            (categoryPercentages.demographic + categoryPercentages.symptoms + categoryPercentages.medical) / 3
+        );
+        
+        const urgencyScore = Math.round(
+            (categoryPercentages.symptoms * 0.7 + categoryPercentages.medical * 0.3)
+        );
+        
+        const programScore = Math.round(
+            (categoryPercentages.sexual * 0.4 + categoryPercentages.experience * 0.3 + categoryPercentages.goals * 0.3)
+        );
+        
+        return {
+            focus: Math.min(100, Math.max(0, focusScore)),
+            urgency: Math.min(100, Math.max(0, urgencyScore)),
+            program: Math.min(100, Math.max(0, programScore))
+        };
+    }
+
+    function completeAssessment() {
         appState.assessmentComplete = true;
-        
         document.getElementById('quiz-section').classList.add('hidden');
+        document.getElementById('progress-section').classList.add('hidden');
         document.getElementById('analysis-section').classList.remove('hidden');
         
-        // Update background
-        updateBackground('analysis');
+        generate30DayProgram();
         
-        // Analyze user profile and select appropriate exercises
-        analyzeUserProfile();
+        // Calculate and animate scores
+        const scores = calculateScores();
         
-        // Calculate scores with normalization
-        const totalPossibleScore = 800; // Approximate maximum score
-        const totalUserScore = Object.values(appState.scores).reduce((a, b) => a + b, 0);
-        const scorePercentage = Math.min(100, Math.round((totalUserScore / totalPossibleScore) * 100));
+        animateScore('focus-score', scores.focus);
+        animateScore('urgency-score', scores.urgency);
+        animateScore('program-score', scores.program);
         
-        // Calculate individual scores for display
-        const focusScore = Math.min(100, Math.round(appState.scores.leakage / 4));
-        const urgencyScore = Math.min(100, Math.round((appState.scores.pain + appState.scores.sexual) / 8));
-        const programScore = Math.min(100, Math.round(100 - (scorePercentage / 2))); // Lower score = better starting point
-        
-        // Animate scores
-        animateScore('focus-score', focusScore);
-        animateScore('urgency-score', urgencyScore);
-        animateScore('program-score', programScore);
-        
-        // Generate analysis and solution points
-        generateAnalysis();
-        
-        // Save state after generating program
-        saveStateToLocalStorage();
-    }
-
-    function analyzeUserProfile() {
-        // Clear any previous selections
-        appState.dayExercises = {};
-        appState.dayProgress = {};
-        appState.selectedExercises = [];
-        
-        // Determine primary focus area based on highest score
-        const scores = appState.scores;
-        const maxScore = Math.max(scores.leakage, scores.pain, scores.sexual);
-        
-        let primaryCategory = "foundational";
-        
-        if (maxScore === scores.leakage && scores.leakage > 50) {
-            primaryCategory = "rehab";
-        } else if (maxScore === scores.sexual && scores.sexual > 50) {
-            primaryCategory = "sexual";
-        } else if (maxScore === scores.pain && scores.pain > 50) {
-            primaryCategory = "relaxation";
-        } else if (scores.control < 20) { // Good control = advanced exercises
-            primaryCategory = "hybrid";
-        } else if (scores.strength > 30 || scores.endurance > 30) {
-            primaryCategory = "endurance";
+        // Generate personalized analysis text
+        let focusArea = "";
+        if (scores.urgency > 70) {
+            focusArea = "Urgent Rehabilitation";
+        } else if (scores.focus > 70) {
+            focusArea = "Advanced Strengthening";
+        } else if (scores.program > 60) {
+            focusArea = "Comprehensive Development";
+        } else {
+            focusArea = "Foundational Training";
         }
         
-        // Generate exercises for all 30 days with gender-specific filtering
-        generate30DayProgram(primaryCategory);
+        document.getElementById('analysis-text').textContent = 
+            `Based on your ${appState.gender || "personal"} profile, we've designed a specialized ${focusArea} protocol. ` +
+            `Your assessment shows ${scores.focus}% focus on core issues, ${scores.urgency}% urgency level, ` +
+            `and a ${scores.program}% match with our optimal protocol. The 30-day program targets your specific needs ` +
+            `with gender-appropriate exercises for measurable improvement.`;
+        
+        saveState();
     }
 
-    function generate30DayProgram(primaryCategory) {
-        appState.dayExercises = {};
-        appState.dayProgress = {};
+    function generate30DayProgram() {
+        if (Object.keys(appState.dayExercises).length > 0) return;
+
+        const gender = appState.gender || "Female";
+        const scores = calculateScores();
         
-        // For each day, select appropriate exercises
+        // Determine program focus based on scores
+        let primaryFocus = "control";
+        let secondaryFocus = "functional";
+        
+        if (scores.urgency > 70) {
+            primaryFocus = "rehab";
+            secondaryFocus = "control";
+        } else if (scores.focus > 60) {
+            primaryFocus = "control";
+            secondaryFocus = "strength";
+        }
+        
         for (let day = 1; day <= 30; day++) {
-            appState.dayExercises[day] = generateDayExercises(day, primaryCategory);
-            appState.dayProgress[day] = []; // Empty array for completed exercises per day
+            let dayExercises = [];
+            
+            // Day 1-10: Foundation phase
+            if (day <= 10) {
+                dayExercises = getExercisesForPhase("foundation", gender, day);
+            }
+            // Day 11-20: Development phase
+            else if (day <= 20) {
+                dayExercises = getExercisesForPhase("development", gender, day);
+            }
+            // Day 21-30: Mastery phase
+            else {
+                dayExercises = getExercisesForPhase("mastery", gender, day);
+            }
+            
+            appState.dayExercises[day] = dayExercises;
+            appState.dayProgress[day] = [];
         }
-        
-        // Set current day exercises
-        appState.selectedExercises = appState.dayExercises[1];
     }
 
-    function generateDayExercises(day, primaryCategory) {
-        let dayExercises = [];
-        const userGender = appState.gender;
+    function getExercisesForPhase(phase, gender, day) {
+        const exercises = [];
+        const genderFilter = ex => ex.gender === "both" || ex.gender === gender;
         
-        // Helper function to get filtered exercises
-        const getFilteredExercises = (category, count) => {
-            let exercises = exerciseLibrary[category] || [];
-            // Filter by gender
-            exercises = exercises.filter(ex => 
-                ex.gender === "both" || ex.gender === userGender
-            );
-            // Shuffle and take requested count
-            return shuffleArray(exercises).slice(0, count);
-        };
-        
-        // Day-specific progression
-        if (day <= 7) {
-            // Week 1: Foundational exercises
-            dayExercises.push(...getFilteredExercises("foundational", 3));
-            dayExercises.push(...getFilteredExercises("breathing", 1));
-            dayExercises.push(...getFilteredExercises("control", 1));
-            dayExercises.push(...getFilteredExercises("mindfulness", 1));
-        } else if (day <= 14) {
-            // Week 2: Add primary category
-            dayExercises.push(...getFilteredExercises("foundational", 2));
-            dayExercises.push(...getFilteredExercises(primaryCategory, 2));
-            dayExercises.push(...getFilteredExercises("functional", 1));
-            dayExercises.push(...getFilteredExercises("mindfulness", 1));
-        } else if (day <= 21) {
-            // Week 3: Focus on primary category
-            dayExercises.push(...getFilteredExercises("strength", 1));
-            dayExercises.push(...getFilteredExercises(primaryCategory, 3));
-            dayExercises.push(...getFilteredExercises("functional", 1));
-            dayExercises.push(...getFilteredExercises("breathing", 1));
-        } else {
-            // Week 4: Advanced and hybrid
-            dayExercises.push(...getFilteredExercises("hybrid", 2));
-            dayExercises.push(...getFilteredExercises("endurance", 2));
-            dayExercises.push(...getFilteredExercises(primaryCategory, 1));
-            dayExercises.push(...getFilteredExercises("mindfulness", 1));
+        if (phase === "foundation") {
+            // 2 functional, 1 control, 1 breathing, 1 relaxation, 1 mindfulness
+            const functional = shuffle([...exerciseLibrary.functional].filter(genderFilter)).slice(0, 2);
+            const control = shuffle([...exerciseLibrary.control].filter(genderFilter)).slice(0, 1);
+            const breathing = shuffle([...exerciseLibrary.breathing].filter(genderFilter)).slice(0, 1);
+            const relaxation = shuffle([...exerciseLibrary.relaxation].filter(genderFilter)).slice(0, 1);
+            const mindfulness = shuffle([...exerciseLibrary.mindfulness].filter(genderFilter)).slice(0, 1);
+            
+            exercises.push(...functional, ...control, ...breathing, ...relaxation, ...mindfulness);
+        }
+        else if (phase === "development") {
+            // 1 functional, 2 control, 1 sexual, 1 hybrid, 1 endurance
+            const functional = shuffle([...exerciseLibrary.functional].filter(genderFilter)).slice(0, 1);
+            const control = shuffle([...exerciseLibrary.control].filter(genderFilter)).slice(0, 2);
+            const sexual = shuffle([...exerciseLibrary.sexual].filter(genderFilter)).slice(0, 1);
+            const hybrid = shuffle([...exerciseLibrary.hybrid].filter(genderFilter)).slice(0, 1);
+            const endurance = shuffle([...exerciseLibrary.endurance].filter(genderFilter)).slice(0, 1);
+            
+            exercises.push(...functional, ...control, ...sexual, ...hybrid, ...endurance);
+        }
+        else { // mastery
+            // 1 control, 1 sexual, 1 hybrid, 1 rehab, 1 endurance, 1 advanced
+            const control = shuffle([...exerciseLibrary.control].filter(genderFilter)).slice(0, 1);
+            const sexual = shuffle([...exerciseLibrary.sexual].filter(genderFilter)).slice(0, 1);
+            const hybrid = shuffle([...exerciseLibrary.hybrid].filter(genderFilter)).slice(0, 1);
+            const rehab = shuffle([...exerciseLibrary.rehab].filter(genderFilter)).slice(0, 1);
+            const endurance = shuffle([...exerciseLibrary.endurance].filter(genderFilter)).slice(0, 1);
+            
+            // For advanced, pick from any category but ensure difficulty is intermediate or advanced
+            const allExercises = [
+                ...exerciseLibrary.control,
+                ...exerciseLibrary.hybrid,
+                ...exerciseLibrary.endurance
+            ].filter(ex => genderFilter(ex) && (ex.difficulty === "advanced" || ex.difficulty === "intermediate"));
+            
+            const advanced = shuffle(allExercises).slice(0, 1);
+            
+            exercises.push(...control, ...sexual, ...hybrid, ...rehab, ...endurance, ...advanced);
         }
         
-        // Ensure exactly 6 exercises per day
-        if (dayExercises.length > 6) {
-            dayExercises = dayExercises.slice(0, 6);
-        }
-        
-        // Sort by difficulty
-        dayExercises.sort((a, b) => {
-            const difficultyOrder = { "beginner": 1, "intermediate": 2, "advanced": 3 };
-            return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
-        });
-        
-        return dayExercises;
-    }
-
-    function generateAnalysis() {
-        const analysisText = document.getElementById('analysis-text');
-        const solutionPoints = document.getElementById('solution-points');
-        
-        // Generate analysis based on scores
-        let analysis = "Based on your comprehensive 50-point assessment, ";
-        
-        if (appState.scores.leakage > 50) {
-            analysis += "you have significant urinary leakage issues that require immediate attention. ";
-        } else if (appState.scores.leakage > 30) {
-            analysis += "you experience moderate urinary leakage that can be improved. ";
-        } else {
-            analysis += "you have good urinary control but can benefit from preventive training. ";
-        }
-        
-        if (appState.scores.pain > 40) {
-            analysis += "Pelvic pain is a concern that needs targeted relaxation techniques. ";
-        } else if (appState.scores.pain > 20) {
-            analysis += "Some pelvic discomfort indicates need for relaxation training. ";
-        }
-        
-        if (appState.scores.sexual > 40) {
-            analysis += "Sexual function improvements are a key focus area. ";
-        }
-        
-        if (appState.scores.control < 20) {
-            analysis += "Your good muscle control allows for advanced exercises. ";
-        }
-        
-        analysis += `Your personalized 30-day program includes 6 carefully selected exercises each day, specifically tailored for ${appState.gender || 'your'} needs and goals.`;
-        
-        analysisText.textContent = analysis;
-        
-        // Generate solution points
-        solutionPoints.innerHTML = '';
-        
-        const solutions = [
-            `🎯 <span class='text-gold-light font-bold'>Gender-Specific:</span> Exercises tailored for ${appState.gender || 'your needs'}`,
-            "📊 <span class='text-gold-light font-bold'>Progressive Plan:</span> Gradually increases difficulty over 30 days",
-            "🔄 <span class='text-gold-light font-bold'>Sequential Learning:</span> Each exercise builds on previous ones",
-            "⏱️ <span class='text-gold-light font-bold'>Time-Efficient:</span> 10-15 minutes daily commitment",
-            "📈 <span class='text-gold-light font-bold'>Measurable Results:</span> Track progress with completion system",
-            "🎬 <span class='text-gold-light font-bold'>Video Guidance:</span> Professional demonstrations for each exercise"
-        ];
-        
-        solutions.forEach((solution, index) => {
-            const point = document.createElement('div');
-            point.className = "text-xs text-gray-300 flex items-start fade-in";
-            point.style.animationDelay = `${index * 0.1}s`;
-            point.innerHTML = `<i class="fas fa-check text-green-500 mr-2 mt-0.5"></i> ${solution}`;
-            solutionPoints.appendChild(point);
-        });
+        return shuffle(exercises).slice(0, 6); // Ensure exactly 6 exercises per day
     }
 
     function showExercisePlan() {
+        document.getElementById('quiz-section').classList.add('hidden');
         document.getElementById('analysis-section').classList.add('hidden');
+        document.getElementById('progress-section').classList.add('hidden');
         document.getElementById('exercise-section').classList.remove('hidden');
         
-        // Update background
-        updateBackground('exercise');
-        
-        renderExercisePlan();
-    }
-
-    function renderExercisePlan() {
-        const exerciseList = document.getElementById('exercise-list');
-        exerciseList.innerHTML = '';
-        
-        // Update day display
-        document.getElementById('current-day').textContent = appState.currentDay;
-        
-        // Get exercises for current day
-        const currentDayExercises = appState.dayExercises[appState.currentDay] || [];
-        const completedExercises = appState.dayProgress[appState.currentDay] || [];
-        
-        // Update stats
-        const completedCount = completedExercises.length;
-        const totalExercises = currentDayExercises.length;
-        document.getElementById('completion-stats').textContent = `${completedCount}/${totalExercises} completed`;
-        
-        if (currentDayExercises.length === 0) {
-            exerciseList.innerHTML = `
-                <div class="text-center py-8">
-                    <i class="fas fa-exclamation-triangle text-3xl text-yellow-500 mb-3"></i>
-                    <p class="text-gray-300">No exercises generated for today. Please restart assessment.</p>
-                </div>
-            `;
-            return;
+        if (Object.keys(appState.dayExercises).length === 0) {
+            generate30DayProgram();
         }
         
-        currentDayExercises.forEach((exercise, index) => {
-            const isCompleted = completedExercises.includes(exercise.id);
-            const isCurrent = index === completedExercises.length;
-            const isLocked = index > completedExercises.length;
-            
+        renderExerciseList();
+        saveState();
+    }
+
+    function renderExerciseList() {
+        const list = document.getElementById('exercise-list');
+        list.innerHTML = '';
+        
+        const day = appState.currentDay;
+        document.getElementById('current-day').textContent = day;
+        
+        const exercises = appState.dayExercises[day] || [];
+        const completed = appState.dayProgress[day] || [];
+        
+        document.getElementById('completion-stats').textContent = `${completed.length}/${exercises.length} Completed`;
+
+        exercises.forEach((ex, idx) => {
+            const isDone = completed.includes(ex.id);
+            const isCurrent = idx === completed.length;
+            const isLocked = idx > completed.length;
+
             const card = document.createElement('div');
-            card.className = `exercise-card p-3.5 rounded-lg ${isLocked ? 'locked' : ''} ${isCurrent ? 'current' : ''} ${isCompleted ? 'completed' : ''} fade-in`;
-            card.style.animationDelay = `${index * 0.08}s`;
-            
+            card.className = `exercise-card p-4 rounded-xl flex items-center gap-4 ${isLocked ? 'locked' : ''} ${isCurrent ? 'current' : ''} ${isDone ? 'completed' : ''} fade-in`;
             card.innerHTML = `
-                <div class="flex items-center gap-3.5">
-                    <div class="number-indicator ${isCurrent ? 'number-current' : isCompleted ? 'number-completed' : 'number-locked'}">
-                        ${index + 1}
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex items-center gap-2 mb-1.5">
-                            <span class="category-tag">${exercise.category}</span>
-                            <span class="text-xs text-gray-400 font-bold">${exercise.difficulty}</span>
-                            ${exercise.gender !== 'both' ? 
-                                `<span class="text-xs px-2 py-0.5 rounded ${exercise.gender === 'Male' ? 'bg-blue-900/30 text-blue-300' : 'bg-pink-900/30 text-pink-300'}">${exercise.gender}</span>` : 
-                                ''}
-                        </div>
-                        <h3 class="text-sm font-bold text-white mb-1.5 truncate text-3d-white">${exercise.name}</h3>
-                        <p class="text-xs text-gray-300 line-clamp-1 text-3d-secondary">${exercise.benefit}</p>
-                        <div class="flex items-center gap-3.5 mt-2 text-xs text-gray-400">
-                            <span class="flex items-center"><i class="fas fa-clock mr-1.5"></i> ${exercise.duration}</span>
-                            <span class="flex items-center"><i class="fas fa-redo mr-1.5"></i> ${exercise.reps}</span>
-                        </div>
-                    </div>
-                    <div class="shrink-0">
-                        ${isLocked ? 
-                            '<i class="fas fa-lock text-base text-gray-600"></i>' : 
-                         isCompleted ? 
-                            '<i class="fas fa-check-circle text-lg text-green-500" style="filter: drop-shadow(0 2px 0 rgba(0,0,0,0.3))"></i>' : 
-                            '<i class="fas fa-play-circle text-lg text-gold-primary" style="filter: drop-shadow(0 2px 0 rgba(212,175,55,0.3))"></i>'}
-                    </div>
+                <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold ${isDone ? 'bg-green-500 text-white' : 'bg-gold-primary text-black'}">
+                    ${isDone ? '<i class="fas fa-check"></i>' : idx + 1}
                 </div>
+                <div class="flex-1">
+                    <h4 class="text-sm font-bold text-white">${ex.name}</h4>
+                    <p class="text-[10px] text-gray-500 uppercase font-bold">${ex.category} • ${ex.duration} • ${ex.difficulty}</p>
+                </div>
+                <i class="fas ${isLocked ? 'fa-lock text-gray-700' : 'fa-play-circle text-gold-primary text-xl'}"></i>
             `;
             
-            if (!isLocked) {
-                card.onclick = () => openExerciseVideo(exercise, index);
+            if (!isLocked && !isDone) {
+                card.onclick = () => openVideo(ex, idx);
             }
-            
-            exerciseList.appendChild(card);
+            list.appendChild(card);
         });
-        
-        // Scroll to current exercise
-        setTimeout(() => {
-            const currentCard = document.querySelector('.exercise-card.current');
-            if (currentCard) {
-                currentCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }, 300);
-        
-        // Save state after rendering exercise plan
-        saveStateToLocalStorage();
     }
 
-    function openExerciseVideo(exercise, index) {
-        appState.currentVideoIndex = index;
+    let activeEx = null;
+    let videoCompleted = false;
+    
+    function openVideo(ex, idx) {
+        activeEx = ex;
+        videoCompleted = false;
+        currentVideoId = ex.videoCode;
         
-        // Clear previous content
-        const videoFrame = document.getElementById('video-frame');
-        videoFrame.innerHTML = '';
+        document.getElementById('video-title').textContent = ex.name;
+        document.getElementById('video-description').textContent = ex.description;
+        document.getElementById('video-duration').textContent = ex.duration;
+        document.getElementById('video-reps').textContent = ex.reps;
+        document.getElementById('video-category').textContent = ex.category;
         
-        // Create 16:9 YouTube iframe with proper settings
-        const iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube.com/embed/${exercise.videoCode}?autoplay=1&controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1`;
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        iframe.allowFullscreen = true;
-        iframe.style.position = "absolute";
-        iframe.style.top = "0";
-        iframe.style.left = "0";
-        iframe.style.width = "100%";
-        iframe.style.height = "100%";
-        iframe.style.border = "none";
+        const frame = document.getElementById('video-frame');
+        frame.innerHTML = `
+            <iframe 
+                id="youtube-player"
+                src="https://www.youtube.com/embed/${ex.videoCode}?enablejsapi=1&rel=0&modestbranding=1&playsinline=1" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>`;
         
-        videoFrame.appendChild(iframe);
+        // Reset video progress
+        document.getElementById('video-progress-fill').style.width = '0%';
+        document.getElementById('video-time-current').textContent = '0:00';
+        document.getElementById('video-time-total').textContent = '0:00';
         
-        // Update modal info
-        document.getElementById('video-title').textContent = exercise.name;
-        document.getElementById('video-description').textContent = exercise.description;
-        document.getElementById('video-duration').textContent = exercise.duration;
-        document.getElementById('video-reps').textContent = exercise.reps;
-        document.getElementById('video-category').textContent = exercise.category;
-        document.getElementById('solution-text').textContent = exercise.solution;
+        // Disable complete button initially
+        const completeBtn = document.getElementById('complete-btn');
+        const completeBtnText = document.getElementById('complete-btn-text');
+        const videoLoading = document.getElementById('video-loading');
         
-        // Show modal
+        completeBtn.disabled = true;
+        completeBtnText.textContent = 'VIDEO MUST BE COMPLETED FIRST';
+        videoLoading.classList.remove('hidden');
+        
         document.getElementById('video-modal').classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
         
-        // Add modal background
-        document.querySelector('.modal-background').classList.remove('hidden');
-    }
-
-    function repeatCurrentVideo() {
-        const currentDayExercises = appState.dayExercises[appState.currentDay] || [];
-        const currentExercise = currentDayExercises[appState.currentVideoIndex];
-        if (currentExercise) {
-            openExerciseVideo(currentExercise, appState.currentVideoIndex);
+        // Load YouTube API if not already loaded
+        if (!window.YT) {
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         }
+        
+        // Initialize YouTube player
+        window.onYouTubeIframeAPIReady = function() {
+            youtubePlayer = new YT.Player('youtube-player', {
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        };
+        
+        // If API is already loaded
+        if (window.YT && YT.Player) {
+            youtubePlayer = new YT.Player('youtube-player', {
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        
+        // Start checking video progress
+        if (videoCheckInterval) clearInterval(videoCheckInterval);
+        videoCheckInterval = setInterval(checkVideoProgress, 1000);
     }
 
-    function nextVideo() {
-        // Mark current exercise as completed for current day
-        const currentDayExercises = appState.dayExercises[appState.currentDay] || [];
-        const currentExercise = currentDayExercises[appState.currentVideoIndex];
-        
-        if (currentExercise) {
-            if (!appState.dayProgress[appState.currentDay]) {
-                appState.dayProgress[appState.currentDay] = [];
-            }
+    function onPlayerReady(event) {
+        document.getElementById('video-loading').classList.add('hidden');
+        const duration = event.target.getDuration();
+        const minutes = Math.floor(duration / 60);
+        const seconds = Math.floor(duration % 60);
+        document.getElementById('video-time-total').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function onPlayerStateChange(event) {
+        if (event.data === YT.PlayerState.ENDED) {
+            videoCompleted = true;
+            const completeBtn = document.getElementById('complete-btn');
+            const completeBtnText = document.getElementById('complete-btn-text');
             
-            if (!appState.dayProgress[appState.currentDay].includes(currentExercise.id)) {
-                appState.dayProgress[appState.currentDay].push(currentExercise.id);
+            completeBtn.disabled = false;
+            completeBtnText.textContent = 'MARK AS COMPLETE';
+            document.getElementById('video-progress-fill').style.width = '100%';
+        }
+    }
+
+    function checkVideoProgress() {
+        if (youtubePlayer && youtubePlayer.getCurrentTime && youtubePlayer.getDuration) {
+            const currentTime = youtubePlayer.getCurrentTime();
+            const duration = youtubePlayer.getDuration();
+            
+            if (duration > 0) {
+                const progressPercent = (currentTime / duration) * 100;
+                document.getElementById('video-progress-fill').style.width = `${progressPercent}%`;
+                
+                // Update current time display
+                const minutes = Math.floor(currentTime / 60);
+                const seconds = Math.floor(currentTime % 60);
+                document.getElementById('video-time-current').textContent = 
+                    `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                // Enable complete button if 95% watched
+                if (progressPercent >= 95 && !videoCompleted) {
+                    videoCompleted = true;
+                    const completeBtn = document.getElementById('complete-btn');
+                    const completeBtnText = document.getElementById('complete-btn-text');
+                    
+                    completeBtn.disabled = false;
+                    completeBtnText.textContent = 'MARK AS COMPLETE';
+                }
             }
         }
+    }
+
+    function markCurrentExerciseComplete() {
+        if (!activeEx || !videoCompleted) return;
         
+        const day = appState.currentDay;
+        if (!appState.dayProgress[day].includes(activeEx.id)) {
+            appState.dayProgress[day].push(activeEx.id);
+        }
+
+        // Auto move to next day if finished
+        if (appState.dayProgress[day].length === appState.dayExercises[day].length && day < 30) {
+            appState.currentDay++;
+        }
+
         closeVideoModal();
-        
-        // Check if all exercises completed for current day
-        const completedExercises = appState.dayProgress[appState.currentDay] || [];
-        const totalExercises = currentDayExercises.length;
-        
-        if (completedExercises.length === totalExercises) {
-            // Day completed, move to next day
-            if (appState.currentDay < 30) {
-                appState.currentDay++;
-                setTimeout(() => {
-                    renderExercisePlan();
-                    // Show completion message
-                    const completionMsg = document.createElement('div');
-                    completionMsg.className = "fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-900/90 text-white px-4 py-2 rounded-lg z-50 fade-in";
-                    completionMsg.innerHTML = `<i class="fas fa-check-circle mr-2"></i> Day ${appState.currentDay-1} completed! Starting Day ${appState.currentDay}`;
-                    document.body.appendChild(completionMsg);
-                    setTimeout(() => completionMsg.remove(), 3000);
-                }, 300);
-            } else {
-                setTimeout(() => {
-                    // Show final completion message
-                    const finalMsg = document.createElement('div');
-                    finalMsg.className = "fixed top-4 left-1/2 transform -translate-x-1/2 bg-gold-primary/90 text-black px-4 py-3 rounded-lg z-50 fade-in";
-                    finalMsg.innerHTML = `<i class="fas fa-trophy mr-2"></i> <strong>Congratulations!</strong> You've completed the entire 30-day program!`;
-                    document.body.appendChild(finalMsg);
-                    setTimeout(() => finalMsg.remove(), 5000);
-                }, 300);
-            }
-        } else {
-            renderExercisePlan();
-        }
-        
-        // Save state after completing video
-        saveStateToLocalStorage();
+        renderExerciseList();
+        saveState();
     }
 
     function closeVideoModal() {
+        if (videoCheckInterval) {
+            clearInterval(videoCheckInterval);
+            videoCheckInterval = null;
+        }
+        
+        if (youtubePlayer) {
+            youtubePlayer.stopVideo();
+            youtubePlayer = null;
+        }
+        
         document.getElementById('video-modal').classList.add('hidden');
         document.getElementById('video-frame').innerHTML = '';
-        document.body.style.overflow = 'auto';
-        document.querySelector('.modal-background').classList.add('hidden');
+        activeEx = null;
+        videoCompleted = false;
     }
 
     function restartAssessment() {
-        // Clear localStorage
-        clearLocalStorage();
-        
-        // Reset all state
-        appState = {
-            currentQuestion: 0,
-            gender: null,
-            age: null,
-            primaryGoal: null,
-            condition: null,
-            experience: null,
-            symptoms: [],
-            scores: { leakage: 0, pain: 0, sexual: 0, strength: 0, endurance: 0, control: 0 },
-            currentDay: 1,
-            completedExercises: [],
-            totalQuestions: 50,
-            selectedCategory: null,
-            selectedExercises: [],
-            currentVideoIndex: 0,
-            userProfile: {},
-            dayProgress: {},
-            dayExercises: {},
-            assessmentComplete: false,
-            exercisePlanGenerated: false
-        };
-        
-        // Reset UI
-        document.getElementById('analysis-section').classList.add('hidden');
-        document.getElementById('exercise-section').classList.add('hidden');
-        document.getElementById('quiz-section').classList.remove('hidden');
-        
-        // Update background
-        updateBackground('quiz');
-        
-        // Restart questions
-        showQuestion();
+        if(confirm("This will clear all progress and start fresh. Continue?")) {
+            localStorage.removeItem('STI_KEGAL_PRO_DATA');
+            location.reload();
+        }
     }
 
-    // ==================== HELPER FUNCTIONS ====================
-
-    function animateScore(elementId, targetValue) {
-        const element = document.getElementById(elementId);
-        let current = 0;
-        const increment = targetValue / 40;
-        const interval = setInterval(() => {
-            current += increment;
-            if (current >= targetValue) {
-                current = targetValue;
-                clearInterval(interval);
-            }
-            element.textContent = Math.round(current) + "%";
-        }, 20);
-    }
-
-    function shuffleArray(array) {
+    // ==================== UTILS ====================
+    function shuffle(array) { 
         const shuffled = [...array];
         for (let i = shuffled.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -3349,80 +1239,28 @@
         }
         return shuffled;
     }
-
-    function updateBackground(section) {
-        // Hide all backgrounds first
-        document.getElementById('quiz-bg').classList.add('hidden');
-        document.getElementById('analysis-bg').classList.add('hidden');
-        document.getElementById('exercise-bg').classList.add('hidden');
-        
-        // Show appropriate background
-        if (section === 'quiz') {
-            document.getElementById('quiz-bg').classList.remove('hidden');
-        } else if (section === 'analysis') {
-            document.getElementById('analysis-bg').classList.remove('hidden');
-        } else if (section === 'exercise') {
-            document.getElementById('exercise-bg').classList.remove('hidden');
-        }
-    }
-
-    function setupEventListeners() {
-        // Escape key closes modal
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                if (!document.getElementById('video-modal').classList.contains('hidden')) {
-                    closeVideoModal();
-                }
-                if (!document.getElementById('question-popup-modal').classList.contains('hidden')) {
-                    closeQuestionPopup();
-                }
+    
+    function animateScore(id, target) {
+        let cur = 0;
+        const el = document.getElementById(id);
+        const iv = setInterval(() => {
+            cur += 2;
+            if (cur >= target) { 
+                el.textContent = target + '%'; 
+                clearInterval(iv); 
             }
-        });
-        
-        // Touch feedback
-        document.querySelectorAll('button').forEach(btn => {
-            btn.addEventListener('touchstart', () => {
-                btn.style.transform = 'translateY(1px)';
-            });
-            btn.addEventListener('touchend', () => {
-                setTimeout(() => {
-                    btn.style.transform = '';
-                }, 150);
-            });
-        });
-        
-        // Handle back button for WebView
-        window.addEventListener('popstate', function(event) {
-            if (!document.getElementById('video-modal').classList.contains('hidden')) {
-                closeVideoModal();
-                history.pushState(null, null, window.location.href);
+            else { 
+                el.textContent = cur + '%'; 
             }
-            if (!document.getElementById('question-popup-modal').classList.contains('hidden')) {
-                closeQuestionPopup();
-                history.pushState(null, null, window.location.href);
-            }
-        });
-        
-        // Save state before page unload
-        window.addEventListener('beforeunload', saveStateToLocalStorage);
+        }, 20);
     }
 
-    // Question popup functions (for future use)
-    function showQuestionPopup() {
-        // Implementation for popup questions
-    }
+    // Ensure YouTube API is available
+    window.onYouTubeIframeAPIReady = function() {
+        // This will be called by YouTube API
+    };
 
-    function closeQuestionPopup() {
-        document.getElementById('question-popup-modal').classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    }
-
-    function nextQuestionFromPopup() {
-        // Implementation for popup navigation
-    }
-
-    // Initialize
-    document.addEventListener('DOMContentLoaded', initApp);
+    window.onload = initApp;
 </script>
 </body>
 </html>
