@@ -3,254 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>S.T.I-KEGAL Pro | Pelvic Health Partner</title>
+    <title>S.T.I-KEGEL PRO 2025 | Next-Gen Pelvic Health</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        
         :root {
-            --gold-light: #FFD700;
-            --gold-primary: #D4AF37;
-            --gold-secondary: #B8860B;
-            --gold-dark: #996515;
-            --black-deep: #0A0A0A;
-            --black-surface: #121212;
+            /* 2025 Cyber-Medical Palette */
+            --bg-deep: #050507;
+            --bg-card: rgba(20, 20, 25, 0.6);
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            
+            --gold-neon: #FFD700;
+            --gold-dim: #997b00;
+            --gold-glow: 0 0 15px rgba(255, 215, 0, 0.3);
+            
+            --accent-cyan: #06b6d4;
+            --accent-success: #10b981;
+            
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-gold: rgba(255, 215, 0, 0.3);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body { 
-            font-family: 'Inter', -apple-system, sans-serif; 
-            background: #000000;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
             color: #ffffff;
-            min-height: 100vh;
-            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            text-rendering: optimizeLegibility;
+            overflow-x: hidden;
+            /* Subtle animated mesh background */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.03) 0%, transparent 20%);
         }
 
-        .background-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -10;
-            background: linear-gradient(145deg, #000000 70%, rgba(212, 175, 55, 0.05) 100%);
+        /* Tech Typography */
+        .font-mono-tech {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Glassmorphism Containers */
+        .glass-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.9);
+        }
+
+        .glass-panel-gold {
+            border: 1px solid var(--border-gold);
+            box-shadow: 0 0 30px -10px rgba(255, 215, 0, 0.15);
+        }
+
+        /* Futuristic Text Styles */
+        .text-glow {
+            text-shadow: var(--gold-glow);
         }
         
-        .quiz-background, .analysis-background, .exercise-background, .modal-background, .question-popup-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.7;
-            z-index: -9;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 215, 0, 0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 215, 0, 0.5); }
+
+        /* Button Styles */
+        .btn-tech {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-tech::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: 0.5s;
         }
 
-        .main-container {
-            background: rgba(10, 10, 10, 0.85);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 24px rgba(212, 175, 55, 0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+        .btn-tech:hover {
+            border-color: var(--gold-neon);
+            box-shadow: var(--gold-glow);
+            transform: translateY(-2px);
         }
+        
+        .btn-tech:hover::before { left: 100%; }
+        
+        .btn-tech:active { transform: scale(0.98); }
 
-        .text-3d-gold {
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 3px 0 rgba(212, 175, 55, 0.1), 0 5px 10px rgba(0, 0, 0, 0.25);
-            color: var(--gold-light);
-        }
-
-        .gold-btn {
-            background: linear-gradient(135deg, var(--gold-secondary) 0%, var(--gold-primary) 100%);
+        .btn-primary-glow {
+            background: var(--gold-neon);
             color: #000;
             font-weight: 800;
-            box-shadow: 0 4px 0 var(--gold-dark), 0 6px 10px rgba(212, 175, 55, 0.3);
-            transition: all 0.2s ease;
-        }
-        
-        .gold-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--gold-dark); }
-
-        .option-btn {
-            background: rgba(20, 20, 20, 0.95);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            transition: all 0.2s ease;
-        }
-        
-        .option-btn:active { border-color: var(--gold-primary); background: rgba(212, 175, 55, 0.12); }
-
-        .exercise-card {
-            background: rgba(20, 20, 20, 0.9);
-            border: 1px solid rgba(212, 175, 55, 0.1);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
             transition: all 0.3s ease;
         }
-        
-        .exercise-card.current { border-color: var(--gold-primary); box-shadow: 0 0 20px rgba(212, 175, 55, 0.15); }
-        .exercise-card.locked { opacity: 0.4; pointer-events: none; }
-        .exercise-card.completed { border-color: #10B981; background: rgba(16, 185, 129, 0.05); }
-
-        .progress-bar {
-            background: linear-gradient(90deg, var(--gold-secondary), var(--gold-primary));
-            height: 8px;
-            border-radius: 10px;
-            transition: width 0.4s ease;
+        .btn-primary-glow:hover {
+            background: #fff;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
         }
 
-        .video-container {
-            background: #000;
-            border-radius: 16px;
-            border: 2px solid var(--gold-primary);
-            overflow: hidden;
+        /* Exercise Cards */
+        .exercise-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.2) 100%);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+        .exercise-card.current {
+            border-color: var(--gold-neon);
+            background: linear-gradient(180deg, rgba(255, 215, 0, 0.05) 0%, rgba(0,0,0,0.3) 100%);
+            box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.05);
+        }
+        .exercise-card.completed {
+            border-color: var(--accent-success);
+            opacity: 0.6;
+        }
+        .exercise-card.locked {
+            opacity: 0.3;
+            filter: grayscale(1);
         }
 
-        .aspect-ratio-16-9 { position: relative; padding-top: 56.25%; }
-        .aspect-ratio-16-9 iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--gold-primary); border-radius: 10px; }
-
-        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        /* Animations */
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .scrollable-content { max-height: 70vh; overflow-y: auto; }
-        
-        .video-progress {
-            height: 4px;
-            background: rgba(212, 175, 55, 0.3);
-            border-radius: 2px;
-            overflow: hidden;
+        /* HUD Elements */
+        .hud-box {
+            position: relative;
         }
-        
-        .video-progress-fill {
-            height: 100%;
-            background: var(--gold-primary);
-            width: 0%;
-            transition: width 0.3s ease;
+        .hud-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 10px; height: 10px;
+            border-bottom: 2px solid var(--gold-neon);
+            border-right: 2px solid var(--gold-neon);
+        }
+        .hud-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 10px; height: 10px;
+            border-top: 2px solid var(--gold-neon);
+            border-left: 2px solid var(--gold-neon);
         }
     </style>
 </head>
-<body class="flex items-center justify-center p-0">
-    <div class="background-layer"></div>
-    <div class="quiz-background" id="quiz-bg"></div>
-    <div class="analysis-background hidden" id="analysis-bg"></div>
-    <div class="exercise-background hidden" id="exercise-bg"></div>
-    
-    <div class="w-full min-h-screen safe-area-top safe-area-bottom flex items-center justify-center px-3">
-        <div class="w-full max-w-md main-container rounded-xl p-4 fade-in">
-            
-            <header class="text-center mb-6">
-                <h1 class="text-2xl font-black text-3d-gold tracking-tight">S.T.I-KEGAL PRO</h1>
-                <p class="text-[10px] text-gold-light/60 font-bold uppercase tracking-wider">PELVIC HEALTH PARTNER</p>
-            </header>
+<body class="flex items-center justify-center min-h-screen p-4 sm:p-6">
 
-            <div class="scrollable-content custom-scrollbar">
-                <main id="app-content">
-                    <!-- Progress -->
-                    <div id="progress-section" class="mb-5">
-                        <div class="flex justify-between items-center mb-2">
-                            <span id="step-label" class="text-[10px] font-bold text-gold-light uppercase">Assessment</span>
-                            <span id="question-counter" class="text-[10px] font-bold text-white">1/50</span>
-                        </div>
-                        <div class="w-full bg-black/50 h-2 rounded-full overflow-hidden">
-                            <div id="progress-bar" class="progress-bar w-0"></div>
-                        </div>
-                    </div>
+    <div class="fixed inset-0 pointer-events-none opacity-20" style="background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDQwaDQwVjBIMHY0MHptMS0xaDM4VjFIMXYzOHoiIGZpbGw9IiMzMzMiIGZpbGwtb3BhY2l0eT0iMC4xIi8+PC9nPjwvc3ZnPg==');"></div>
 
-                    <!-- Quiz Section -->
-                    <div id="quiz-section" class="fade-in">
-                        <h2 id="question-text" class="text-lg font-bold text-white mb-5 leading-tight"></h2>
-                        <div id="options-container" class="space-y-2.5"></div>
-                    </div>
-
-                    <!-- Analysis Section -->
-                    <div id="analysis-section" class="hidden text-center fade-in">
-                        <h2 class="text-xl font-black text-3d-gold mb-2">Assessment Complete!</h2>
-                        <p class="text-xs text-gray-400 mb-6">Your Personalized Medical Report</p>
-                        
-                        <div class="grid grid-cols-3 gap-3 mb-6">
-                            <div class="bg-white/5 p-4 rounded-lg border border-gold-primary/10">
-                                <div class="text-[9px] uppercase text-gray-500 mb-2">Focus</div>
-                                <div id="focus-score" class="text-lg font-black text-gold-light">--</div>
-                            </div>
-                            <div class="bg-white/5 p-4 rounded-lg border border-gold-primary/10">
-                                <div class="text-[9px] uppercase text-gray-500 mb-2">Urgency</div>
-                                <div id="urgency-score" class="text-lg font-black text-gold-light">--</div>
-                            </div>
-                            <div class="bg-white/5 p-4 rounded-lg border border-gold-primary/10">
-                                <div class="text-[9px] uppercase text-gray-500 mb-2">Protocol</div>
-                                <div id="program-score" class="text-lg font-black text-gold-light">--</div>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-gold-primary/5 p-4 rounded-lg border border-gold-primary/20 mb-6 text-left">
-                            <h3 class="text-sm font-bold text-white mb-2 flex items-center">
-                                <i class="fas fa-stethoscope text-gold-primary mr-2"></i> Medical Prescription
-                            </h3>
-                            <p id="analysis-text" class="text-xs text-gray-300 leading-relaxed"></p>
-                        </div>
-                        
-                        <button onclick="showExercisePlan()" class="w-full gold-btn py-4 rounded-lg text-sm font-bold">
-                            VIEW PRESCRIBED PROTOCOL
-                        </button>
-                    </div>
-
-                    <!-- Exercise Plan Section -->
-                    <div id="exercise-section" class="hidden fade-in">
-                        <div class="flex justify-between items-center mb-5">
-                            <div>
-                                <h2 class="text-lg font-bold text-white">Daily Protocol</h2>
-                                <span class="text-[10px] text-gold-primary font-bold">Day <span id="current-day">1</span> of 30</span>
-                            </div>
-                            <div id="completion-stats" class="text-[10px] text-gray-400 font-bold">0/6 Completed</div>
-                        </div>
-                        
-                        <div id="exercise-list" class="space-y-3 pb-4"></div>
-                        
-                        <button onclick="restartAssessment()" class="w-full mt-4 py-3 bg-black/50 border border-gold-primary/30 text-gold-primary rounded-lg text-[10px] font-bold uppercase">
-                            <i class="fas fa-redo mr-2"></i> Reset Assessment
-                        </button>
-                    </div>
-                </main>
+    <div class="w-full max-w-[420px] glass-panel glass-panel-gold rounded-3xl overflow-hidden relative animate-fade-in flex flex-col h-[90vh]">
+        
+        <header class="pt-6 pb-4 px-6 text-center border-b border-white/5 relative z-10 shrink-0">
+            <div class="inline-block relative">
+                <h1 class="text-2xl font-black italic tracking-tighter text-white">
+                    S.T.I <span class="text-glow text-[#FFD700]">PRO</span>
+                </h1>
+                <div class="absolute -bottom-1 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#FFD700] to-transparent"></div>
             </div>
+            <p class="text-[9px] font-mono-tech text-gray-400 mt-1 tracking-[0.2em] uppercase">Pelvic Health OS v2.5</p>
+        </header>
+
+        <div class="flex-1 overflow-y-auto custom-scrollbar p-6 relative z-10">
+            <main id="app-content">
+                
+                <div id="progress-section" class="mb-8">
+                    <div class="flex justify-between items-end mb-2 font-mono-tech">
+                        <span id="step-label" class="text-[10px] text-[#FFD700] tracking-widest uppercase">Initializing...</span>
+                        <span id="question-counter" class="text-xs text-white/70">00/50</span>
+                    </div>
+                    <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden shadow-inner">
+                        <div id="progress-bar" class="h-full bg-gradient-to-r from-[#997b00] to-[#FFD700] w-0 shadow-[0_0_10px_#FFD700] transition-all duration-500 ease-out"></div>
+                    </div>
+                </div>
+
+                <div id="quiz-section" class="animate-fade-in min-h-[300px] flex flex-col justify-center">
+                    <h2 id="question-text" class="text-xl md:text-2xl font-bold text-white mb-8 leading-snug drop-shadow-md min-h-[60px]">
+                        Loading System...
+                    </h2>
+                    <div id="options-container" class="space-y-3">
+                        </div>
+                </div>
+
+                <div id="analysis-section" class="hidden animate-fade-in">
+                    <div class="text-center mb-8">
+                        <div class="inline-block p-3 rounded-full border border-[#FFD700]/30 bg-[#FFD700]/5 mb-3">
+                            <i class="fas fa-check text-2xl text-[#FFD700] drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]"></i>
+                        </div>
+                        <h2 class="text-2xl font-black text-white tracking-tight">ANALYSIS COMPLETE</h2>
+                        <p class="text-[10px] font-mono-tech text-gray-400 mt-1">BIOMETRIC REPORT GENERATED</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-2 mb-6">
+                        <div class="hud-box bg-white/5 p-3 rounded-lg text-center border border-white/5">
+                            <div class="text-[9px] uppercase text-gray-500 font-bold mb-1 tracking-wider">Focus</div>
+                            <div id="focus-score" class="text-xl font-mono-tech font-bold text-[#FFD700]">0%</div>
+                        </div>
+                        <div class="hud-box bg-white/5 p-3 rounded-lg text-center border border-white/5">
+                            <div class="text-[9px] uppercase text-gray-500 font-bold mb-1 tracking-wider">Urgency</div>
+                            <div id="urgency-score" class="text-xl font-mono-tech font-bold text-[#ef4444]">0%</div>
+                        </div>
+                        <div class="hud-box bg-white/5 p-3 rounded-lg text-center border border-white/5">
+                            <div class="text-[9px] uppercase text-gray-500 font-bold mb-1 tracking-wider">Protocol</div>
+                            <div id="program-score" class="text-xl font-mono-tech font-bold text-[#06b6d4]">0%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-gray-900 to-black border border-[#FFD700]/20 p-5 rounded-xl mb-6 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-[#FFD700] blur-[40px] opacity-10"></div>
+                        <h3 class="text-xs font-bold text-[#FFD700] mb-3 flex items-center gap-2 uppercase tracking-wide">
+                            <i class="fas fa-microchip"></i> Medical Algorithm Output
+                        </h3>
+                        <p id="analysis-text" class="text-xs text-gray-300 leading-relaxed font-light"></p>
+                    </div>
+                    
+                    <button onclick="showExercisePlan()" class="w-full btn-primary-glow py-4 rounded-xl text-xs uppercase tracking-widest relative overflow-hidden group">
+                        <span class="relative z-10">Initiate Protocol <i class="fas fa-arrow-right ml-2"></i></span>
+                    </button>
+                </div>
+
+                <div id="exercise-section" class="hidden animate-fade-in pb-10">
+                    <div class="flex justify-between items-end mb-6 border-b border-white/10 pb-4">
+                        <div>
+                            <h2 class="text-lg font-bold text-white">Daily Protocol</h2>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="w-2 h-2 rounded-full bg-[#FFD700] animate-pulse"></span>
+                                <span class="text-[10px] font-mono-tech text-[#FFD700]">DAY <span id="current-day" class="text-lg font-bold">01</span> / 30</span>
+                            </div>
+                        </div>
+                        <div id="completion-stats" class="text-[10px] font-mono-tech text-gray-400 bg-white/5 px-2 py-1 rounded">0/6 TASKS</div>
+                    </div>
+                    
+                    <div id="exercise-list" class="space-y-3">
+                        </div>
+                    
+                    <button onclick="restartAssessment()" class="w-full mt-8 py-3 rounded-lg text-[10px] font-bold uppercase text-gray-500 hover:text-white hover:bg-white/5 transition-colors">
+                        <i class="fas fa-refresh mr-1"></i> System Reset
+                    </button>
+                </div>
+            </main>
         </div>
     </div>
 
-    <!-- Video Modal -->
     <div id="video-modal" class="fixed inset-0 z-50 hidden flex flex-col items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/95 backdrop-blur-sm" onclick="closeVideoModal()"></div>
-        <div class="w-full max-w-md z-10">
-            <div class="video-container mb-4">
-                <div class="aspect-ratio-16-9" id="video-frame"></div>
-                <div class="p-3 bg-black/80">
-                    <div class="video-progress mb-2">
-                        <div id="video-progress-fill" class="video-progress-fill"></div>
+        <div class="absolute inset-0 bg-black/95 backdrop-blur-xl transition-opacity duration-300" onclick="closeVideoModal()"></div>
+        
+        <div class="w-full max-w-md z-10 relative animate-fade-in">
+            <div class="video-container relative rounded-2xl overflow-hidden border border-[#FFD700]/30 shadow-[0_0_50px_rgba(0,0,0,0.8)] bg-black">
+                <div class="aspect-ratio-16-9 relative pt-[56.25%] bg-gray-900" id="video-frame">
                     </div>
-                    <div class="flex justify-between text-[10px] text-gray-400">
+                
+                <div class="p-4 bg-gradient-to-t from-black via-gray-900 to-transparent border-t border-white/10">
+                    <div class="video-progress h-1 bg-white/10 rounded-full mb-3 overflow-hidden">
+                        <div id="video-progress-fill" class="h-full bg-[#FFD700] w-0 transition-all duration-300 shadow-[0_0_10px_#FFD700]"></div>
+                    </div>
+                    
+                    <div class="flex justify-between text-[10px] font-mono-tech text-gray-400 mb-4">
                         <span id="video-time-current">0:00</span>
                         <span id="video-time-total">0:00</span>
                     </div>
+
+                    <h3 id="video-title" class="text-base font-bold text-white mb-1"></h3>
+                    <p id="video-description" class="text-xs text-gray-400 mb-4 line-clamp-2"></p>
+                    
+                    <div class="grid grid-cols-3 gap-2 mb-5">
+                        <div class="bg-white/5 p-2 rounded text-center">
+                            <i class="fas fa-clock text-[#FFD700] text-[10px] mb-1 block"></i>
+                            <span id="video-duration" class="text-[10px] font-mono-tech"></span>
+                        </div>
+                        <div class="bg-white/5 p-2 rounded text-center">
+                            <i class="fas fa-redo text-[#FFD700] text-[10px] mb-1 block"></i>
+                            <span id="video-reps" class="text-[10px] font-mono-tech"></span>
+                        </div>
+                        <div class="bg-white/5 p-2 rounded text-center">
+                            <i class="fas fa-tag text-[#FFD700] text-[10px] mb-1 block"></i>
+                            <span id="video-category" class="text-[10px] uppercase font-bold"></span>
+                        </div>
+                    </div>
+                    
+                    <button id="complete-btn" onclick="markCurrentExerciseComplete()" class="w-full btn-primary-glow py-4 rounded-xl text-xs font-bold disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-700 disabled:text-gray-400 disabled:box-shadow-none transition-all">
+                        <i class="fas fa-circle-notch fa-spin mr-2 hidden" id="video-loading"></i>
+                        <span id="complete-btn-text">INITIALIZING STREAM...</span>
+                    </button>
                 </div>
             </div>
-            <div class="bg-black/90 p-5 rounded-xl border border-gold-primary/20">
-                <h3 id="video-title" class="text-sm font-bold text-white mb-2"></h3>
-                <p id="video-description" class="text-[11px] text-gray-400 mb-4"></p>
-                <div class="flex justify-between text-[10px] text-gray-500 mb-6">
-                    <span><i class="fas fa-clock mr-1"></i> <span id="video-duration"></span></span>
-                    <span><i class="fas fa-redo mr-1"></i> <span id="video-reps"></span></span>
-                    <span id="video-category" class="text-gold-primary uppercase font-bold"></span>
-                </div>
-                <button id="complete-btn" onclick="markCurrentExerciseComplete()" class="w-full gold-btn py-3.5 rounded-lg text-xs font-bold" disabled>
-                    <i class="fas fa-spinner fa-spin mr-2 hidden" id="video-loading"></i>
-                    <span id="complete-btn-text">VIDEO MUST BE COMPLETED FIRST</span>
-                </button>
-            </div>
+            
+            <button onclick="closeVideoModal()" class="absolute -top-12 right-0 text-white/50 hover:text-white transition-colors">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
         </div>
     </div>
 
@@ -286,6 +335,7 @@
     }
 
     // ==================== MASSIVE EXERCISE LIBRARY ====================
+    // NOTE: This library is identical to the original input.
     const exerciseLibrary = {
         control:[
 { id:"C1",name:"Elevator Wave Control",description:"Gradual intensity levels",category:"control",subcategory:"wave",difficulty:"intermediate",duration:"4:10",reps:"6 full waves",videoCode:"dQw4w9WgXcQ",benefit:"Precise intensity control. Fine motor skills.",solution:"Teaches graded muscle contraction control.",gender:"both"},
@@ -394,6 +444,7 @@ relaxation:[
     };
 
     // ==================== 50 COMPLETE ASSESSMENT QUESTIONS ====================
+    // NOTE: Questions are identical to the original input.
     const questions = [
         {
             id: 1,
@@ -802,7 +853,10 @@ relaxation:[
 
         const q = questions[appState.currentQuestion];
         document.getElementById('question-text').textContent = q.text;
-        document.getElementById('question-counter').textContent = `${appState.currentQuestion + 1}/${questions.length}`;
+        
+        // Padded number format
+        const currentQNum = (appState.currentQuestion + 1).toString().padStart(2, '0');
+        document.getElementById('question-counter').textContent = `${currentQNum}/${questions.length}`;
         
         const progress = ((appState.currentQuestion) / questions.length) * 100;
         document.getElementById('progress-bar').style.width = `${progress}%`;
@@ -812,8 +866,9 @@ relaxation:[
 
         q.options.forEach(opt => {
             const btn = document.createElement('button');
-            btn.className = "w-full option-btn p-4 rounded-xl text-sm font-semibold text-left text-white flex justify-between items-center fade-in";
-            btn.innerHTML = `<span>${opt}</span><i class="far fa-circle text-gold-primary/30"></i>`;
+            // Updated button class for new aesthetics
+            btn.className = "w-full btn-tech p-4 rounded-xl text-sm font-semibold text-left text-white flex justify-between items-center group";
+            btn.innerHTML = `<span>${opt}</span><i class="far fa-circle text-white/20 group-hover:text-[#FFD700] transition-colors"></i>`;
             btn.onclick = () => handleAnswer(opt);
             container.appendChild(btn);
         });
@@ -1035,12 +1090,13 @@ relaxation:[
         list.innerHTML = '';
         
         const day = appState.currentDay;
-        document.getElementById('current-day').textContent = day;
+        // Padded number
+        document.getElementById('current-day').textContent = day.toString().padStart(2, '0');
         
         const exercises = appState.dayExercises[day] || [];
         const completed = appState.dayProgress[day] || [];
         
-        document.getElementById('completion-stats').textContent = `${completed.length}/${exercises.length} Completed`;
+        document.getElementById('completion-stats').textContent = `${completed.length}/${exercises.length} TASKS`;
 
         exercises.forEach((ex, idx) => {
             const isDone = completed.includes(ex.id);
@@ -1048,20 +1104,28 @@ relaxation:[
             const isLocked = idx > completed.length;
 
             const card = document.createElement('div');
-            card.className = `exercise-card p-4 rounded-xl flex items-center gap-4 ${isLocked ? 'locked' : ''} ${isCurrent ? 'current' : ''} ${isDone ? 'completed' : ''} fade-in`;
+            // Updated class for new styling
+            card.className = `exercise-card p-4 rounded-xl flex items-center gap-4 ${isLocked ? 'locked' : ''} ${isCurrent ? 'current' : ''} ${isDone ? 'completed' : ''} animate-fade-in group`;
+            
+            let iconColor = isDone ? 'bg-[#10b981] text-black' : (isLocked ? 'bg-white/10 text-white/30' : 'bg-[#FFD700] text-black');
+            let icon = isDone ? '<i class="fas fa-check"></i>' : (isLocked ? '<i class="fas fa-lock"></i>' : idx + 1);
+
             card.innerHTML = `
-                <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold ${isDone ? 'bg-green-500 text-white' : 'bg-gold-primary text-black'}">
-                    ${isDone ? '<i class="fas fa-check"></i>' : idx + 1}
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center font-bold font-mono-tech ${iconColor} transition-all">
+                    ${icon}
                 </div>
                 <div class="flex-1">
-                    <h4 class="text-sm font-bold text-white">${ex.name}</h4>
-                    <p class="text-[10px] text-gray-500 uppercase font-bold">${ex.category} • ${ex.duration} • ${ex.difficulty}</p>
+                    <h4 class="text-sm font-bold text-white group-hover:text-[#FFD700] transition-colors">${ex.name}</h4>
+                    <p class="text-[9px] text-gray-400 uppercase font-mono-tech tracking-wider mt-1">
+                        ${ex.category} <span class="text-[#FFD700]">•</span> ${ex.duration}
+                    </p>
                 </div>
-                <i class="fas ${isLocked ? 'fa-lock text-gray-700' : 'fa-play-circle text-gold-primary text-xl'}"></i>
+                ${!isLocked && !isDone ? '<div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center"><i class="fas fa-play text-[#FFD700] text-xs"></i></div>' : ''}
             `;
             
             if (!isLocked && !isDone) {
                 card.onclick = () => openVideo(ex, idx);
+                card.style.cursor = 'pointer';
             }
             list.appendChild(card);
         });
@@ -1086,6 +1150,7 @@ relaxation:[
             <iframe 
                 id="youtube-player"
                 src="https://www.youtube.com/embed/${ex.videoCode}?enablejsapi=1&rel=0&modestbranding=1&playsinline=1" 
+                class="absolute top-0 left-0 w-full h-full"
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen>
@@ -1102,7 +1167,7 @@ relaxation:[
         const videoLoading = document.getElementById('video-loading');
         
         completeBtn.disabled = true;
-        completeBtnText.textContent = 'VIDEO MUST BE COMPLETED FIRST';
+        completeBtnText.textContent = 'PROTOCOL IN PROGRESS...';
         videoLoading.classList.remove('hidden');
         
         document.getElementById('video-modal').classList.remove('hidden');
@@ -1155,7 +1220,7 @@ relaxation:[
             const completeBtnText = document.getElementById('complete-btn-text');
             
             completeBtn.disabled = false;
-            completeBtnText.textContent = 'MARK AS COMPLETE';
+            completeBtnText.textContent = 'COMPLETE & SYNC DATA';
             document.getElementById('video-progress-fill').style.width = '100%';
         }
     }
@@ -1182,7 +1247,7 @@ relaxation:[
                     const completeBtnText = document.getElementById('complete-btn-text');
                     
                     completeBtn.disabled = false;
-                    completeBtnText.textContent = 'MARK AS COMPLETE';
+                    completeBtnText.textContent = 'COMPLETE & SYNC DATA';
                 }
             }
         }
@@ -1224,7 +1289,7 @@ relaxation:[
     }
 
     function restartAssessment() {
-        if(confirm("This will clear all progress and start fresh. Continue?")) {
+        if(confirm("WARNING: SYSTEM RESET. All progress data will be wiped. Continue?")) {
             localStorage.removeItem('STI_KEGAL_PRO_DATA');
             location.reload();
         }
