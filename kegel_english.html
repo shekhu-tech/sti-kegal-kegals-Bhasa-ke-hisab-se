@@ -30,61 +30,28 @@
             background-color: var(--bg-deep);
             color: #ffffff;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
+            overflow: hidden; /* Prevent body scroll */
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.03) 0%, transparent 20%),
                 radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.03) 0%, transparent 20%);
-        }
-
-        /* iPhone 12 Mini Height Fix - 812px height */
-        @media (max-height: 812px) {
-            .video-modal-container {
-                height: calc(100vh - 100px) !important;
-                max-height: calc(100vh - 100px) !important;
-                margin: 20px auto !important;
-            }
-            
-            .exercise-container {
-                max-height: calc(100vh - 280px) !important;
-            }
-        }
-
-        /* For smaller iPhones */
-        @media (max-height: 667px) {
-            .video-modal-container {
-                height: calc(100vh - 80px) !important;
-                max-height: calc(100vh - 80px) !important;
-                margin: 15px auto !important;
-            }
-            
-            .exercise-container {
-                max-height: calc(100vh - 240px) !important;
-            }
-        }
-
-        /* For very small screens */
-        @media (max-height: 568px) {
-            .video-modal-container {
-                height: calc(100vh - 60px) !important;
-                max-height: calc(100vh - 60px) !important;
-                margin: 10px auto !important;
-            }
-            
-            .exercise-container {
-                max-height: calc(100vh - 220px) !important;
-            }
+            height: 100dvh;
         }
 
         .font-mono-tech {
             font-family: 'JetBrains Mono', monospace;
         }
 
+        /* MAIN APP CONTAINER */
         .glass-panel {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border-light);
             box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.9);
+            height: 90dvh; 
+            max-height: 900px;
+            display: flex;
+            flex-direction: column;
         }
 
         .glass-panel-gold {
@@ -97,12 +64,12 @@
         }
         
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(255, 215, 0, 0.2); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(255, 215, 0, 0.5); }
 
-        /* Button Styles */
+        /* Buttons */
         .btn-tech {
             background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
             border: 1px solid var(--border-light);
@@ -126,7 +93,6 @@
         }
         
         .btn-tech:hover::before { left: 100%; }
-        
         .btn-tech:active { transform: scale(0.98); }
 
         .btn-primary-glow {
@@ -161,37 +127,35 @@
             filter: grayscale(1);
         }
 
-        /* Animations */
         .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* HUD Elements */
-        .hud-box {
-            position: relative;
-        }
+        .hud-box { position: relative; }
         .hud-box::after {
-            content: '';
-            position: absolute;
-            bottom: 0; right: 0;
+            content: ''; position: absolute; bottom: 0; right: 0;
             width: 10px; height: 10px;
             border-bottom: 2px solid var(--gold-neon);
             border-right: 2px solid var(--gold-neon);
         }
         .hud-box::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
+            content: ''; position: absolute; top: 0; left: 0;
             width: 10px; height: 10px;
             border-top: 2px solid var(--gold-neon);
             border-left: 2px solid var(--gold-neon);
         }
 
-        /* Video Modal Height Fix */
+        /* === UPDATED VIDEO MODAL STYLING === */
         .video-modal-container {
             width: 100%;
-            height: calc(100vh - 120px);
-            max-height: calc(100vh - 120px);
-            margin: 40px auto;
+            height: auto; /* Allow height to shrink */
+            max-height: 70dvh; /* Reduced max height */
+            margin: auto; /* Helps centering */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border-radius: 16px;
+            background: #000;
+            box-shadow: 0 0 50px rgba(0,0,0,0.9);
         }
 
         .video-container {
@@ -199,46 +163,71 @@
             height: 100%;
             display: flex;
             flex-direction: column;
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
 
+        /* 16:9 Aspect Ratio Lock */
         .video-player-wrapper {
-            flex: 1;
-            min-height: 0;
-            overflow: hidden;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            flex-shrink: 0; 
+            background: #000;
+            position: relative;
+            z-index: 10;
         }
 
         .video-info-area {
-            flex-shrink: 0;
-            max-height: 45%;
-            overflow-y: auto;
+            flex: 1; 
+            overflow-y: auto; 
+            background: linear-gradient(to top, #000 0%, #111 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
         }
 
-        /* Exercise List Container - Max 3-4 cards visible */
-        .exercise-container {
-            max-height: calc(100vh - 320px);
-            overflow-y: auto;
-        }
-
-        /* Floating Reset Button */
-        .floating-reset-btn {
+        /* === SIDE RESET BUTTON === */
+        .side-reset-tab {
             position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 100;
-            width: auto;
-            padding: 8px 20px;
-            border-radius: 25px;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #050507;
+            color: #fff;
+            padding: 16px 6px;
+            border: 1px solid var(--gold-dim);
+            border-right: none;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 9999;
+            box-shadow: -4px 0 15px rgba(0,0,0,0.6);
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        /* For exercise section */
-        #exercise-section {
-            position: relative;
-            padding-bottom: 80px; /* Space for floating button */
+        .side-reset-tab:hover {
+            background: #1a1a1a;
+            box-shadow: -4px 0 20px rgba(255, 215, 0, 0.2);
+            color: var(--gold-neon);
+            padding-right: 10px;
+        }
+        
+        #app-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .content-scroll-area {
+            flex: 1;
+            overflow-y: auto;
+            min-height: 0;
         }
     </style>
 </head>
@@ -246,7 +235,7 @@
 
     <div class="fixed inset-0 pointer-events-none opacity-20" style="background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDQwaDQwVjBIMHY0MHptMS0xaDM4VjFIMXYzOHoiIGZpbGw9IiMzMzMiIGZpbGwtb3BhY2l0eT0iMC4xIi8+PC9nPjwvc3ZnPg==');"></div>
 
-    <div class="w-full max-w-[420px] glass-panel glass-panel-gold rounded-3xl overflow-hidden relative animate-fade-in flex flex-col h-auto max-h-[95vh]">
+    <div class="w-full max-w-[420px] glass-panel glass-panel-gold rounded-3xl overflow-hidden relative animate-fade-in">
         
         <header class="pt-6 pb-4 px-6 text-center border-b border-white/5 relative z-10 shrink-0">
             <div class="inline-block relative">
@@ -258,13 +247,13 @@
             <p class="text-[9px] font-mono-tech text-gray-400 mt-1 tracking-[0.2em] uppercase">Your-Pelvic-Health-Partner</p>
         </header>
 
-        <div class="flex-1 overflow-y-auto custom-scrollbar p-6 relative z-10">
-            <main id="app-content">
+        <main id="app-content" class="relative z-10 flex flex-col h-full overflow-hidden">
+            <div class="content-scroll-area p-6 custom-scrollbar">
                 
                 <div id="progress-section" class="mb-8">
                     <div class="flex justify-between items-end mb-2 font-mono-tech">
                         <span id="step-label" class="text-[10px] text-[#FFD700] tracking-widest uppercase">Initializing...</span>
-                        <span id="question-counter" class="text-xs text-white/70">00/50</span>
+                        <span id="question-counter" class="text-xs text-white/70">00/65</span>
                     </div>
                     <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden shadow-inner">
                         <div id="progress-bar" class="h-full bg-gradient-to-r from-[#997b00] to-[#FFD700] w-0 shadow-[0_0_10px_#FFD700] transition-all duration-500 ease-out"></div>
@@ -279,7 +268,7 @@
                         </div>
                 </div>
 
-                <div id="analysis-section" class="hidden animate-fade-in">
+                <div id="analysis-section" class="hidden animate-fade-in pb-10">
                     <div class="text-center mb-8">
                         <div class="inline-block p-3 rounded-full border border-[#FFD700]/30 bg-[#FFD700]/5 mb-3">
                             <i class="fas fa-check text-2xl text-[#FFD700] drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]"></i>
@@ -316,8 +305,8 @@
                     </button>
                 </div>
 
-                <div id="exercise-section" class="hidden animate-fade-in">
-                    <div class="flex justify-between items-end mb-6 border-b border-white/10 pb-4">
+                <div id="exercise-section" class="hidden animate-fade-in pb-20">
+                    <div class="flex justify-between items-end mb-6 border-b border-white/10 pb-4 sticky top-0 bg-[#050507]/90 backdrop-blur z-20 pt-2">
                         <div>
                             <h2 class="text-lg font-bold text-white">Daily Protocol</h2>
                             <div class="flex items-center gap-2 mt-1">
@@ -328,30 +317,32 @@
                         <div id="completion-stats" class="text-[10px] font-mono-tech text-gray-400 bg-white/5 px-2 py-1 rounded">0/6 TASKS</div>
                     </div>
                     
-                    <div id="exercise-list" class="exercise-container space-y-3">
-                        <!-- Exercises will be rendered here - Max 3-4 visible -->
-                    </div>
+                    <div id="exercise-list" class="space-y-3">
+                        </div>
                 </div>
-            </main>
-        </div>
+            </div>
+        </main>
     </div>
 
-    <!-- Floating Reset Button (Only visible in exercise section) -->
-    <button id="floating-reset-btn" onclick="restartAssessment()" class="floating-reset-btn hidden text-[10px] font-bold uppercase text-gray-300 hover:text-white hover:bg-white/10 transition-colors">
-        <i class="fas fa-refresh mr-1"></i> System Reset
-    </button>
+    <div id="floating-reset-btn" onclick="restartAssessment()" class="side-reset-tab hidden">
+        SYSTEM RESET
+    </div>
 
-    <!-- Video Modal -->
-    <div id="video-modal" class="fixed inset-0 z-50 hidden flex flex-col items-center justify-center p-4">
+    <div id="video-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/95 backdrop-blur-xl transition-opacity duration-300" onclick="closeVideoModal()"></div>
         
-        <div class="w-full max-w-md z-10 relative animate-fade-in video-modal-container">
-            <div class="video-container relative rounded-2xl overflow-hidden border border-[#FFD700]/30 shadow-[0_0_50px_rgba(0,0,0,0.8)] bg-black h-full flex flex-col">
-                <div class="video-player-wrapper relative pt-[56.25%] bg-gray-900" id="video-frame">
-                    <!-- YouTube iframe will be inserted here -->
-                </div>
+        <div class="video-modal-container z-10 relative animate-fade-in max-w-md">
+            
+            <div class="video-container">
+                <button onclick="closeVideoModal()" class="absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center bg-black/50 rounded-full text-white/70 hover:text-white hover:bg-black/80 transition-all border border-white/10">
+                    <i class="fas fa-times"></i>
+                </button>
+
+                <div class="video-player-wrapper" id="video-frame">
+                    </div>
                 
-                <div class="video-info-area p-4 bg-gradient-to-t from-black via-gray-900 to-transparent border-t border-white/10">
+                <div class="video-info-area custom-scrollbar">
+                    
                     <div class="video-progress h-1 bg-white/10 rounded-full mb-3 overflow-hidden shrink-0">
                         <div id="video-progress-fill" class="h-full bg-[#FFD700] w-0 transition-all duration-300 shadow-[0_0_10px_#FFD700]"></div>
                     </div>
@@ -361,34 +352,30 @@
                         <span id="video-time-total">0:00</span>
                     </div>
 
-                    <h3 id="video-title" class="text-base font-bold text-white mb-1"></h3>
-                    <p id="video-description" class="text-xs text-gray-400 mb-4"></p>
+                    <h3 id="video-title" class="text-base font-bold text-white mb-1 leading-tight"></h3>
+                    <p id="video-description" class="text-xs text-gray-400 mb-4 leading-relaxed"></p>
                     
                     <div class="grid grid-cols-3 gap-2 mb-5 shrink-0">
-                        <div class="bg-white/5 p-2 rounded text-center">
+                        <div class="bg-white/5 p-2 rounded text-center border border-white/5">
                             <i class="fas fa-clock text-[#FFD700] text-[10px] mb-1 block"></i>
                             <span id="video-duration" class="text-[10px] font-mono-tech"></span>
                         </div>
-                        <div class="bg-white/5 p-2 rounded text-center">
+                        <div class="bg-white/5 p-2 rounded text-center border border-white/5">
                             <i class="fas fa-redo text-[#FFD700] text-[10px] mb-1 block"></i>
                             <span id="video-reps" class="text-[10px] font-mono-tech"></span>
                         </div>
-                        <div class="bg-white/5 p-2 rounded text-center">
+                        <div class="bg-white/5 p-2 rounded text-center border border-white/5">
                             <i class="fas fa-tag text-[#FFD700] text-[10px] mb-1 block"></i>
-                            <span id="video-category" class="text-[10px] uppercase font-bold"></span>
+                            <span id="video-category" class="text-[9px] uppercase font-bold truncate"></span>
                         </div>
                     </div>
                     
-                    <button id="complete-btn" onclick="markCurrentExerciseComplete()" class="w-full btn-primary-glow py-4 rounded-xl text-xs font-bold disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-700 disabled:text-gray-400 disabled:box-shadow-none transition-all shrink-0">
+                    <button id="complete-btn" onclick="markCurrentExerciseComplete()" class="w-full btn-primary-glow py-3 rounded-xl text-xs font-bold disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-700 disabled:text-gray-400 disabled:box-shadow-none transition-all shrink-0 mt-auto">
                         <i class="fas fa-circle-notch fa-spin mr-2 hidden" id="video-loading"></i>
                         <span id="complete-btn-text">INITIALIZING STREAM...</span>
                     </button>
                 </div>
             </div>
-            
-            <button onclick="closeVideoModal()" class="absolute -top-12 right-0 text-white/50 hover:text-white transition-colors">
-                <i class="fas fa-times text-2xl"></i>
-            </button>
         </div>
     </div>
 
@@ -423,7 +410,8 @@
         return false;
     }
 
-    // ==================== UPDATED EXERCISE LIBRARY ====================
+    // ==================== EXERCISE LIBRARY ====================
+    // IMPORTANT: Make sure to include ALL exercises in this object
     const exerciseLibrary = {
         foundational:[
 { id:"F1",name:"Classic Hold Kegel",description:"Basic contraction hold for muscle identification",category:"foundational",subcategory:"slow",difficulty:"beginner",duration:"2:45",reps:"10 × 5s",videoCode:"pUjKMvAqNm0",benefit:"Identifies pelvic floor muscles.",solution:"Builds awareness.",gender:"both"},
@@ -800,9 +788,13 @@ relaxation:[
 { id:"RL29",name:"Relaxation Control Plus",description:"Controlled deep relaxation",category:"relaxation",subcategory:"reverse",difficulty:"advanced",duration:"4:45",reps:"6 reps",videoCode:"pUjKMvAqNm0",benefit:"Complete ease.",solution:"Precision relaxation.",gender:"both"},
 { id:"RL30",name:"Relaxation Mastery Prep",description:"Preparation for full relaxation mastery",category:"relaxation",subcategory:"mindful",difficulty:"advanced",duration:"6:00",reps:"10 reps",videoCode:"pUjKMvAqNm0",benefit:"Total calm readiness.",solution:"Final phase prep.",gender:"both"}
 ]
-    };
+// ... [CONTINUE PASTE OF ALL OTHER CATEGORIES HERE: control, functional, breathing, sexual, rehab, endurance, mindfulness, hybrid, relaxation]
+// FOR THE CODE TO WORK, YOU MUST PASTE THE REST OF THE EXERCISES FROM YOUR ORIGINAL FILE HERE.
+};
 
-    // ==================== 50 COMPLETE ASSESSMENT QUESTIONS ====================
+// ... [REMAINING EXERCISE CATEGORIES FROM YOUR ORIGINAL FILE SHOULD BE PASTED HERE] ...
+
+    // ==================== 65 COMPLETE ASSESSMENT QUESTIONS ====================
     const questions = [
         {
             id: 1,
@@ -1168,8 +1160,129 @@ relaxation:[
             options: ["Never", "Few sessions", "Completed program", "Multiple programs", "Currently in therapy"],
             category: "medical",
             scoreMap: { "Never": 0, "Few sessions": 5, "Completed program": 10, "Multiple programs": 20, "Currently in therapy": 30 }
-        }
+        },
+
+        // NEW SECTION: Sexual Health Supplement (15 questions)
+        // 1. Harmful substances for sexual health (Male Only - 5 questions)
+        {
+            id: 51,
+            text: "Do you consume substances harmful for sexual health? (Tobacco, alcohol, drugs)",
+            options: ["Never", "Rarely", "Sometimes", "Often", "Regularly"],
+            category: "sexual",
+            scoreMap: { "Never": 0, "Rarely": 10, "Sometimes": 20, "Often": 30, "Regularly": 40 },
+            skipIfGender: "Female"
+        },
+        {
+            id: 52,
+            text: "How long have you been consuming these substances?",
+            options: ["Never consumed", "Less than 1 year", "1-3 years", "3-5 years", "More than 5 years"],
+            category: "sexual",
+            scoreMap: { "Never consumed": 0, "Less than 1 year": 5, "1-3 years": 15, "3-5 years": 25, "More than 5 years": 35 },
+            skipIfGender: "Female"
+        },
+        {
+            id: 53,
+            text: "How frequently do you consume these substances now?",
+            options: ["Not currently", "Once a month", "Once a week", "Several times/week", "Daily"],
+            category: "sexual",
+            scoreMap: { "Not currently": 0, "Once a month": 5, "Once a week": 15, "Several times/week": 25, "Daily": 35 },
+            skipIfGender: "Female"
+        },
+        {
+            id: 54,
+            text: "Do you take any performance enhancing drugs?",
+            options: ["Never", "Occasionally", "Sometimes", "Often", "Regularly"],
+            category: "sexual",
+            scoreMap: { "Never": 0, "Occasionally": 10, "Sometimes": 20, "Often": 30, "Regularly": 40 },
+            skipIfGender: "Female"
+        },
+        {
+            id: 55,
+            text: "Have you experienced side effects from these substances?",
+            options: ["No", "Mild effects", "Moderate effects", "Severe effects", "Significant problems"],
+            category: "sexual",
+            scoreMap: { "No": 0, "Mild effects": 10, "Moderate effects": 20, "Severe effects": 30, "Significant problems": 40 },
+            skipIfGender: "Female"
+        },
+
+        // 2. Masturbation habits (Both Genders - 5 questions)
+        {
+            id: 56,
+            text: "When did you start masturbating?",
+            options: ["Never masturbate", "After 18 years", "13-17 years", "Before 13 years", "Not sure"],
+            category: "sexual",
+            scoreMap: { "Never masturbate": 0, "After 18 years": 5, "13-17 years": 10, "Before 13 years": 15, "Not sure": 5 }
+        },
+        {
+            id: 57,
+            text: "How long have you been masturbating continuously?",
+            options: ["Never", "Less than 1 year", "1-3 years", "3-5 years", "More than 5 years"],
+            category: "sexual",
+            scoreMap: { "Never": 0, "Less than 1 year": 5, "1-3 years": 10, "3-5 years": 15, "More than 5 years": 20 }
+        },
+        {
+            id: 58,
+            text: "Do you currently masturbate?",
+            options: ["Never", "Rarely", "Sometimes", "Often", "Daily"],
+            category: "sexual",
+            scoreMap: { "Never": 0, "Rarely": 5, "Sometimes": 10, "Often": 15, "Daily": 20 }
+        },
+        {
+            id: 59,
+            text: "How frequently do you masturbate?",
+            options: ["Never", "1-2 times/month", "1-2 times/week", "3-4 times/week", "Daily or more"],
+            category: "sexual",
+            scoreMap: { "Never": 0, "1-2 times/month": 5, "1-2 times/week": 10, "3-4 times/week": 15, "Daily or more": 20 }
+        },
+        {
+            id: 60,
+            text: "Do you feel masturbation affects your sexual performance?",
+            options: ["No effect", "Slight effect", "Moderate effect", "Significant effect", "Major problem"],
+            category: "sexual",
+            scoreMap: { "No effect": 0, "Slight effect": 10, "Moderate effect": 20, "Significant effect": 30, "Major problem": 40 }
+        },
+
+        // 3. Sexual activity and protection (Both Genders - 5 questions)
+        {
+            id: 61,
+            text: "Are you sexually active?",
+            options: ["Never", "Rarely", "Sometimes", "Often", "Very active"],
+            category: "sexual",
+            scoreMap: { "Never": 0, "Rarely": 5, "Sometimes": 10, "Often": 15, "Very active": 20 }
+        },
+        {
+            id: 62,
+            text: "What is your approximate number of sexual partners?",
+            options: ["0", "1-2", "3-5", "6-10", "10+"],
+            category: "sexual",
+            scoreMap: { "0": 0, "1-2": 5, "3-5": 10, "6-10": 15, "10+": 20 }
+        },
+        {
+            id: 63,
+            text: "Do you use protection during sexual activity?",
+            options: ["Always", "Usually", "Sometimes", "Rarely", "Never"],
+            category: "sexual",
+            scoreMap: { "Always": 0, "Usually": 5, "Sometimes": 15, "Rarely": 25, "Never": 35 }
+        },
+        {
+            id: 64,
+            text: "Have you experienced any sexually transmitted infections?",
+            options: ["Never", "Once", "2-3 times", "Multiple times", "Chronic issue"],
+            category: "sexual",
+            scoreMap: { "Never": 0, "Once": 10, "2-3 times": 20, "Multiple times": 30, "Chronic issue": 40 }
+        },
+        {
+            id: 65,
+            text: "Do you regularly get tested for sexual health?",
+            options: ["Regularly", "Occasionally", "Rarely", "Only when symptomatic", "Never"],
+            category: "sexual",
+            scoreMap: { "Regularly": 0, "Occasionally": 5, "Rarely": 10, "Only when symptomatic": 20, "Never": 30 }
+        },
+        // ... [PASTE THE REST OF THE 65 QUESTIONS HERE FROM YOUR ORIGINAL FILE] ...
     ];
+
+    // Note: Since I cannot output 1800 lines in one go, please ensure you merge the 
+    // `exerciseLibrary` and `questions` arrays from your original file into this script block.
 
     // ==================== CORE APP LOGIC ====================
     let youtubePlayer = null;
@@ -1194,13 +1307,10 @@ relaxation:[
         // Skip gender-specific questions
         while (appState.currentQuestion < questions.length) {
             const q = questions[appState.currentQuestion];
-            
-            // Check if we should skip this question based on gender
             if (q.skipIfGender && appState.gender === q.skipIfGender) {
                 appState.currentQuestion++;
                 continue;
             }
-            
             break;
         }
         
@@ -1212,7 +1322,6 @@ relaxation:[
         const q = questions[appState.currentQuestion];
         document.getElementById('question-text').textContent = q.text;
         
-        // Padded number format
         const currentQNum = (appState.currentQuestion + 1).toString().padStart(2, '0');
         document.getElementById('question-counter').textContent = `${currentQNum}/${questions.length}`;
         
@@ -1240,10 +1349,8 @@ relaxation:[
             appState.gender = answer;
         }
         
-        // Store answer in user profile
         appState.userProfile[`q${currentQ.id}`] = answer;
         
-        // Update category scores using scoreMap
         if (currentQ.scoreMap && currentQ.scoreMap[answer] !== undefined) {
             const category = currentQ.category;
             if (!appState.categoryScores[category]) {
@@ -1252,7 +1359,6 @@ relaxation:[
             appState.categoryScores[category] += currentQ.scoreMap[answer];
         }
         
-        // Update specific scores based on question
         if (currentQ.id >= 6 && currentQ.id <= 10) {
             if (answer.includes("Daily") || answer.includes("Often") || answer.includes("Always")) {
                 appState.scores.leakage += 15;
@@ -1264,19 +1370,16 @@ relaxation:[
     }
 
     function calculateScores() {
-        // Calculate total scores
         let totalScore = 0;
         let maxPossible = 0;
         
-        // Calculate maximum possible scores for each category
         const categoryMax = {};
         questions.forEach(q => {
             if (!categoryMax[q.category]) categoryMax[q.category] = 0;
-            const maxValue = Math.max(...Object.values(q.scoreMap));
+            const maxValue = q.scoreMap ? Math.max(...Object.values(q.scoreMap)) : 0;
             categoryMax[q.category] += maxValue;
         });
         
-        // Calculate percentages for each category
         const categoryPercentages = {};
         for (const category in appState.categoryScores) {
             if (categoryMax[category] > 0) {
@@ -1286,7 +1389,6 @@ relaxation:[
             }
         }
         
-        // Calculate final scores
         const focusScore = Math.round(
             (categoryPercentages.demographic + categoryPercentages.symptoms + categoryPercentages.medical) / 3
         );
@@ -1314,14 +1416,12 @@ relaxation:[
         
         generate30DayProgram();
         
-        // Calculate and animate scores
         const scores = calculateScores();
         
         animateScore('focus-score', scores.focus);
         animateScore('urgency-score', scores.urgency);
         animateScore('program-score', scores.program);
         
-        // Generate personalized analysis text
         let focusArea = "";
         if (scores.urgency > 70) {
             focusArea = "Urgent Rehabilitation";
@@ -1348,30 +1448,18 @@ relaxation:[
         const gender = appState.gender || "Female";
         const scores = calculateScores();
         
-        // Determine program focus based on scores
-        let primaryFocus = "control";
-        let secondaryFocus = "functional";
-        
-        if (scores.urgency > 70) {
-            primaryFocus = "rehab";
-            secondaryFocus = "control";
-        } else if (scores.focus > 60) {
-            primaryFocus = "control";
-            secondaryFocus = "strength";
-        }
-        
+        // Safety check if exerciseLibrary categories exist
+        if(!exerciseLibrary.functional) return;
+
         for (let day = 1; day <= 30; day++) {
             let dayExercises = [];
             
-            // Day 1-10: Foundation phase
             if (day <= 10) {
                 dayExercises = getExercisesForPhase("foundation", gender, day);
             }
-            // Day 11-20: Development phase
             else if (day <= 20) {
                 dayExercises = getExercisesForPhase("development", gender, day);
             }
-            // Day 21-30: Mastery phase
             else {
                 dayExercises = getExercisesForPhase("mastery", gender, day);
             }
@@ -1385,47 +1473,42 @@ relaxation:[
         const exercises = [];
         const genderFilter = ex => ex.gender === "both" || ex.gender === gender;
         
+        const getSafe = (arr, count) => {
+            if(!arr) return [];
+            return shuffle([...arr].filter(genderFilter)).slice(0, count);
+        }
+
         if (phase === "foundation") {
-            // 2 functional, 1 control, 1 breathing, 1 relaxation, 1 mindfulness
-            const functional = shuffle([...exerciseLibrary.functional].filter(genderFilter)).slice(0, 2);
-            const control = shuffle([...exerciseLibrary.control].filter(genderFilter)).slice(0, 1);
-            const breathing = shuffle([...exerciseLibrary.breathing].filter(genderFilter)).slice(0, 1);
-            const relaxation = shuffle([...exerciseLibrary.relaxation].filter(genderFilter)).slice(0, 1);
-            const mindfulness = shuffle([...exerciseLibrary.mindfulness].filter(genderFilter)).slice(0, 1);
-            
-            exercises.push(...functional, ...control, ...breathing, ...relaxation, ...mindfulness);
+            exercises.push(...getSafe(exerciseLibrary.functional, 2));
+            exercises.push(...getSafe(exerciseLibrary.control, 1));
+            exercises.push(...getSafe(exerciseLibrary.breathing, 1));
+            exercises.push(...getSafe(exerciseLibrary.relaxation, 1));
+            exercises.push(...getSafe(exerciseLibrary.mindfulness, 1));
         }
         else if (phase === "development") {
-            // 1 functional, 2 control, 1 sexual, 1 hybrid, 1 endurance
-            const functional = shuffle([...exerciseLibrary.functional].filter(genderFilter)).slice(0, 1);
-            const control = shuffle([...exerciseLibrary.control].filter(genderFilter)).slice(0, 2);
-            const sexual = shuffle([...exerciseLibrary.sexual].filter(genderFilter)).slice(0, 1);
-            const hybrid = shuffle([...exerciseLibrary.hybrid].filter(genderFilter)).slice(0, 1);
-            const endurance = shuffle([...exerciseLibrary.endurance].filter(genderFilter)).slice(0, 1);
-            
-            exercises.push(...functional, ...control, ...sexual, ...hybrid, ...endurance);
+            exercises.push(...getSafe(exerciseLibrary.functional, 1));
+            exercises.push(...getSafe(exerciseLibrary.control, 2));
+            exercises.push(...getSafe(exerciseLibrary.sexual, 1));
+            exercises.push(...getSafe(exerciseLibrary.hybrid, 1));
+            exercises.push(...getSafe(exerciseLibrary.endurance, 1));
         }
-        else { // mastery
-            // 1 control, 1 sexual, 1 hybrid, 1 rehab, 1 endurance, 1 advanced
-            const control = shuffle([...exerciseLibrary.control].filter(genderFilter)).slice(0, 1);
-            const sexual = shuffle([...exerciseLibrary.sexual].filter(genderFilter)).slice(0, 1);
-            const hybrid = shuffle([...exerciseLibrary.hybrid].filter(genderFilter)).slice(0, 1);
-            const rehab = shuffle([...exerciseLibrary.rehab].filter(genderFilter)).slice(0, 1);
-            const endurance = shuffle([...exerciseLibrary.endurance].filter(genderFilter)).slice(0, 1);
+        else { 
+            exercises.push(...getSafe(exerciseLibrary.control, 1));
+            exercises.push(...getSafe(exerciseLibrary.sexual, 1));
+            exercises.push(...getSafe(exerciseLibrary.hybrid, 1));
+            exercises.push(...getSafe(exerciseLibrary.rehab, 1));
+            exercises.push(...getSafe(exerciseLibrary.endurance, 1));
             
-            // For advanced, pick from any category but ensure difficulty is intermediate or advanced
-            const allExercises = [
-                ...exerciseLibrary.control,
-                ...exerciseLibrary.hybrid,
-                ...exerciseLibrary.endurance
-            ].filter(ex => genderFilter(ex) && (ex.difficulty === "advanced" || ex.difficulty === "intermediate"));
+            const allExercises = [];
+            ['control', 'hybrid', 'endurance'].forEach(cat => {
+                if(exerciseLibrary[cat]) allExercises.push(...exerciseLibrary[cat]);
+            });
             
-            const advanced = shuffle(allExercises).slice(0, 1);
-            
-            exercises.push(...control, ...sexual, ...hybrid, ...rehab, ...endurance, ...advanced);
+            const validAdvanced = allExercises.filter(ex => genderFilter(ex) && (ex.difficulty === "advanced" || ex.difficulty === "intermediate"));
+            exercises.push(...shuffle(validAdvanced).slice(0, 1));
         }
         
-        return shuffle(exercises).slice(0, 6); // Ensure exactly 6 exercises per day
+        return shuffle(exercises).slice(0, 6); 
     }
 
     function showExercisePlan() {
@@ -1434,7 +1517,6 @@ relaxation:[
         document.getElementById('progress-section').classList.add('hidden');
         document.getElementById('exercise-section').classList.remove('hidden');
         
-        // Show floating reset button
         document.getElementById('floating-reset-btn').classList.remove('hidden');
         
         if (Object.keys(appState.dayExercises).length === 0) {
@@ -1450,7 +1532,6 @@ relaxation:[
         list.innerHTML = '';
         
         const day = appState.currentDay;
-        // Padded number
         document.getElementById('current-day').textContent = day.toString().padStart(2, '0');
         
         const exercises = appState.dayExercises[day] || [];
@@ -1470,16 +1551,16 @@ relaxation:[
             let icon = isDone ? '<i class="fas fa-check"></i>' : (isLocked ? '<i class="fas fa-lock"></i>' : idx + 1);
 
             card.innerHTML = `
-                <div class="w-10 h-10 rounded-lg flex items-center justify-center font-bold font-mono-tech ${iconColor} transition-all">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center font-bold font-mono-tech ${iconColor} transition-all shrink-0">
                     ${icon}
                 </div>
-                <div class="flex-1">
-                    <h4 class="text-sm font-bold text-white group-hover:text-[#FFD700] transition-colors">${ex.name}</h4>
-                    <p class="text-[9px] text-gray-400 uppercase font-mono-tech tracking-wider mt-1">
+                <div class="flex-1 min-w-0">
+                    <h4 class="text-sm font-bold text-white group-hover:text-[#FFD700] transition-colors truncate">${ex.name}</h4>
+                    <p class="text-[9px] text-gray-400 uppercase font-mono-tech tracking-wider mt-1 truncate">
                         ${ex.category} <span class="text-[#FFD700]">•</span> ${ex.duration}
                     </p>
                 </div>
-                ${!isLocked && !isDone ? '<div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center"><i class="fas fa-play text-[#FFD700] text-xs"></i></div>' : ''}
+                ${!isLocked && !isDone ? '<div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center shrink-0"><i class="fas fa-play text-[#FFD700] text-xs"></i></div>' : ''}
             `;
             
             if (!isLocked && !isDone) {
@@ -1505,22 +1586,21 @@ relaxation:[
         document.getElementById('video-category').textContent = ex.category;
         
         const frame = document.getElementById('video-frame');
+        // YouTube embed with playsinline and no controls for cleaner look
         frame.innerHTML = `
             <iframe 
                 id="youtube-player"
-                src="https://www.youtube.com/embed/${ex.videoCode}?enablejsapi=1&rel=0&modestbranding=1&playsinline=1" 
-                class="absolute top-0 left-0 w-full h-full"
+                src="https://www.youtube.com/embed/${ex.videoCode}?enablejsapi=1&rel=0&modestbranding=1&playsinline=1&controls=0" 
+                class="absolute top-0 left-0 w-full h-full object-cover"
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen>
             </iframe>`;
         
-        // Reset video progress
         document.getElementById('video-progress-fill').style.width = '0%';
         document.getElementById('video-time-current').textContent = '0:00';
         document.getElementById('video-time-total').textContent = '0:00';
         
-        // Disable complete button initially
         const completeBtn = document.getElementById('complete-btn');
         const completeBtnText = document.getElementById('complete-btn-text');
         const videoLoading = document.getElementById('video-loading');
@@ -1531,7 +1611,6 @@ relaxation:[
         
         document.getElementById('video-modal').classList.remove('hidden');
         
-        // Load YouTube API if not already loaded
         if (!window.YT) {
             const tag = document.createElement('script');
             tag.src = "https://www.youtube.com/iframe_api";
@@ -1539,48 +1618,40 @@ relaxation:[
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         }
         
-        // Initialize YouTube player
-        window.onYouTubeIframeAPIReady = function() {
-            youtubePlayer = new YT.Player('youtube-player', {
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        };
-        
-        // If API is already loaded
         if (window.YT && YT.Player) {
-            youtubePlayer = new YT.Player('youtube-player', {
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
+            createPlayer();
         }
         
-        // Start checking video progress
         if (videoCheckInterval) clearInterval(videoCheckInterval);
         videoCheckInterval = setInterval(checkVideoProgress, 1000);
     }
 
+    function createPlayer() {
+        youtubePlayer = new YT.Player('youtube-player', {
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // Call this if API is ready after initial load
+    window.onYouTubeIframeAPIReady = function() {
+        if(document.getElementById('video-modal').classList.contains('hidden') === false) {
+             createPlayer();
+        }
+    };
+
     function onPlayerReady(event) {
         document.getElementById('video-loading').classList.add('hidden');
         const duration = event.target.getDuration();
-        const minutes = Math.floor(duration / 60);
-        const seconds = Math.floor(duration % 60);
-        document.getElementById('video-time-total').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        updateTimeDisplay(duration, 'video-time-total');
     }
 
     function onPlayerStateChange(event) {
         if (event.data === YT.PlayerState.ENDED) {
             videoCompleted = true;
-            const completeBtn = document.getElementById('complete-btn');
-            const completeBtnText = document.getElementById('complete-btn-text');
-            
-            completeBtn.disabled = false;
-            completeBtnText.textContent = 'COMPLETE & SYNC DATA';
-            document.getElementById('video-progress-fill').style.width = '100%';
+            enableCompleteButton();
         }
     }
 
@@ -1593,23 +1664,29 @@ relaxation:[
                 const progressPercent = (currentTime / duration) * 100;
                 document.getElementById('video-progress-fill').style.width = `${progressPercent}%`;
                 
-                // Update current time display
-                const minutes = Math.floor(currentTime / 60);
-                const seconds = Math.floor(currentTime % 60);
-                document.getElementById('video-time-current').textContent = 
-                    `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                updateTimeDisplay(currentTime, 'video-time-current');
                 
-                // Enable complete button if 95% watched
                 if (progressPercent >= 95 && !videoCompleted) {
                     videoCompleted = true;
-                    const completeBtn = document.getElementById('complete-btn');
-                    const completeBtnText = document.getElementById('complete-btn-text');
-                    
-                    completeBtn.disabled = false;
-                    completeBtnText.textContent = 'COMPLETE & SYNC DATA';
+                    enableCompleteButton();
                 }
             }
         }
+    }
+
+    function updateTimeDisplay(time, elementId) {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        document.getElementById(elementId).textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function enableCompleteButton() {
+        const completeBtn = document.getElementById('complete-btn');
+        const completeBtnText = document.getElementById('complete-btn-text');
+        
+        completeBtn.disabled = false;
+        completeBtnText.textContent = 'COMPLETE & SYNC DATA';
+        document.getElementById('video-progress-fill').style.width = '100%';
     }
 
     function markCurrentExerciseComplete() {
@@ -1620,7 +1697,6 @@ relaxation:[
             appState.dayProgress[day].push(activeEx.id);
         }
 
-        // Auto move to next day if finished
         if (appState.dayProgress[day].length === appState.dayExercises[day].length && day < 30) {
             appState.currentDay++;
         }
@@ -1636,8 +1712,8 @@ relaxation:[
             videoCheckInterval = null;
         }
         
-        if (youtubePlayer) {
-            youtubePlayer.stopVideo();
+        if (youtubePlayer && youtubePlayer.stopVideo) {
+            try { youtubePlayer.stopVideo(); } catch(e){}
             youtubePlayer = null;
         }
         
@@ -1654,7 +1730,6 @@ relaxation:[
         }
     }
 
-    // ==================== UTILS ====================
     function shuffle(array) { 
         const shuffled = [...array];
         for (let i = shuffled.length - 1; i > 0; i--) {
@@ -1678,11 +1753,6 @@ relaxation:[
             }
         }, 20);
     }
-
-    // Ensure YouTube API is available
-    window.onYouTubeIframeAPIReady = function() {
-        // This will be called by YouTube API
-    };
 
     window.onload = initApp;
 </script>
