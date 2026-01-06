@@ -395,6 +395,21 @@
             color: rgba(255, 255, 255, 0.3);
             cursor: not-allowed;
         }
+
+        /* Video Modal Button Layout */
+        .video-top-buttons {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .video-bottom-button {
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.8);
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen">
@@ -595,24 +610,32 @@
         </div>
     </div>
 
+    <!-- UPDATED VIDEO MODAL WITH BUTTONS ABOVE AND BELOW -->
     <div id="video-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
         <div class="absolute top-0 left-0 right-0 bottom-0 bg-black/95 backdrop-blur-xl transition-opacity duration-300" 
              style="top: calc(var(--header-h) + 25px + var(--safe-top)); bottom: calc(var(--footer-h) + 20px + var(--safe-bottom));"
              onclick="closeVideoModal()"></div>
         
         <div class="video-modal-container z-10 relative animate-fade-in max-w-md">
-            
-            <div class="video-container">
-                <button onclick="closeVideoModal()" class="absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center bg-black/50 rounded-full text-white/70 hover:text-white hover:bg-black/80 transition-all border border-white/10">
+            <!-- TOP BUTTONS ROW (Above video) -->
+            <div class="video-top-buttons">
+                <button id="repeat-btn" onclick="repeatVideo()" 
+                        class="flex-1 btn-tech py-3 rounded-xl text-xs font-bold font-cyber disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+                    <i class="fas fa-redo mr-2"></i>
+                    <span>REPEAT VIDEO</span>
+                </button>
+                <button onclick="closeVideoModal()" 
+                        class="w-12 h-12 flex items-center justify-center bg-white/5 rounded-xl border border-white/10 text-white/70 hover:text-white hover:bg-white/10 transition-all">
                     <i class="fas fa-times"></i>
                 </button>
-
+            </div>
+            
+            <div class="video-container">
                 <div class="video-player-wrapper" id="video-frame">
                     <!-- Dailymotion iframe will be inserted here -->
                 </div>
                 
                 <div class="video-info-area custom-scrollbar">
-                    
                     <div class="video-progress h-1 bg-white/10 rounded-full mb-3 overflow-hidden shrink-0">
                         <div id="video-progress-fill" class="h-full bg-[#FFD700] w-0 transition-all duration-300 shadow-[0_0_10px_#FFD700]"></div>
                     </div>
@@ -639,19 +662,38 @@
                             <span id="video-category" class="text-[9px] uppercase font-bold truncate"></span>
                         </div>
                     </div>
-                    
-                    <div class="flex gap-3 mb-4">
-                        <button id="repeat-btn" onclick="repeatVideo()" class="flex-1 btn-tech py-3 rounded-xl text-xs font-bold disabled:opacity-50 disabled:cursor-not-allowed transition-all shrink-0">
-                            <i class="fas fa-redo mr-2"></i>
-                            <span>REPEAT VIDEO</span>
-                        </button>
-                        <button id="complete-btn" onclick="markCurrentExerciseComplete()" class="flex-1 btn-primary-glow py-3 rounded-xl text-xs font-bold disabled:opacity-50 disabled:cursor-not-allowed transition-all shrink-0">
-                            <i class="fas fa-circle-notch fa-spin mr-2 hidden" id="video-loading"></i>
-                            <span id="complete-btn-text">IN PROGRESS...</span>
-                        </button>
-                    </div>
                 </div>
             </div>
+            
+            <!-- BOTTOM BUTTON ROW (Below video) -->
+            <div class="video-bottom-button">
+                <button id="complete-btn" onclick="markCurrentExerciseComplete()" 
+                        class="w-full btn-primary-glow py-4 rounded-xl text-sm font-bold font-cyber disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+                    <i class="fas fa-circle-notch fa-spin mr-2 hidden" id="video-loading"></i>
+                    <span id="complete-btn-text">PROTOCOL IN PROGRESS...</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW: Day Library Exercise List Modal -->
+    <div id="day-library-exercises-modal" class="overlay-modal hidden">
+        <div class="relative bg-[#0a0a0c] border border-[#FFD700]/30 p-6 rounded-2xl max-w-md w-full max-h-[80vh] overflow-hidden flex flex-col shadow-[0_0_80px_rgba(255,215,0,0.15)]">
+            <div class="flex justify-between items-center mb-6 pb-4 border-b border-white/10">
+                <div>
+                    <h3 class="text-xl font-bold text-white font-cyber tracking-wide">DAY <span id="library-day-number">1</span> EXERCISES</h3>
+                    <p class="text-xs text-gray-400 font-mono-tech mt-1" id="library-progress-status">0/0 completed</p>
+                </div>
+                <button onclick="closeDayLibraryExercisesModal()" class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-xl border border-white/10 text-white/70 hover:text-white hover:bg-white/10 transition-all">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto pr-2 space-y-3" id="day-exercises-list">
+                <!-- Exercises will be populated here -->
+            </div>
+            
+            <button onclick="closeDayLibraryExercisesModal()" class="mt-6 w-full btn-tech py-4 rounded-xl text-xs font-bold font-cyber text-white/40 hover:text-white uppercase tracking-widest">Close</button>
         </div>
     </div>
 
@@ -1634,6 +1676,66 @@
         document.querySelectorAll('.module-popup').forEach(el => el.classList.remove('active'));
     }
 
+    // NEW: Function to open day library exercises modal
+    function openDayLibraryExercisesModal(day) {
+        if (day > appState.currentDay) {
+            alert("Complete Day " + appState.currentDay + " first!");
+            return;
+        }
+        
+        const dayExercises = appState.dayExercises[day] || [];
+        if (dayExercises.length === 0) {
+            alert("No exercises generated for Day " + day + " yet.");
+            return;
+        }
+        
+        const done = appState.dayProgress[day] || [];
+        const completedCount = done.length;
+        const totalCount = dayExercises.length;
+        
+        // Update modal title and progress
+        document.getElementById('library-day-number').textContent = day;
+        document.getElementById('library-progress-status').textContent = 
+            `${completedCount}/${totalCount} completed`;
+        
+        // Generate exercise list
+        const exercisesList = document.getElementById('day-exercises-list');
+        let html = '';
+        
+        dayExercises.forEach((ex, idx) => {
+            const isDone = done.includes(ex.id);
+            
+            html += `
+                <div class="exercise-card p-4 rounded-2xl flex items-center gap-4 ${isDone ? 'completed' : ''}">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold font-mono-tech text-base shadow-inner ${isDone ? 'bg-[#10b981] text-black shadow-none' : 'bg-white/5 text-white'}">
+                        ${isDone ? '<i class="fas fa-check"></i>' : idx+1}
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-white font-cyber tracking-wide mb-1">${ex.name}</h4>
+                        <div class="flex gap-3 text-[9px] text-gray-400 font-mono-tech">
+                            <span class="bg-white/5 px-2 py-0.5 rounded border border-white/5"><i class="far fa-clock mr-1"></i>${ex.duration}</span>
+                            <span class="bg-white/5 px-2 py-0.5 rounded border border-white/5"><i class="fas fa-repeat mr-1"></i>${ex.reps}</span>
+                        </div>
+                    </div>
+                    ${isDone ? 
+                        '<div class="w-8 h-8 rounded-full bg-[#10b981]/20 flex items-center justify-center text-[#10b981]"><i class="fas fa-check text-xs"></i></div>' : 
+                        '<div class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/40"><i class="fas fa-clock text-xs"></i></div>'
+                    }
+                </div>
+            `;
+        });
+        
+        exercisesList.innerHTML = html;
+        
+        // Show modal
+        document.getElementById('day-library-exercises-modal').classList.remove('hidden');
+    }
+
+    // NEW: Function to close day library exercises modal
+    function closeDayLibraryExercisesModal() {
+        document.getElementById('day-library-exercises-modal').classList.add('hidden');
+    }
+
     function updateProfileUI() {
         if(appState.name) {
             document.getElementById('profile-name').textContent = appState.name;
@@ -1712,56 +1814,10 @@
             if (isCurrent) btnClass += ' current';
             if (isLocked) btnClass += ' locked';
             
-            html += `<button class="${btnClass}" ${!isLocked ? `onclick="openDayLibrary(${day})"` : ''}>${day}</button>`;
+            html += `<button class="${btnClass}" ${!isLocked ? `onclick="openDayLibraryExercisesModal(${day})"` : ''}>${day}</button>`;
         }
         
         grid.innerHTML = html;
-    }
-
-    function openDayLibrary(day) {
-        if (day > appState.currentDay) return;
-        
-        const dayExercises = appState.dayExercises[day] || [];
-        if (dayExercises.length === 0) return;
-        
-        let html = `
-            <div class="p-6 h-full flex flex-col">
-                <h2 class="text-2xl font-cyber font-bold text-white mb-6 border-b border-white/10 pb-4 flex items-center justify-between">
-                    <span>DAY ${day} LIBRARY</span>
-                    <span class="text-xs font-mono-tech text-[#FFD700]">${appState.dayProgress[day]?.length || 0}/${dayExercises.length} COMPLETED</span>
-                </h2>
-                <div class="space-y-4 overflow-y-auto pr-2 flex-1">
-        `;
-        
-        dayExercises.forEach((ex, idx) => {
-            const isDone = appState.dayProgress[day]?.includes(ex.id) || false;
-            
-            html += `
-                <div class="exercise-card p-4 rounded-2xl flex items-center gap-4 ${isDone ? 'completed' : ''}" onclick="playVideoFromLibrary('${ex.id}', ${day})">
-                    <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold font-mono-tech text-base shadow-inner ${isDone ? 'bg-[#10b981] text-black shadow-none' : 'bg-white/5 text-white'}">
-                        ${isDone ? '<i class="fas fa-check"></i>' : idx+1}
-                    </div>
-                    <div class="flex-1">
-                        <h4 class="text-sm font-bold text-white font-cyber tracking-wide mb-1">${ex.name}</h4>
-                        <div class="flex gap-3 text-[9px] text-gray-400 font-mono-tech">
-                            <span class="bg-white/5 px-2 py-0.5 rounded border border-white/5"><i class="far fa-clock mr-1"></i>${ex.duration}</span>
-                            <span class="bg-white/5 px-2 py-0.5 rounded border border-white/5"><i class="fas fa-repeat mr-1"></i>${ex.reps}</span>
-                        </div>
-                    </div>
-                    <div class="w-8 h-8 rounded-full border border-[#FFD700]/50 flex items-center justify-center text-[#FFD700]">
-                        <i class="fas fa-play text-xs ml-0.5"></i>
-                    </div>
-                </div>
-            `;
-        });
-        
-        html += `
-                </div>
-                <button onclick="closeAllModules()" class="mt-6 w-full btn-tech py-4 rounded-xl text-xs font-bold font-cyber text-white/40 hover:text-white uppercase tracking-widest">Close Library</button>
-            </div>
-        `;
-        
-        document.getElementById('module-progress').innerHTML = html;
     }
 
     function startQuiz() {
@@ -2055,6 +2111,9 @@
     let videoStarted = false;
     let videoProgress = 0;
     let videoCheckInterval = null;
+    let repeatButtonEnabled = false;
+    let progress95Reached = false;
+    let repeatButtonTimer = null;
     
     function playVideo(exId, day = appState.currentDay) {
         const ex = appState.dayExercises[day].find(e => e.id === exId);
@@ -2065,6 +2124,14 @@
         activeDay = day;
         videoStarted = false;
         videoProgress = 0;
+        progress95Reached = false;
+        repeatButtonEnabled = false;
+        
+        // Clear any existing timers
+        if (repeatButtonTimer) {
+            clearTimeout(repeatButtonTimer);
+            repeatButtonTimer = null;
+        }
         
         document.getElementById('video-title').textContent = ex.name;
         document.getElementById('video-description').textContent = ex.description || "Execute controlled contractions. Focus on breath work.";
@@ -2104,10 +2171,6 @@
         
         document.getElementById('video-modal').classList.remove('hidden');
     }
-    
-    function playVideoFromLibrary(exId, day) {
-        playVideo(exId, day);
-    }
 
     function loadDailymotionVideo(videoCode) {
         const container = document.getElementById('dailymotion-container');
@@ -2117,7 +2180,7 @@
         
         container.innerHTML = `
             <iframe 
-                src="https://www.dailymotion.com/embed/video/${videoCode}?autoplay=1&controls=1&ui=start-screen-info-logo&ui-highlight=000000&ui-start-screen-info=true"
+                src="https://www.dailymotion.com/embed/video/${videoCode}?autoplay=1&controls=1&ui=start-screen-info-logo&ui-highlight=000000&ui-start-screen-info=true&queue-enable=0&endscreen-enable=0"
                 frameborder="0" 
                 allow="autoplay; fullscreen; picture-in-picture" 
                 allowfullscreen
@@ -2126,9 +2189,10 @@
         `;
         
         document.getElementById('video-loading').classList.add('hidden');
-        document.getElementById('complete-btn').disabled = false;
-        document.getElementById('complete-btn-text').textContent = 'COMPLETE & SYNC DATA';
-        document.getElementById('repeat-btn').disabled = false;
+        document.getElementById('complete-btn').disabled = true; // Still disabled until 95%
+        document.getElementById('complete-btn-text').textContent = 'PROTOCOL IN PROGRESS...';
+        document.getElementById('repeat-btn').disabled = true; // Disabled initially
+        
         videoStarted = true;
         
         // Start checking video progress
@@ -2137,11 +2201,11 @@
     }
 
     function checkVideoProgress() {
-        // For Dailymotion, we'll simulate progress since we can't access the player API directly
-        // In a real implementation, you would use Dailymotion's JavaScript API
+        // Simulate progress since we can't access Dailymotion API directly
         if (videoProgress < 100) {
-            videoProgress += 0.5; // Simulate progress
-            document.getElementById('video-progress-fill').style.width = `${videoProgress}%`;
+            videoProgress += 0.5; // Simulate 0.5% progress per second (200 seconds total for 100%)
+            const progressFill = document.getElementById('video-progress-fill');
+            progressFill.style.width = `${videoProgress}%`;
             
             // Format time display (simulated)
             const totalSeconds = 180; // Assume 3 minute videos
@@ -2149,27 +2213,66 @@
             document.getElementById('video-time-current').textContent = formatTime(currentSeconds);
             document.getElementById('video-time-total').textContent = formatTime(totalSeconds);
             
-            // Auto-enable complete button at 95% progress
-            if (videoProgress >= 95 && !document.getElementById('complete-btn').disabled) {
-                document.getElementById('complete-btn').disabled = false;
-                document.getElementById('complete-btn-text').textContent = 'COMPLETE & SYNC DATA';
+            // Enable complete button at 95% progress
+            if (videoProgress >= 95 && !progress95Reached) {
+                progress95Reached = true;
+                const completeBtn = document.getElementById('complete-btn');
+                const completeBtnText = document.getElementById('complete-btn-text');
+                
+                completeBtn.disabled = false;
+                completeBtnText.textContent = 'COMPLETE & SYNC DATA';
+                
+                // Enable repeat button after 2 seconds
+                repeatButtonTimer = setTimeout(() => {
+                    const repeatBtn = document.getElementById('repeat-btn');
+                    repeatBtn.disabled = false;
+                    repeatButtonEnabled = true;
+                }, 2000); // 2 second delay
             }
         } else if (videoProgress >= 100) {
             clearInterval(videoCheckInterval);
-            document.getElementById('complete-btn').disabled = false;
-            document.getElementById('complete-btn-text').textContent = 'COMPLETE & SYNC DATA';
+            
+            const completeBtn = document.getElementById('complete-btn');
+            const completeBtnText = document.getElementById('complete-btn-text');
+            
+            completeBtn.disabled = false;
+            completeBtnText.textContent = 'COMPLETE & SYNC DATA';
+            
+            // Ensure repeat button is enabled
+            const repeatBtn = document.getElementById('repeat-btn');
+            if (!repeatButtonEnabled) {
+                repeatBtn.disabled = false;
+                repeatButtonEnabled = true;
+            }
         }
     }
 
     function repeatVideo() {
-        // For Dailymotion, we'll reload the iframe
+        if (!repeatButtonEnabled) return;
+        
+        // For Dailymotion, reload the iframe
         const iframe = document.getElementById('dailymotion-iframe');
         if (iframe) {
             const src = iframe.src;
-            iframe.src = src.replace(/\?.*$/, '') + '?autoplay=1';
+            iframe.src = src.replace(/\?.*$/, '') + '?autoplay=1&queue-enable=0&endscreen-enable=0';
         }
+        
+        // Reset progress
         videoProgress = 0;
+        progress95Reached = false;
         document.getElementById('video-progress-fill').style.width = '0%';
+        
+        // Disable buttons again until progress reaches 95%
+        document.getElementById('complete-btn').disabled = true;
+        document.getElementById('complete-btn-text').textContent = 'PROTOCOL IN PROGRESS...';
+        document.getElementById('repeat-btn').disabled = true;
+        repeatButtonEnabled = false;
+        
+        // Clear any existing timer
+        if (repeatButtonTimer) {
+            clearTimeout(repeatButtonTimer);
+            repeatButtonTimer = null;
+        }
     }
 
     function formatTime(time) {
@@ -2179,7 +2282,7 @@
     }
 
     function markCurrentExerciseComplete() {
-        if (!activeEx || !videoStarted) return;
+        if (!activeEx || !videoStarted || !progress95Reached) return;
         
         const day = activeDay || appState.currentDay;
         if (!appState.dayProgress[day].includes(activeEx.id)) {
@@ -2197,6 +2300,11 @@
             videoCheckInterval = null;
         }
         
+        if (repeatButtonTimer) {
+            clearTimeout(repeatButtonTimer);
+            repeatButtonTimer = null;
+        }
+        
         const iframe = document.getElementById('dailymotion-iframe');
         if (iframe) {
             iframe.src = '';
@@ -2208,6 +2316,8 @@
         activeDay = null;
         videoStarted = false;
         videoProgress = 0;
+        progress95Reached = false;
+        repeatButtonEnabled = false;
         
         // Reset UI
         document.getElementById('complete-btn').disabled = true;
