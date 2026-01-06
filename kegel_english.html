@@ -335,50 +335,65 @@
             z-index: 10;
         }
 
-        .custom-video-player {
+        /* YouTube iframe styling */
+        .youtube-iframe-container {
             width: 100%;
             height: 100%;
-            background: #000;
             position: relative;
         }
 
-        /* Video controls */
-        .video-controls {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            padding: 10px;
-            display: flex;
-            align-items: center;
+        .youtube-iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+
+        /* Day library grid */
+        .day-library-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
             gap: 10px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 30;
+            margin-top: 20px;
         }
 
-        .custom-video-player:hover .video-controls {
-            opacity: 1;
-        }
-
-        .control-btn {
-            background: rgba(255, 215, 0, 0.2);
-            border: 1px solid rgba(255, 215, 0, 0.4);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        .day-library-btn {
+            aspect-ratio: 1;
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            background: rgba(255, 215, 0, 0.1);
+            color: white;
+            font-family: 'JetBrains Mono';
+            font-weight: bold;
+            font-size: 14px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
-        .control-btn:hover {
-            background: rgba(255, 215, 0, 0.4);
-            transform: scale(1.1);
+        .day-library-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: scale(1.05);
+        }
+
+        .day-library-btn.completed {
+            background: rgba(16, 185, 129, 0.3);
+            border-color: #10b981;
+        }
+
+        .day-library-btn.current {
+            background: rgba(255, 215, 0, 0.3);
+            border-color: #FFD700;
+            animation: subtlePulse 2s infinite;
+        }
+
+        .day-library-btn.locked {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.3);
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -502,10 +517,10 @@
         <div id="module-progress" class="module-popup">
             <div class="p-6 h-full flex flex-col">
                 <h2 class="text-2xl font-cyber font-bold text-white mb-8 border-b border-white/10 pb-4 flex items-center justify-between">
-                    <span>STATUS</span> <i class="fas fa-tasks text-[#FFD700] text-lg"></i>
+                    <span>DAY LIBRARY</span> <i class="fas fa-tasks text-[#FFD700] text-lg"></i>
                 </h2>
 
-                <div class="flex items-center gap-6 mb-10 bg-white/5 p-4 rounded-2xl border border-white/5">
+                <div class="flex items-center gap-6 mb-6 bg-white/5 p-4 rounded-2xl border border-white/5">
                     <div class="w-20 h-20 rounded-full flex items-center justify-center relative">
                          <svg class="absolute inset-0 w-full h-full transform -rotate-90 filter drop-shadow-[0_0_8px_rgba(255,215,0,0.3)]">
                              <circle cx="40" cy="40" r="36" stroke="rgba(255,255,255,0.05)" stroke-width="6" fill="transparent" />
@@ -516,6 +531,13 @@
                     <div>
                         <div class="text-[10px] text-gray-400 font-mono-tech uppercase mb-1 tracking-wider">Current Phase</div>
                         <div class="text-2xl font-bold font-cyber text-white tracking-wide" id="progress-phase">INITIATION</div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-xs font-bold text-[#FFD700] mb-3 font-cyber uppercase tracking-widest">Training Days</h3>
+                    <div class="day-library-grid" id="day-library-grid">
+                        <!-- Day buttons will be generated here -->
                     </div>
                 </div>
 
@@ -586,7 +608,7 @@
                 </button>
 
                 <div class="video-player-wrapper" id="video-frame">
-                    <!-- Custom video player will be inserted here -->
+                    <!-- YouTube iframe will be inserted here -->
                 </div>
                 
                 <div class="video-info-area custom-scrollbar">
@@ -618,10 +640,16 @@
                         </div>
                     </div>
                     
-                    <button id="complete-btn" onclick="markCurrentExerciseComplete()" class="w-full btn-primary-glow py-3 rounded-xl text-xs font-bold disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-700 disabled:text-gray-400 disabled:box-shadow-none transition-all shrink-0 mt-auto">
-                        <i class="fas fa-circle-notch fa-spin mr-2 hidden" id="video-loading"></i>
-                        <span id="complete-btn-text">INITIALIZING STREAM...</span>
-                    </button>
+                    <div class="flex gap-3 mb-4">
+                        <button id="repeat-btn" onclick="repeatVideo()" class="flex-1 btn-tech py-3 rounded-xl text-xs font-bold disabled:opacity-50 disabled:cursor-not-allowed transition-all shrink-0">
+                            <i class="fas fa-redo mr-2"></i>
+                            <span>REPEAT VIDEO</span>
+                        </button>
+                        <button id="complete-btn" onclick="markCurrentExerciseComplete()" class="flex-1 btn-primary-glow py-3 rounded-xl text-xs font-bold disabled:opacity-50 disabled:cursor-not-allowed transition-all shrink-0">
+                            <i class="fas fa-circle-notch fa-spin mr-2 hidden" id="video-loading"></i>
+                            <span id="complete-btn-text">IN PROGRESS...</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -647,220 +675,126 @@
     // ==================== OPTIMIZED EXERCISE LIBRARY (10 PER CATEGORY) ====================
     const exerciseLibrary = {
         foundational: [
-            { id:"F1",name:"Classic Hold Kegel",description:"Basic contraction hold for muscle identification",category:"foundational",subcategory:"slow",difficulty:"beginner",duration:"2:45",reps:"10 × 5s",videoCode:"foundational1",benefit:"Identifies pelvic floor muscles.",solution:"Builds awareness.",gender:"both",thumbnail:"F1"},
-            { id:"F2",name:"Timed Hold Progression",description:"Gradual increase in hold duration",category:"foundational",subcategory:"slow",difficulty:"beginner",duration:"3:10",reps:"8 progressions",videoCode:"foundational2",benefit:"Improves endurance safely.",solution:"Progressive overload.",gender:"both",thumbnail:"F2"},
-            { id:"F3",name:"Quick Flick Kegels",description:"Rapid short contractions",category:"foundational",subcategory:"fast",difficulty:"beginner",duration:"2:20",reps:"20 reps",videoCode:"foundational3",benefit:"Improves reaction time.",solution:"Trains fast-twitch fibers.",gender:"both",thumbnail:"F3"},
-            { id:"F4",name:"Pulse Kegels",description:"Rhythmic pulsing contractions",category:"foundational",subcategory:"fast",difficulty:"beginner",duration:"3:00",reps:"15 pulses",videoCode:"foundational4",benefit:"Improves tone.",solution:"Enhances circulation.",gender:"both",thumbnail:"F4"},
-            { id:"F5",name:"Micro Contractions",description:"Small precise engagements",category:"foundational",subcategory:"fast",difficulty:"beginner",duration:"2:50",reps:"25 reps",videoCode:"foundational5",benefit:"Improves precision.",solution:"Isolates fibers.",gender:"both",thumbnail:"F5"},
-            { id:"F6",name:"Long-Hold Static",description:"Extended static holds",category:"foundational",subcategory:"slow",difficulty:"intermediate",duration:"4:15",reps:"6 × 15s",videoCode:"foundational6",benefit:"Builds endurance.",solution:"Strengthens slow fibers.",gender:"both",thumbnail:"F6"},
-            { id:"F7",name:"Progressive Hold 3-5-10",description:"Step-wise hold increase",category:"foundational",subcategory:"slow",difficulty:"beginner",duration:"3:30",reps:"3 sets",videoCode:"foundational7",benefit:"Structured progress.",solution:"Prevents plateau.",gender:"both",thumbnail:"F7"},
-            { id:"F8",name:"Rapid Fire Series",description:"Fast consecutive contractions",category:"foundational",subcategory:"fast",difficulty:"intermediate",duration:"2:55",reps:"30 reps",videoCode:"foundational8",benefit:"Improves speed.",solution:"Boosts neural drive.",gender:"both",thumbnail:"F8"},
-            { id:"F9",name:"Contraction Awareness",description:"Focus on muscle sensation",category:"foundational",subcategory:"slow",difficulty:"beginner",duration:"3:15",reps:"10 reps",videoCode:"foundational9",benefit:"Mind-muscle link.",solution:"Improves technique.",gender:"both",thumbnail:"F9"},
-            { id:"F10",name:"Basic Rhythm Training",description:"Consistent contraction rhythm",category:"foundational",subcategory:"fast",difficulty:"beginner",duration:"2:40",reps:"20 reps",videoCode:"foundational10",benefit:"Timing control.",solution:"Establishes rhythm.",gender:"both",thumbnail:"F10"}
+            { id:"F1",name:"Classic Hold Kegel",description:"Basic contraction hold for muscle identification",category:"foundational",subcategory:"slow",difficulty:"beginner",duration:"2:45",reps:"10 × 5s",videoCode:"2ACRqePb14o",benefit:"Identifies pelvic floor muscles.",solution:"Builds awareness.",gender:"both",thumbnail:"F1"},
+            { id:"F2",name:"Timed Hold Progression",description:"Gradual increase in hold duration",category:"foundational",subcategory:"slow",difficulty:"beginner",duration:"3:10",reps:"8 progressions",videoCode:"2ACRqePb14o",benefit:"Improves endurance safely.",solution:"Progressive overload.",gender:"both",thumbnail:"F2"},
+            { id:"F3",name:"Quick Flick Kegels",description:"Rapid short contractions",category:"foundational",subcategory:"fast",difficulty:"beginner",duration:"2:20",reps:"20 reps",videoCode:"2ACRqePb14o",benefit:"Improves reaction time.",solution:"Trains fast-twitch fibers.",gender:"both",thumbnail:"F3"},
+            { id:"F4",name:"Pulse Kegels",description:"Rhythmic pulsing contractions",category:"foundational",subcategory:"fast",difficulty:"beginner",duration:"3:00",reps:"15 pulses",videoCode:"2ACRqePb14o",benefit:"Improves tone.",solution:"Enhances circulation.",gender:"both",thumbnail:"F4"},
+            { id:"F5",name:"Micro Contractions",description:"Small precise engagements",category:"foundational",subcategory:"fast",difficulty:"beginner",duration:"2:50",reps:"25 reps",videoCode:"2ACRqePb14o",benefit:"Improves precision.",solution:"Isolates fibers.",gender:"both",thumbnail:"F5"},
+            { id:"F6",name:"Long-Hold Static",description:"Extended static holds",category:"foundational",subcategory:"slow",difficulty:"intermediate",duration:"4:15",reps:"6 × 15s",videoCode:"2ACRqePb14o",benefit:"Builds endurance.",solution:"Strengthens slow fibers.",gender:"both",thumbnail:"F6"},
+            { id:"F7",name:"Progressive Hold 3-5-10",description:"Step-wise hold increase",category:"foundational",subcategory:"slow",difficulty:"beginner",duration:"3:30",reps:"3 sets",videoCode:"2ACRqePb14o",benefit:"Structured progress.",solution:"Prevents plateau.",gender:"both",thumbnail:"F7"},
+            { id:"F8",name:"Rapid Fire Series",description:"Fast consecutive contractions",category:"foundational",subcategory:"fast",difficulty:"intermediate",duration:"2:55",reps:"30 reps",videoCode:"2ACRqePb14o",benefit:"Improves speed.",solution:"Boosts neural drive.",gender:"both",thumbnail:"F8"},
+            { id:"F9",name:"Contraction Awareness",description:"Focus on muscle sensation",category:"foundational",subcategory:"slow",difficulty:"beginner",duration:"3:15",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Mind-muscle link.",solution:"Improves technique.",gender:"both",thumbnail:"F9"},
+            { id:"F10",name:"Basic Rhythm Training",description:"Consistent contraction rhythm",category:"foundational",subcategory:"fast",difficulty:"beginner",duration:"2:40",reps:"20 reps",videoCode:"2ACRqePb14o",benefit:"Timing control.",solution:"Establishes rhythm.",gender:"both",thumbnail:"F10"}
         ],
 
         strength: [
-            { id:"S1",name:"Full Squeeze Max",description:"Maximum pelvic contraction hold",category:"strength",subcategory:"slow",difficulty:"intermediate",duration:"3:45",reps:"8 × 6s",videoCode:"strength1",benefit:"Builds maximum strength.",solution:"Activates full muscle fibers.",gender:"both",thumbnail:"S1"},
-            { id:"S2",name:"Peak Hold Challenge",description:"High intensity peak holds",category:"strength",subcategory:"slow",difficulty:"intermediate",duration:"4:20",reps:"6 × 10s",videoCode:"strength2",benefit:"Improves peak endurance.",solution:"Sustains max contraction.",gender:"both",thumbnail:"S2"},
-            { id:"S3",name:"Clench Release Power",description:"Explosive clench and release",category:"strength",subcategory:"fast",difficulty:"intermediate",duration:"3:30",reps:"15 reps",videoCode:"strength3",benefit:"Increases power.",solution:"Trains fast force output.",gender:"both",thumbnail:"S3"},
-            { id:"S4",name:"Isometric Strength Hold",description:"Static high tension hold",category:"strength",subcategory:"slow",difficulty:"intermediate",duration:"4:00",reps:"5 × 15s",videoCode:"strength4",benefit:"Strengthens holding capacity.",solution:"Improves isometric strength.",gender:"both",thumbnail:"S4"},
-            { id:"S5",name:"Resistance Focus Hold",description:"Strength against internal resistance",category:"strength",subcategory:"slow",difficulty:"advanced",duration:"4:30",reps:"6 reps",videoCode:"strength5",benefit:"Boosts resistance strength.",solution:"Increases load tolerance.",gender:"both",thumbnail:"S5"},
-            { id:"S6",name:"Power Pulse Advanced",description:"Fast powerful pulses",category:"strength",subcategory:"fast",difficulty:"advanced",duration:"3:20",reps:"20 pulses",videoCode:"strength6",benefit:"Explosive pelvic power.",solution:"Fast-twitch activation.",gender:"both",thumbnail:"S6"},
-            { id:"S7",name:"Endurance Strength Hold",description:"Long strong contractions",category:"strength",subcategory:"slow",difficulty:"advanced",duration:"5:00",reps:"5 × 20s",videoCode:"strength7",benefit:"Strength + endurance.",solution:"Delayed fatigue.",gender:"both",thumbnail:"S7"},
-            { id:"S8",name:"Male Pelvic Power",description:"Male focused strength contractions",category:"strength",subcategory:"slow",difficulty:"advanced",duration:"4:40",reps:"8 reps",videoCode:"strength8",benefit:"Male pelvic strength.",solution:"Targets male muscle load.",gender:"Male",thumbnail:"S8"},
-            { id:"S9",name:"Female Core Strength",description:"Female pelvic strengthening",category:"strength",subcategory:"slow",difficulty:"advanced",duration:"4:50",reps:"8 reps",videoCode:"strength9",benefit:"Female pelvic stability.",solution:"Supports core control.",gender:"Female",thumbnail:"S9"},
-            { id:"S10",name:"Power Hold Ladder",description:"Increasing power holds",category:"strength",subcategory:"slow",difficulty:"intermediate",duration:"4:10",reps:"Ladder sets",videoCode:"strength10",benefit:"Progressive strength.",solution:"Step load increase.",gender:"both",thumbnail:"S10"}
+            { id:"S1",name:"Full Squeeze Max",description:"Maximum pelvic contraction hold",category:"strength",subcategory:"slow",difficulty:"intermediate",duration:"3:45",reps:"8 × 6s",videoCode:"2ACRqePb14o",benefit:"Builds maximum strength.",solution:"Activates full muscle fibers.",gender:"both",thumbnail:"S1"},
+            { id:"S2",name:"Peak Hold Challenge",description:"High intensity peak holds",category:"strength",subcategory:"slow",difficulty:"intermediate",duration:"4:20",reps:"6 × 10s",videoCode:"2ACRqePb14o",benefit:"Improves peak endurance.",solution:"Sustains max contraction.",gender:"both",thumbnail:"S2"},
+            { id:"S3",name:"Clench Release Power",description:"Explosive clench and release",category:"strength",subcategory:"fast",difficulty:"intermediate",duration:"3:30",reps:"15 reps",videoCode:"2ACRqePb14o",benefit:"Increases power.",solution:"Trains fast force output.",gender:"both",thumbnail:"S3"},
+            { id:"S4",name:"Isometric Strength Hold",description:"Static high tension hold",category:"strength",subcategory:"slow",difficulty:"intermediate",duration:"4:00",reps:"5 × 15s",videoCode:"2ACRqePb14o",benefit:"Strengthens holding capacity.",solution:"Improves isometric strength.",gender:"both",thumbnail:"S4"},
+            { id:"S5",name:"Resistance Focus Hold",description:"Strength against internal resistance",category:"strength",subcategory:"slow",difficulty:"advanced",duration:"4:30",reps:"6 reps",videoCode:"2ACRqePb14o",benefit:"Boosts resistance strength.",solution:"Increases load tolerance.",gender:"both",thumbnail:"S5"},
+            { id:"S6",name:"Power Pulse Advanced",description:"Fast powerful pulses",category:"strength",subcategory:"fast",difficulty:"advanced",duration:"3:20",reps:"20 pulses",videoCode:"2ACRqePb14o",benefit:"Explosive pelvic power.",solution:"Fast-twitch activation.",gender:"both",thumbnail:"S6"},
+            { id:"S7",name:"Endurance Strength Hold",description:"Long strong contractions",category:"strength",subcategory:"slow",difficulty:"advanced",duration:"5:00",reps:"5 × 20s",videoCode:"2ACRqePb14o",benefit:"Strength + endurance.",solution:"Delayed fatigue.",gender:"both",thumbnail:"S7"},
+            { id:"S8",name:"Male Pelvic Power",description:"Male focused strength contractions",category:"strength",subcategory:"slow",difficulty:"advanced",duration:"4:40",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Male pelvic strength.",solution:"Targets male muscle load.",gender:"Male",thumbnail:"S8"},
+            { id:"S9",name:"Female Core Strength",description:"Female pelvic strengthening",category:"strength",subcategory:"slow",difficulty:"advanced",duration:"4:50",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Female pelvic stability.",solution:"Supports core control.",gender:"Female",thumbnail:"S9"},
+            { id:"S10",name:"Power Hold Ladder",description:"Increasing power holds",category:"strength",subcategory:"slow",difficulty:"intermediate",duration:"4:10",reps:"Ladder sets",videoCode:"2ACRqePb14o",benefit:"Progressive strength.",solution:"Step load increase.",gender:"both",thumbnail:"S10"}
         ],
 
         control: [
-            { id:"C1",name:"Elevator Control",description:"Gradual increase and decrease of contraction",category:"control",subcategory:"slow",difficulty:"beginner",duration:"3:20",reps:"8 cycles",videoCode:"control1",benefit:"Improves graded control.",solution:"Teaches intensity variation.",gender:"both",thumbnail:"C1"},
-            { id:"C2",name:"Stop Start Hold",description:"Instant stop and release training",category:"control",subcategory:"fast",difficulty:"beginner",duration:"2:40",reps:"15 reps",videoCode:"control2",benefit:"Quick control response.",solution:"Trains on-off control.",gender:"both",thumbnail:"C2"},
-            { id:"C3",name:"Front Back Control",description:"Front to back muscle activation",category:"control",subcategory:"slow",difficulty:"intermediate",duration:"3:30",reps:"10 reps",videoCode:"control3",benefit:"Improves muscle isolation.",solution:"Selective activation.",gender:"both",thumbnail:"C3"},
-            { id:"C4",name:"Wave Control Drill",description:"Smooth wave-like contractions",category:"control",subcategory:"slow",difficulty:"intermediate",duration:"3:45",reps:"8 waves",videoCode:"control4",benefit:"Fluid control.",solution:"Coordination training.",gender:"both",thumbnail:"C4"},
-            { id:"C5",name:"Pulse Control Hold",description:"Controlled pulse with hold",category:"control",subcategory:"fast",difficulty:"beginner",duration:"3:00",reps:"18 pulses",videoCode:"control5",benefit:"Pulse accuracy.",solution:"Control precision.",gender:"both",thumbnail:"C5"},
-            { id:"C6",name:"Segmented Control",description:"Segment by segment contraction",category:"control",subcategory:"slow",difficulty:"intermediate",duration:"3:50",reps:"8 reps",videoCode:"control6",benefit:"Segment awareness.",solution:"Improves separation.",gender:"both",thumbnail:"C6"},
-            { id:"C7",name:"Rapid Control Switch",description:"Fast switch between contract and relax",category:"control",subcategory:"fast",difficulty:"intermediate",duration:"2:55",reps:"20 switches",videoCode:"control7",benefit:"Reaction control.",solution:"Speed accuracy.",gender:"both",thumbnail:"C7"},
-            { id:"C8",name:"Precision Hold Control",description:"Exact duration holds",category:"control",subcategory:"slow",difficulty:"beginner",duration:"3:10",reps:"10 reps",videoCode:"control8",benefit:"Timing accuracy.",solution:"Controlled holds.",gender:"both",thumbnail:"C8"},
-            { id:"C9",name:"Control Ladder",description:"Increasing control difficulty ladder",category:"control",subcategory:"slow",difficulty:"intermediate",duration:"3:40",reps:"Ladder sets",videoCode:"control9",benefit:"Progressive control.",solution:"Step control.",gender:"both",thumbnail:"C9"},
-            { id:"C10",name:"Rhythm Control",description:"Maintain steady contraction rhythm",category:"control",subcategory:"fast",difficulty:"beginner",duration:"2:50",reps:"20 reps",videoCode:"control10",benefit:"Rhythmic stability.",solution:"Consistency training.",gender:"both",thumbnail:"C10"}
+            { id:"C1",name:"Elevator Control",description:"Gradual increase and decrease of contraction",category:"control",subcategory:"slow",difficulty:"beginner",duration:"3:20",reps:"8 cycles",videoCode:"2ACRqePb14o",benefit:"Improves graded control.",solution:"Teaches intensity variation.",gender:"both",thumbnail:"C1"},
+            { id:"C2",name:"Stop Start Hold",description:"Instant stop and release training",category:"control",subcategory:"fast",difficulty:"beginner",duration:"2:40",reps:"15 reps",videoCode:"2ACRqePb14o",benefit:"Quick control response.",solution:"Trains on-off control.",gender:"both",thumbnail:"C2"},
+            { id:"C3",name:"Front Back Control",description:"Front to back muscle activation",category:"control",subcategory:"slow",difficulty:"intermediate",duration:"3:30",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Improves muscle isolation.",solution:"Selective activation.",gender:"both",thumbnail:"C3"},
+            { id:"C4",name:"Wave Control Drill",description:"Smooth wave-like contractions",category:"control",subcategory:"slow",difficulty:"intermediate",duration:"3:45",reps:"8 waves",videoCode:"2ACRqePb14o",benefit:"Fluid control.",solution:"Coordination training.",gender:"both",thumbnail:"C4"},
+            { id:"C5",name:"Pulse Control Hold",description:"Controlled pulse with hold",category:"control",subcategory:"fast",difficulty:"beginner",duration:"3:00",reps:"18 pulses",videoCode:"2ACRqePb14o",benefit:"Pulse accuracy.",solution:"Control precision.",gender:"both",thumbnail:"C5"},
+            { id:"C6",name:"Segmented Control",description:"Segment by segment contraction",category:"control",subcategory:"slow",difficulty:"intermediate",duration:"3:50",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Segment awareness.",solution:"Improves separation.",gender:"both",thumbnail:"C6"},
+            { id:"C7",name:"Rapid Control Switch",description:"Fast switch between contract and relax",category:"control",subcategory:"fast",difficulty:"intermediate",duration:"2:55",reps:"20 switches",videoCode:"2ACRqePb14o",benefit:"Reaction control.",solution:"Speed accuracy.",gender:"both",thumbnail:"C7"},
+            { id:"C8",name:"Precision Hold Control",description:"Exact duration holds",category:"control",subcategory:"slow",difficulty:"beginner",duration:"3:10",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Timing accuracy.",solution:"Controlled holds.",gender:"both",thumbnail:"C8"},
+            { id:"C9",name:"Control Ladder",description:"Increasing control difficulty ladder",category:"control",subcategory:"slow",difficulty:"intermediate",duration:"3:40",reps:"Ladder sets",videoCode:"2ACRqePb14o",benefit:"Progressive control.",solution:"Step control.",gender:"both",thumbnail:"C9"},
+            { id:"C10",name:"Rhythm Control",description:"Maintain steady contraction rhythm",category:"control",subcategory:"fast",difficulty:"beginner",duration:"2:50",reps:"20 reps",videoCode:"2ACRqePb14o",benefit:"Rhythmic stability.",solution:"Consistency training.",gender:"both",thumbnail:"C10"}
         ],
 
         functional: [
-            { id:"FU1",name:"Walking Kegels",description:"Kegel contractions while walking",category:"functional",subcategory:"activity",difficulty:"beginner",duration:"3:30",reps:"5 min walk",videoCode:"functional1",benefit:"Daily integration.",solution:"Builds habit.",gender:"both",thumbnail:"FU1"},
-            { id:"FU2",name:"Standing Hold",description:"Kegels in standing posture",category:"functional",subcategory:"posture",difficulty:"beginner",duration:"3:10",reps:"10 reps",videoCode:"functional2",benefit:"Postural control.",solution:"Improves balance.",gender:"both",thumbnail:"FU2"},
-            { id:"FU3",name:"Sitting Control",description:"Pelvic engagement while sitting",category:"functional",subcategory:"posture",difficulty:"beginner",duration:"3:00",reps:"12 reps",videoCode:"functional3",benefit:"Desk friendly.",solution:"Office safe.",gender:"both",thumbnail:"FU3"},
-            { id:"FU4",name:"Cough Guard",description:"Pre-contraction before cough",category:"functional",subcategory:"stress",difficulty:"beginner",duration:"2:45",reps:"10 reps",videoCode:"functional4",benefit:"Leak prevention.",solution:"Stress control.",gender:"both",thumbnail:"FU4"},
-            { id:"FU5",name:"Laugh Control",description:"Control during laughter",category:"functional",subcategory:"stress",difficulty:"beginner",duration:"3:05",reps:"8 reps",videoCode:"functional5",benefit:"Social confidence.",solution:"Reflex training.",gender:"both",thumbnail:"FU5"},
-            { id:"FU6",name:"Lift Support",description:"Pelvic support during lifting",category:"functional",subcategory:"stress",difficulty:"intermediate",duration:"3:40",reps:"6 reps",videoCode:"functional6",benefit:"Load protection.",solution:"Core safety.",gender:"both",thumbnail:"FU6"},
-            { id:"FU7",name:"Stair Climb Kegels",description:"Kegels while climbing stairs",category:"functional",subcategory:"activity",difficulty:"intermediate",duration:"3:20",reps:"2 rounds",videoCode:"functional7",benefit:"Functional endurance.",solution:"Daily strength.",gender:"both",thumbnail:"FU7"},
-            { id:"FU8",name:"Car Seat Control",description:"Kegels while driving",category:"functional",subcategory:"activity",difficulty:"beginner",duration:"3:10",reps:"10 reps",videoCode:"functional8",benefit:"Time efficient.",solution:"Commute use.",gender:"both",thumbnail:"FU8"},
-            { id:"FU9",name:"Standing Shift Hold",description:"Weight shift with hold",category:"functional",subcategory:"posture",difficulty:"intermediate",duration:"3:25",reps:"8 reps",videoCode:"functional9",benefit:"Dynamic balance.",solution:"Stability gain.",gender:"both",thumbnail:"FU9"},
-            { id:"FU10",name:"Desk Micro Holds",description:"Short holds at desk",category:"functional",subcategory:"posture",difficulty:"beginner",duration:"2:50",reps:"15 reps",videoCode:"functional10",benefit:"Discreet training.",solution:"Office routine.",gender:"both",thumbnail:"FU10"}
+            { id:"FU1",name:"Walking Kegels",description:"Kegel contractions while walking",category:"functional",subcategory:"activity",difficulty:"beginner",duration:"3:30",reps:"5 min walk",videoCode:"2ACRqePb14o",benefit:"Daily integration.",solution:"Builds habit.",gender:"both",thumbnail:"FU1"},
+            { id:"FU2",name:"Standing Hold",description:"Kegels in standing posture",category:"functional",subcategory:"posture",difficulty:"beginner",duration:"3:10",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Postural control.",solution:"Improves balance.",gender:"both",thumbnail:"FU2"},
+            { id:"FU3",name:"Sitting Control",description:"Pelvic engagement while sitting",category:"functional",subcategory:"posture",difficulty:"beginner",duration:"3:00",reps:"12 reps",videoCode:"2ACRqePb14o",benefit:"Desk friendly.",solution:"Office safe.",gender:"both",thumbnail:"FU3"},
+            { id:"FU4",name:"Cough Guard",description:"Pre-contraction before cough",category:"functional",subcategory:"stress",difficulty:"beginner",duration:"2:45",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Leak prevention.",solution:"Stress control.",gender:"both",thumbnail:"FU4"},
+            { id:"FU5",name:"Laugh Control",description:"Control during laughter",category:"functional",subcategory:"stress",difficulty:"beginner",duration:"3:05",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Social confidence.",solution:"Reflex training.",gender:"both",thumbnail:"FU5"},
+            { id:"FU6",name:"Lift Support",description:"Pelvic support during lifting",category:"functional",subcategory:"stress",difficulty:"intermediate",duration:"3:40",reps:"6 reps",videoCode:"2ACRqePb14o",benefit:"Load protection.",solution:"Core safety.",gender:"both",thumbnail:"FU6"},
+            { id:"FU7",name:"Stair Climb Kegels",description:"Kegels while climbing stairs",category:"functional",subcategory:"activity",difficulty:"intermediate",duration:"3:20",reps:"2 rounds",videoCode:"2ACRqePb14o",benefit:"Functional endurance.",solution:"Daily strength.",gender:"both",thumbnail:"FU7"},
+            { id:"FU8",name:"Car Seat Control",description:"Kegels while driving",category:"functional",subcategory:"activity",difficulty:"beginner",duration:"3:10",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Time efficient.",solution:"Commute use.",gender:"both",thumbnail:"FU8"},
+            { id:"FU9",name:"Standing Shift Hold",description:"Weight shift with hold",category:"functional",subcategory:"posture",difficulty:"intermediate",duration:"3:25",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Dynamic balance.",solution:"Stability gain.",gender:"both",thumbnail:"FU9"},
+            { id:"FU10",name:"Desk Micro Holds",description:"Short holds at desk",category:"functional",subcategory:"posture",difficulty:"beginner",duration:"2:50",reps:"15 reps",videoCode:"2ACRqePb14o",benefit:"Discreet training.",solution:"Office routine.",gender:"both",thumbnail:"FU10"}
         ],
 
         breathing: [
-            { id:"B1",name:"Diaphragmatic Sync",description:"Deep breathing with pelvic sync",category:"breathing",subcategory:"breath-sync",difficulty:"beginner",duration:"3:30",reps:"10 cycles",videoCode:"breathing1",benefit:"Breath coordination.",solution:"Reduces strain.",gender:"both",thumbnail:"B1"},
-            { id:"B2",name:"Inhale Relax Exhale Hold",description:"Relax on inhale, hold on exhale",category:"breathing",subcategory:"breath-sync",difficulty:"beginner",duration:"3:20",reps:"12 cycles",videoCode:"breathing2",benefit:"Natural rhythm.",solution:"Improves control.",gender:"both",thumbnail:"B2"},
-            { id:"B3",name:"Slow Breath Hold",description:"Slow breathing with gentle hold",category:"breathing",subcategory:"slow",difficulty:"beginner",duration:"3:45",reps:"10 reps",videoCode:"breathing3",benefit:"Calms nervous system.",solution:"Stress reduction.",gender:"both",thumbnail:"B3"},
-            { id:"B4",name:"Pulse Breath Control",description:"Pulse contractions with breathing",category:"breathing",subcategory:"fast",difficulty:"beginner",duration:"3:00",reps:"15 pulses",videoCode:"breathing4",benefit:"Breath timing.",solution:"Improves coordination.",gender:"both",thumbnail:"B4"},
-            { id:"B5",name:"Box Breathing Kegels",description:"4-4-4-4 breath pattern",category:"breathing",subcategory:"pranayama",difficulty:"intermediate",duration:"4:00",reps:"8 cycles",videoCode:"breathing5",benefit:"Mental focus.",solution:"Improves stability.",gender:"both",thumbnail:"B5"},
-            { id:"B6",name:"Extended Exhale Hold",description:"Long exhale with contraction",category:"breathing",subcategory:"slow",difficulty:"intermediate",duration:"4:10",reps:"8 reps",videoCode:"breathing6",benefit:"Endurance control.",solution:"Improves stamina.",gender:"both",thumbnail:"B6"},
-            { id:"B7",name:"Breath Awareness Hold",description:"Awareness-focused breathing holds",category:"breathing",subcategory:"slow",difficulty:"beginner",duration:"3:25",reps:"10 reps",videoCode:"breathing7",benefit:"Mind-body link.",solution:"Better technique.",gender:"both",thumbnail:"B7"},
-            { id:"B8",name:"Rhythm Breath Pulses",description:"Rhythmic breathing pulses",category:"breathing",subcategory:"fast",difficulty:"beginner",duration:"2:50",reps:"20 pulses",videoCode:"breathing8",benefit:"Rhythmic flow.",solution:"Timing accuracy.",gender:"both",thumbnail:"B8"},
-            { id:"B9",name:"Deep Belly Sync",description:"Belly breathing coordination",category:"breathing",subcategory:"breath-sync",difficulty:"beginner",duration:"3:40",reps:"12 cycles",videoCode:"breathing9",benefit:"Relaxation.",solution:"Reduces tension.",gender:"both",thumbnail:"B9"},
-            { id:"B10",name:"Breath Ladder Hold",description:"Increasing breath-hold ladder",category:"breathing",subcategory:"slow",difficulty:"intermediate",duration:"4:20",reps:"Ladder sets",videoCode:"breathing10",benefit:"Progressive control.",solution:"Builds endurance.",gender:"both",thumbnail:"B10"}
+            { id:"B1",name:"Diaphragmatic Sync",description:"Deep breathing with pelvic sync",category:"breathing",subcategory:"breath-sync",difficulty:"beginner",duration:"3:30",reps:"10 cycles",videoCode:"2ACRqePb14o",benefit:"Breath coordination.",solution:"Reduces strain.",gender:"both",thumbnail:"B1"},
+            { id:"B2",name:"Inhale Relax Exhale Hold",description:"Relax on inhale, hold on exhale",category:"breathing",subcategory:"breath-sync",difficulty:"beginner",duration:"3:20",reps:"12 cycles",videoCode:"2ACRqePb14o",benefit:"Natural rhythm.",solution:"Improves control.",gender:"both",thumbnail:"B2"},
+            { id:"B3",name:"Slow Breath Hold",description:"Slow breathing with gentle hold",category:"breathing",subcategory:"slow",difficulty:"beginner",duration:"3:45",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Calms nervous system.",solution:"Stress reduction.",gender:"both",thumbnail:"B3"},
+            { id:"B4",name:"Pulse Breath Control",description:"Pulse contractions with breathing",category:"breathing",subcategory:"fast",difficulty:"beginner",duration:"3:00",reps:"15 pulses",videoCode:"2ACRqePb14o",benefit:"Breath timing.",solution:"Improves coordination.",gender:"both",thumbnail:"B4"},
+            { id:"B5",name:"Box Breathing Kegels",description:"4-4-4-4 breath pattern",category:"breathing",subcategory:"pranayama",difficulty:"intermediate",duration:"4:00",reps:"8 cycles",videoCode:"2ACRqePb14o",benefit:"Mental focus.",solution:"Improves stability.",gender:"both",thumbnail:"B5"},
+            { id:"B6",name:"Extended Exhale Hold",description:"Long exhale with contraction",category:"breathing",subcategory:"slow",difficulty:"intermediate",duration:"4:10",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Endurance control.",solution:"Improves stamina.",gender:"both",thumbnail:"B6"},
+            { id:"B7",name:"Breath Awareness Hold",description:"Awareness-focused breathing holds",category:"breathing",subcategory:"slow",difficulty:"beginner",duration:"3:25",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Mind-body link.",solution:"Better technique.",gender:"both",thumbnail:"B7"},
+            { id:"B8",name:"Rhythm Breath Pulses",description:"Rhythmic breathing pulses",category:"breathing",subcategory:"fast",difficulty:"beginner",duration:"2:50",reps:"20 pulses",videoCode:"2ACRqePb14o",benefit:"Rhythmic flow.",solution:"Timing accuracy.",gender:"both",thumbnail:"B8"},
+            { id:"B9",name:"Deep Belly Sync",description:"Belly breathing coordination",category:"breathing",subcategory:"breath-sync",difficulty:"beginner",duration:"3:40",reps:"12 cycles",videoCode:"2ACRqePb14o",benefit:"Relaxation.",solution:"Reduces tension.",gender:"both",thumbnail:"B9"},
+            { id:"B10",name:"Breath Ladder Hold",description:"Increasing breath-hold ladder",category:"breathing",subcategory:"slow",difficulty:"intermediate",duration:"4:20",reps:"Ladder sets",videoCode:"2ACRqePb14o",benefit:"Progressive control.",solution:"Builds endurance.",gender:"both",thumbnail:"B10"}
         ],
 
         sexual: [
             // Male exercises
-            { id:"SPM1",name:"Erection Strength Hold",description:"Targeted holds for erection quality",category:"sexual",subcategory:"male",difficulty:"beginner",duration:"3:30",reps:"10 reps",videoCode:"sexual_m1",benefit:"Improves erection firmness.",solution:"Strengthens pelvic muscles.",gender:"Male",thumbnail:"SPM1"},
-            { id:"SPM2",name:"Ejaculation Control Pulse",description:"Controlled pulses for timing",category:"sexual",subcategory:"male",difficulty:"intermediate",duration:"3:10",reps:"20 pulses",videoCode:"sexual_m2",benefit:"Better timing control.",solution:"Refines reflex control.",gender:"Male",thumbnail:"SPM2"},
-            { id:"SPM3",name:"Prostate Circulation Hold",description:"Holds to enhance circulation",category:"sexual",subcategory:"male",difficulty:"beginner",duration:"3:45",reps:"8 reps",videoCode:"sexual_m3",benefit:"Supports prostate health.",solution:"Improves blood flow.",gender:"Male",thumbnail:"SPM3"},
-            { id:"SPM4",name:"Stamina Build Cycle",description:"Endurance cycles for performance",category:"sexual",subcategory:"male",difficulty:"intermediate",duration:"4:00",reps:"8 cycles",videoCode:"sexual_m4",benefit:"Longer performance.",solution:"Builds endurance.",gender:"Male",thumbnail:"SPM4"},
-            { id:"SPM5",name:"Power Squeeze Series",description:"Strong squeeze repetitions",category:"sexual",subcategory:"male",difficulty:"intermediate",duration:"3:20",reps:"12 reps",videoCode:"sexual_m5",benefit:"Increases power.",solution:"Boosts contraction strength.",gender:"Male",thumbnail:"SPM5"},
+            { id:"SPM1",name:"Erection Strength Hold",description:"Targeted holds for erection quality",category:"sexual",subcategory:"male",difficulty:"beginner",duration:"3:30",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Improves erection firmness.",solution:"Strengthens pelvic muscles.",gender:"Male",thumbnail:"SPM1"},
+            { id:"SPM2",name:"Ejaculation Control Pulse",description:"Controlled pulses for timing",category:"sexual",subcategory:"male",difficulty:"intermediate",duration:"3:10",reps:"20 pulses",videoCode:"2ACRqePb14o",benefit:"Better timing control.",solution:"Refines reflex control.",gender:"Male",thumbnail:"SPM2"},
+            { id:"SPM3",name:"Prostate Circulation Hold",description:"Holds to enhance circulation",category:"sexual",subcategory:"male",difficulty:"beginner",duration:"3:45",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Supports prostate health.",solution:"Improves blood flow.",gender:"Male",thumbnail:"SPM3"},
+            { id:"SPM4",name:"Stamina Build Cycle",description:"Endurance cycles for performance",category:"sexual",subcategory:"male",difficulty:"intermediate",duration:"4:00",reps:"8 cycles",videoCode:"2ACRqePb14o",benefit:"Longer performance.",solution:"Builds endurance.",gender:"Male",thumbnail:"SPM4"},
+            { id:"SPM5",name:"Power Squeeze Series",description:"Strong squeeze repetitions",category:"sexual",subcategory:"male",difficulty:"intermediate",duration:"3:20",reps:"12 reps",videoCode:"2ACRqePb14o",benefit:"Increases power.",solution:"Boosts contraction strength.",gender:"Male",thumbnail:"SPM5"},
             // Female exercises
-            { id:"SPF1",name:"Tone & Tighten Hold",description:"Tone-focused holds",category:"sexual",subcategory:"female",difficulty:"beginner",duration:"3:30",reps:"12 reps",videoCode:"sexual_f1",benefit:"Improves tone.",solution:"Strengthens muscles.",gender:"Female",thumbnail:"SPF1"},
-            { id:"SPF2",name:"Sensation Pulse",description:"Gentle pulses for sensation",category:"sexual",subcategory:"female",difficulty:"beginner",duration:"2:50",reps:"20 pulses",videoCode:"sexual_f2",benefit:"Enhanced sensation.",solution:"Improves awareness.",gender:"Female",thumbnail:"SPF2"},
-            { id:"SPF3",name:"Orgasm Control Cycle",description:"Control cycles for intensity",category:"sexual",subcategory:"female",difficulty:"intermediate",duration:"4:00",reps:"8 cycles",videoCode:"sexual_f3",benefit:"Stronger orgasms.",solution:"Control training.",gender:"Female",thumbnail:"SPF3"},
-            { id:"SPF4",name:"Arousal Endurance",description:"Endurance holds for arousal",category:"sexual",subcategory:"female",difficulty:"intermediate",duration:"4:10",reps:"8 reps",videoCode:"sexual_f4",benefit:"Sustained arousal.",solution:"Builds stamina.",gender:"Female",thumbnail:"SPF4"},
-            { id:"SPF5",name:"Confidence Builder",description:"Gentle confidence drills",category:"sexual",subcategory:"female",difficulty:"beginner",duration:"3:15",reps:"10 reps",videoCode:"sexual_f5",benefit:"Body confidence.",solution:"Mind-body link.",gender:"Female",thumbnail:"SPF5"}
+            { id:"SPF1",name:"Tone & Tighten Hold",description:"Tone-focused holds",category:"sexual",subcategory:"female",difficulty:"beginner",duration:"3:30",reps:"12 reps",videoCode:"2ACRqePb14o",benefit:"Improves tone.",solution:"Strengthens muscles.",gender:"Female",thumbnail:"SPF1"},
+            { id:"SPF2",name:"Sensation Pulse",description:"Gentle pulses for sensation",category:"sexual",subcategory:"female",difficulty:"beginner",duration:"2:50",reps:"20 pulses",videoCode:"2ACRqePb14o",benefit:"Enhanced sensation.",solution:"Improves awareness.",gender:"Female",thumbnail:"SPF2"},
+            { id:"SPF3",name:"Orgasm Control Cycle",description:"Control cycles for intensity",category:"sexual",subcategory:"female",difficulty:"intermediate",duration:"4:00",reps:"8 cycles",videoCode:"2ACRqePb14o",benefit:"Stronger orgasms.",solution:"Control training.",gender:"Female",thumbnail:"SPF3"},
+            { id:"SPF4",name:"Arousal Endurance",description:"Endurance holds for arousal",category:"sexual",subcategory:"female",difficulty:"intermediate",duration:"4:10",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Sustained arousal.",solution:"Builds stamina.",gender:"Female",thumbnail:"SPF4"},
+            { id:"SPF5",name:"Confidence Builder",description:"Gentle confidence drills",category:"sexual",subcategory:"female",difficulty:"beginner",duration:"3:15",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Body confidence.",solution:"Mind-body link.",gender:"Female",thumbnail:"SPF5"}
         ],
 
         rehab: [
-            { id:"R1",name:"Gentle Activation Start",description:"Very light pelvic activation",category:"rehab",subcategory:"post-surgery",difficulty:"beginner",duration:"3:00",reps:"8 reps",videoCode:"rehab1",benefit:"Safe recovery start.",solution:"Protects healing tissues.",gender:"both",thumbnail:"R1"},
-            { id:"R2",name:"Post Delivery Ease",description:"Gentle post-delivery holds",category:"rehab",subcategory:"postpartum",difficulty:"beginner",duration:"3:20",reps:"10 reps",videoCode:"rehab2",benefit:"Supports healing.",solution:"Gradual rebuilding.",gender:"Female",thumbnail:"R2"},
-            { id:"R3",name:"Post Prostate Support",description:"Early recovery control holds",category:"rehab",subcategory:"post-surgery",difficulty:"beginner",duration:"3:30",reps:"10 reps",videoCode:"rehab3",benefit:"Regains control.",solution:"Restores function.",gender:"Male",thumbnail:"R3"},
-            { id:"R4",name:"Urge Suppression Hold",description:"Hold to suppress urinary urge",category:"rehab",subcategory:"incontinence",difficulty:"beginner",duration:"3:15",reps:"8 reps",videoCode:"rehab4",benefit:"Reduces urgency.",solution:"Bladder control.",gender:"both",thumbnail:"R4"},
-            { id:"R5",name:"Stress Leak Guard",description:"Control during pressure events",category:"rehab",subcategory:"incontinence",difficulty:"beginner",duration:"3:00",reps:"10 reps",videoCode:"rehab5",benefit:"Leak prevention.",solution:"Stress response training.",gender:"both",thumbnail:"R5"},
-            { id:"R6",name:"Pelvic Relax Recovery",description:"Relaxation-focused rehab",category:"rehab",subcategory:"pain-relief",difficulty:"beginner",duration:"3:40",reps:"8 reps",videoCode:"rehab6",benefit:"Pain reduction.",solution:"Muscle relaxation.",gender:"both",thumbnail:"R6"},
-            { id:"R7",name:"Gentle Pulse Rehab",description:"Soft pulses for circulation",category:"rehab",subcategory:"circulation",difficulty:"beginner",duration:"2:50",reps:"15 pulses",videoCode:"rehab7",benefit:"Improves blood flow.",solution:"Promotes healing.",gender:"both",thumbnail:"R7"},
-            { id:"R8",name:"Controlled Recovery Hold",description:"Controlled holds during rehab",category:"rehab",subcategory:"post-surgery",difficulty:"intermediate",duration:"3:45",reps:"8 reps",videoCode:"rehab8",benefit:"Steady recovery.",solution:"Safe strengthening.",gender:"both",thumbnail:"R8"},
-            { id:"R9",name:"Pelvic Injury Support",description:"Supportive rehab contractions",category:"rehab",subcategory:"injury",difficulty:"beginner",duration:"3:30",reps:"10 reps",videoCode:"rehab9",benefit:"Injury healing.",solution:"Protective activation.",gender:"both",thumbnail:"R9"},
-            { id:"R10",name:"Pain Ease Hold",description:"Hold to ease pelvic pain",category:"rehab",subcategory:"pain-relief",difficulty:"beginner",duration:"3:20",reps:"8 reps",videoCode:"rehab10",benefit:"Pain comfort.",solution:"Reduces tension.",gender:"both",thumbnail:"R10"}
+            { id:"R1",name:"Gentle Activation Start",description:"Very light pelvic activation",category:"rehab",subcategory:"post-surgery",difficulty:"beginner",duration:"3:00",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Safe recovery start.",solution:"Protects healing tissues.",gender:"both",thumbnail:"R1"},
+            { id:"R2",name:"Post Delivery Ease",description:"Gentle post-delivery holds",category:"rehab",subcategory:"postpartum",difficulty:"beginner",duration:"3:20",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Supports healing.",solution:"Gradual rebuilding.",gender:"Female",thumbnail:"R2"},
+            { id:"R3",name:"Post Prostate Support",description:"Early recovery control holds",category:"rehab",subcategory:"post-surgery",difficulty:"beginner",duration:"3:30",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Regains control.",solution:"Restores function.",gender:"Male",thumbnail:"R3"},
+            { id:"R4",name:"Urge Suppression Hold",description:"Hold to suppress urinary urge",category:"rehab",subcategory:"incontinence",difficulty:"beginner",duration:"3:15",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Reduces urgency.",solution:"Bladder control.",gender:"both",thumbnail:"R4"},
+            { id:"R5",name:"Stress Leak Guard",description:"Control during pressure events",category:"rehab",subcategory:"incontinence",difficulty:"beginner",duration:"3:00",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Leak prevention.",solution:"Stress response training.",gender:"both",thumbnail:"R5"},
+            { id:"R6",name:"Pelvic Relax Recovery",description:"Relaxation-focused rehab",category:"rehab",subcategory:"pain-relief",difficulty:"beginner",duration:"3:40",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Pain reduction.",solution:"Muscle relaxation.",gender:"both",thumbnail:"R6"},
+            { id:"R7",name:"Gentle Pulse Rehab",description:"Soft pulses for circulation",category:"rehab",subcategory:"circulation",difficulty:"beginner",duration:"2:50",reps:"15 pulses",videoCode:"2ACRqePb14o",benefit:"Improves blood flow.",solution:"Promotes healing.",gender:"both",thumbnail:"R7"},
+            { id:"R8",name:"Controlled Recovery Hold",description:"Controlled holds during rehab",category:"rehab",subcategory:"post-surgery",difficulty:"intermediate",duration:"3:45",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Steady recovery.",solution:"Safe strengthening.",gender:"both",thumbnail:"R8"},
+            { id:"R9",name:"Pelvic Injury Support",description:"Supportive rehab contractions",category:"rehab",subcategory:"injury",difficulty:"beginner",duration:"3:30",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Injury healing.",solution:"Protective activation.",gender:"both",thumbnail:"R9"},
+            { id:"R10",name:"Pain Ease Hold",description:"Hold to ease pelvic pain",category:"rehab",subcategory:"pain-relief",difficulty:"beginner",duration:"3:20",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Pain comfort.",solution:"Reduces tension.",gender:"both",thumbnail:"R10"}
         ],
 
         mindfulness: [
-            { id:"M1",name:"Body Awareness Hold",description:"Mindful awareness during gentle holds",category:"mindfulness",subcategory:"awareness",difficulty:"beginner",duration:"3:30",reps:"8 reps",videoCode:"mindfulness1",benefit:"Improves awareness.",solution:"Mind-muscle link.",gender:"both",thumbnail:"M1"},
-            { id:"M2",name:"Breath Focus Hold",description:"Focus on breath with contraction",category:"mindfulness",subcategory:"breath-focus",difficulty:"beginner",duration:"3:20",reps:"10 reps",videoCode:"mindfulness2",benefit:"Calms mind.",solution:"Breath anchoring.",gender:"both",thumbnail:"M2"},
-            { id:"M3",name:"Slow Scan Contraction",description:"Body scan with slow holds",category:"mindfulness",subcategory:"awareness",difficulty:"beginner",duration:"3:45",reps:"8 reps",videoCode:"mindfulness3",benefit:"Enhanced perception.",solution:"Scan technique.",gender:"both",thumbnail:"M3"},
-            { id:"M4",name:"Rhythm Awareness Pulse",description:"Mindful rhythmic pulses",category:"mindfulness",subcategory:"rhythm",difficulty:"beginner",duration:"3:00",reps:"18 pulses",videoCode:"mindfulness4",benefit:"Rhythm control.",solution:"Attention training.",gender:"both",thumbnail:"M4"},
-            { id:"M5",name:"Present Moment Hold",description:"Hold with present-moment focus",category:"mindfulness",subcategory:"presence",difficulty:"beginner",duration:"3:10",reps:"10 reps",videoCode:"mindfulness5",benefit:"Focus stability.",solution:"Present awareness.",gender:"both",thumbnail:"M5"},
-            { id:"M6",name:"Gentle Awareness Flow",description:"Gentle flow with awareness",category:"mindfulness",subcategory:"flow",difficulty:"beginner",duration:"3:25",reps:"8 cycles",videoCode:"mindfulness6",benefit:"Mind-body harmony.",solution:"Flow awareness.",gender:"both",thumbnail:"M6"},
-            { id:"M7",name:"Counting Breath Holds",description:"Counted breaths during holds",category:"mindfulness",subcategory:"breath-focus",difficulty:"intermediate",duration:"3:40",reps:"10 reps",videoCode:"mindfulness7",benefit:"Mental clarity.",solution:"Counting anchor.",gender:"both",thumbnail:"M7"},
-            { id:"M8",name:"Soft Attention Pulses",description:"Soft pulses with attention",category:"mindfulness",subcategory:"rhythm",difficulty:"beginner",duration:"2:50",reps:"20 pulses",videoCode:"mindfulness8",benefit:"Gentle focus.",solution:"Low stress.",gender:"both",thumbnail:"M8"},
-            { id:"M9",name:"Awareness Ladder",description:"Increasing awareness ladder",category:"mindfulness",subcategory:"awareness",difficulty:"intermediate",duration:"4:10",reps:"Ladder sets",videoCode:"mindfulness9",benefit:"Progressive focus.",solution:"Step attention.",gender:"both",thumbnail:"M9"},
-            { id:"M10",name:"Mindful Timing Hold",description:"Exact timing with awareness",category:"mindfulness",subcategory:"presence",difficulty:"intermediate",duration:"3:55",reps:"8 reps",videoCode:"mindfulness10",benefit:"Timing awareness.",solution:"Precision focus.",gender:"both",thumbnail:"M10"}
+            { id:"M1",name:"Body Awareness Hold",description:"Mindful awareness during gentle holds",category:"mindfulness",subcategory:"awareness",difficulty:"beginner",duration:"3:30",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Improves awareness.",solution:"Mind-muscle link.",gender:"both",thumbnail:"M1"},
+            { id:"M2",name:"Breath Focus Hold",description:"Focus on breath with contraction",category:"mindfulness",subcategory:"breath-focus",difficulty:"beginner",duration:"3:20",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Calms mind.",solution:"Breath anchoring.",gender:"both",thumbnail:"M2"},
+            { id:"M3",name:"Slow Scan Contraction",description:"Body scan with slow holds",category:"mindfulness",subcategory:"awareness",difficulty:"beginner",duration:"3:45",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Enhanced perception.",solution:"Scan technique.",gender:"both",thumbnail:"M3"},
+            { id:"M4",name:"Rhythm Awareness Pulse",description:"Mindful rhythmic pulses",category:"mindfulness",subcategory:"rhythm",difficulty:"beginner",duration:"3:00",reps:"18 pulses",videoCode:"2ACRqePb14o",benefit:"Rhythm control.",solution:"Attention training.",gender:"both",thumbnail:"M4"},
+            { id:"M5",name:"Present Moment Hold",description:"Hold with present-moment focus",category:"mindfulness",subcategory:"presence",difficulty:"beginner",duration:"3:10",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Focus stability.",solution:"Present awareness.",gender:"both",thumbnail:"M5"},
+            { id:"M6",name:"Gentle Awareness Flow",description:"Gentle flow with awareness",category:"mindfulness",subcategory:"flow",difficulty:"beginner",duration:"3:25",reps:"8 cycles",videoCode:"2ACRqePb14o",benefit:"Mind-body harmony.",solution:"Flow awareness.",gender:"both",thumbnail:"M6"},
+            { id:"M7",name:"Counting Breath Holds",description:"Counted breaths during holds",category:"mindfulness",subcategory:"breath-focus",difficulty:"intermediate",duration:"3:40",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Mental clarity.",solution:"Counting anchor.",gender:"both",thumbnail:"M7"},
+            { id:"M8",name:"Soft Attention Pulses",description:"Soft pulses with attention",category:"mindfulness",subcategory:"rhythm",difficulty:"beginner",duration:"2:50",reps:"20 pulses",videoCode:"2ACRqePb14o",benefit:"Gentle focus.",solution:"Low stress.",gender:"both",thumbnail:"M8"},
+            { id:"M9",name:"Awareness Ladder",description:"Increasing awareness ladder",category:"mindfulness",subcategory:"awareness",difficulty:"intermediate",duration:"4:10",reps:"Ladder sets",videoCode:"2ACRqePb14o",benefit:"Progressive focus.",solution:"Step attention.",gender:"both",thumbnail:"M9"},
+            { id:"M10",name:"Mindful Timing Hold",description:"Exact timing with awareness",category:"mindfulness",subcategory:"presence",difficulty:"intermediate",duration:"3:55",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Timing awareness.",solution:"Precision focus.",gender:"both",thumbnail:"M10"}
         ],
 
         hybrid: [
-            { id:"H1",name:"Kegel + Bridge Basic",description:"Pelvic contraction with glute bridge",category:"hybrid",subcategory:"core",difficulty:"beginner",duration:"3:30",reps:"10 reps",videoCode:"hybrid1",benefit:"Pelvic-glute coordination.",solution:"Builds base integration.",gender:"both",thumbnail:"H1"},
-            { id:"H2",name:"Kegel + Squat Intro",description:"Pelvic engagement during squat",category:"hybrid",subcategory:"functional",difficulty:"beginner",duration:"3:40",reps:"10 reps",videoCode:"hybrid2",benefit:"Functional strength.",solution:"Daily movement control.",gender:"both",thumbnail:"H2"},
-            { id:"H3",name:"Kegel + Plank Hold",description:"Plank with pelvic hold",category:"hybrid",subcategory:"core",difficulty:"intermediate",duration:"3:20",reps:"6 × 20s",videoCode:"hybrid3",benefit:"Core-pelvic stability.",solution:"Deep core activation.",gender:"both",thumbnail:"H3"},
-            { id:"H4",name:"Kegel + Marching",description:"Pelvic control while marching",category:"hybrid",subcategory:"balance",difficulty:"beginner",duration:"3:00",reps:"20 steps",videoCode:"hybrid4",benefit:"Balance & control.",solution:"Dynamic coordination.",gender:"both",thumbnail:"H4"},
-            { id:"H5",name:"Bridge Pulse Combo",description:"Bridge with pelvic pulses",category:"hybrid",subcategory:"core",difficulty:"intermediate",duration:"3:10",reps:"15 pulses",videoCode:"hybrid5",benefit:"Endurance + strength.",solution:"Pulse integration.",gender:"both",thumbnail:"H5"},
-            { id:"H6",name:"Squat Hold Integration",description:"Squat hold with pelvic contraction",category:"hybrid",subcategory:"functional",difficulty:"intermediate",duration:"3:45",reps:"8 reps",videoCode:"hybrid6",benefit:"Lower-body control.",solution:"Load management.",gender:"both",thumbnail:"H6"},
-            { id:"H7",name:"Plank Pulse Control",description:"Pelvic pulses in plank",category:"hybrid",subcategory:"core",difficulty:"advanced",duration:"3:00",reps:"20 pulses",videoCode:"hybrid7",benefit:"Advanced core strength.",solution:"High control demand.",gender:"both",thumbnail:"H7"},
-            { id:"H8",name:"Standing Balance Hold",description:"Single-leg balance with hold",category:"hybrid",subcategory:"balance",difficulty:"intermediate",duration:"3:30",reps:"6 reps/leg",videoCode:"hybrid8",benefit:"Stability improvement.",solution:"Neuromuscular control.",gender:"both",thumbnail:"H8"},
-            { id:"H9",name:"Dynamic Step Control",description:"Step movement with pelvic engagement",category:"hybrid",subcategory:"functional",difficulty:"beginner",duration:"3:20",reps:"20 steps",videoCode:"hybrid9",benefit:"Movement control.",solution:"Daily life use.",gender:"both",thumbnail:"H9"},
-            { id:"H10",name:"Core Flow Combo",description:"Flowing core-pelvic movements",category:"hybrid",subcategory:"flow",difficulty:"intermediate",duration:"3:50",reps:"8 cycles",videoCode:"hybrid10",benefit:"Smooth coordination.",solution:"Fluid strength.",gender:"both",thumbnail:"H10"}
+            { id:"H1",name:"Kegel + Bridge Basic",description:"Pelvic contraction with glute bridge",category:"hybrid",subcategory:"core",difficulty:"beginner",duration:"3:30",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Pelvic-glute coordination.",solution:"Builds base integration.",gender:"both",thumbnail:"H1"},
+            { id:"H2",name:"Kegel + Squat Intro",description:"Pelvic engagement during squat",category:"hybrid",subcategory:"functional",difficulty:"beginner",duration:"3:40",reps:"10 reps",videoCode:"2ACRqePb14o",benefit:"Functional strength.",solution:"Daily movement control.",gender:"both",thumbnail:"H2"},
+            { id:"H3",name:"Kegel + Plank Hold",description:"Plank with pelvic hold",category:"hybrid",subcategory:"core",difficulty:"intermediate",duration:"3:20",reps:"6 × 20s",videoCode:"2ACRqePb14o",benefit:"Core-pelvic stability.",solution:"Deep core activation.",gender:"both",thumbnail:"H3"},
+            { id:"H4",name:"Kegel + Marching",description:"Pelvic control while marching",category:"hybrid",subcategory:"balance",difficulty:"beginner",duration:"3:00",reps:"20 steps",videoCode:"2ACRqePb14o",benefit:"Balance & control.",solution:"Dynamic coordination.",gender:"both",thumbnail:"H4"},
+            { id:"H5",name:"Bridge Pulse Combo",description:"Bridge with pelvic pulses",category:"hybrid",subcategory:"core",difficulty:"intermediate",duration:"3:10",reps:"15 pulses",videoCode:"2ACRqePb14o",benefit:"Endurance + strength.",solution:"Pulse integration.",gender:"both",thumbnail:"H5"},
+            { id:"H6",name:"Squat Hold Integration",description:"Squat hold with pelvic contraction",category:"hybrid",subcategory:"functional",difficulty:"intermediate",duration:"3:45",reps:"8 reps",videoCode:"2ACRqePb14o",benefit:"Lower-body control.",solution:"Load management.",gender:"both",thumbnail:"H6"},
+            { id:"H7",name:"Plank Pulse Control",description:"Pelvic pulses in plank",category:"hybrid",subcategory:"core",difficulty:"advanced",duration:"3:00",reps:"20 pulses",videoCode:"2ACRqePb14o",benefit:"Advanced core strength.",solution:"High control demand.",gender:"both",thumbnail:"H7"},
+            { id:"H8",name:"Standing Balance Hold",description:"Single-leg balance with hold",category:"hybrid",subcategory:"balance",difficulty:"intermediate",duration:"3:30",reps:"6 reps/leg",videoCode:"2ACRqePb14o",benefit:"Stability improvement.",solution:"Neuromuscular control.",gender:"both",thumbnail:"H8"},
+            { id:"H9",name:"Dynamic Step Control",description:"Step movement with pelvic engagement",category:"hybrid",subcategory:"functional",difficulty:"beginner",duration:"3:20",reps:"20 steps",videoCode:"2ACRqePb14o",benefit:"Movement control.",solution:"Daily life use.",gender:"both",thumbnail:"H9"},
+            { id:"H10",name:"Core Flow Combo",description:"Flowing core-pelvic movements",category:"hybrid",subcategory:"flow",difficulty:"intermediate",duration:"3:50",reps:"8 cycles",videoCode:"2ACRqePb14o",benefit:"Smooth coordination.",solution:"Fluid strength.",gender:"both",thumbnail:"H10"}
         ]
     };
 
-    // Video URL mapping (same for all exercises in this demo)
-    const videoUrls = {
-        "foundational1": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "foundational2": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "foundational3": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "foundational4": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "foundational5": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "foundational6": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "foundational7": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "foundational8": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "foundational9": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "foundational10": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "strength1": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "strength2": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "strength3": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "strength4": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "strength5": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "strength6": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "strength7": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "strength8": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "strength9": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "strength10": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "control1": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "control2": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "control3": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "control4": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "control5": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "control6": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "control7": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "control8": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "control9": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "control10": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "functional1": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "functional2": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "functional3": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "functional4": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "functional5": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "functional6": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "functional7": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "functional8": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "functional9": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "functional10": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "breathing1": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "breathing2": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "breathing3": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "breathing4": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "breathing5": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "breathing6": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "breathing7": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "breathing8": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "breathing9": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "breathing10": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "sexual_m1": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "sexual_m2": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "sexual_m3": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "sexual_m4": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "sexual_m5": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "sexual_f1": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "sexual_f2": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "sexual_f3": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "sexual_f4": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "sexual_f5": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "rehab1": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "rehab2": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "rehab3": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "rehab4": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "rehab5": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "rehab6": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "rehab7": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "rehab8": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "rehab9": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "rehab10": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "mindfulness1": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "mindfulness2": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "mindfulness3": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "mindfulness4": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "mindfulness5": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "mindfulness6": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "mindfulness7": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "mindfulness8": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "mindfulness9": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "mindfulness10": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "hybrid1": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "hybrid2": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "hybrid3": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "hybrid4": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "hybrid5": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "hybrid6": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "hybrid7": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "hybrid8": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "hybrid9": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "hybrid10": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
-    };
-
-    // Thumbnail images (in real app, these would be actual image URLs)
+    // Thumbnail images
     const thumbnailImages = {
         "F1": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
         "F2": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
@@ -1653,12 +1587,14 @@
         }
         updateReactor();
         updateProfileUI();
+        renderDayLibrary();
     }
 
     function saveState() {
         localStorage.setItem('STI_KEGAL_V3_PRO', JSON.stringify(appState));
         updateReactor();
         updateProfileUI();
+        renderDayLibrary();
     }
 
     // ==================== LOGIC ====================
@@ -1690,6 +1626,7 @@
         } else if (type === 'progress') {
             document.getElementById('module-progress').classList.add('active');
             renderProgress();
+            renderDayLibrary();
         }
     }
 
@@ -1759,6 +1696,72 @@
         if(current > 10) phase = "DEVELOPMENT";
         if(current > 20) phase = "MASTERY";
         document.getElementById('progress-phase').textContent = phase;
+    }
+
+    function renderDayLibrary() {
+        const grid = document.getElementById('day-library-grid');
+        let html = '';
+        
+        for (let day = 1; day <= 30; day++) {
+            const isCompleted = appState.dayProgress[day] && appState.dayProgress[day].length > 0;
+            const isCurrent = day === appState.currentDay;
+            const isLocked = day > appState.currentDay;
+            
+            let btnClass = 'day-library-btn';
+            if (isCompleted) btnClass += ' completed';
+            if (isCurrent) btnClass += ' current';
+            if (isLocked) btnClass += ' locked';
+            
+            html += `<button class="${btnClass}" ${!isLocked ? `onclick="openDayLibrary(${day})"` : ''}>${day}</button>`;
+        }
+        
+        grid.innerHTML = html;
+    }
+
+    function openDayLibrary(day) {
+        if (day > appState.currentDay) return;
+        
+        const dayExercises = appState.dayExercises[day] || [];
+        if (dayExercises.length === 0) return;
+        
+        let html = `
+            <div class="p-6 h-full flex flex-col">
+                <h2 class="text-2xl font-cyber font-bold text-white mb-6 border-b border-white/10 pb-4 flex items-center justify-between">
+                    <span>DAY ${day} LIBRARY</span>
+                    <span class="text-xs font-mono-tech text-[#FFD700]">${appState.dayProgress[day]?.length || 0}/${dayExercises.length} COMPLETED</span>
+                </h2>
+                <div class="space-y-4 overflow-y-auto pr-2 flex-1">
+        `;
+        
+        dayExercises.forEach((ex, idx) => {
+            const isDone = appState.dayProgress[day]?.includes(ex.id) || false;
+            
+            html += `
+                <div class="exercise-card p-4 rounded-2xl flex items-center gap-4 ${isDone ? 'completed' : ''}" onclick="playVideoFromLibrary('${ex.id}', ${day})">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold font-mono-tech text-base shadow-inner ${isDone ? 'bg-[#10b981] text-black shadow-none' : 'bg-white/5 text-white'}">
+                        ${isDone ? '<i class="fas fa-check"></i>' : idx+1}
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-white font-cyber tracking-wide mb-1">${ex.name}</h4>
+                        <div class="flex gap-3 text-[9px] text-gray-400 font-mono-tech">
+                            <span class="bg-white/5 px-2 py-0.5 rounded border border-white/5"><i class="far fa-clock mr-1"></i>${ex.duration}</span>
+                            <span class="bg-white/5 px-2 py-0.5 rounded border border-white/5"><i class="fas fa-repeat mr-1"></i>${ex.reps}</span>
+                        </div>
+                    </div>
+                    <div class="w-8 h-8 rounded-full border border-[#FFD700]/50 flex items-center justify-center text-[#FFD700]">
+                        <i class="fas fa-play text-xs ml-0.5"></i>
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += `
+                </div>
+                <button onclick="closeAllModules()" class="mt-6 w-full btn-tech py-4 rounded-xl text-xs font-bold font-cyber text-white/40 hover:text-white uppercase tracking-widest">Close Library</button>
+            </div>
+        `;
+        
+        document.getElementById('module-progress').innerHTML = html;
     }
 
     function startQuiz() {
@@ -1893,8 +1896,8 @@
             dayEx.push(exerciseLibrary.rehab[4]); // Stress Leak Guard
             dayEx.push(exerciseLibrary.functional[3]); // Cough Guard
         } else if (problems.includes("Pelvic Pain/Discomfort")) {
-            dayEx.push(exerciseLibrary.relaxation[0]); // Pelvic Drop Release
-            dayEx.push(exerciseLibrary.relaxation[5]); // Pelvic Relax Scan
+            dayEx.push(exerciseLibrary.rehab[5]); // Pelvic Relax Recovery
+            dayEx.push(exerciseLibrary.rehab[9]); // Pain Ease Hold
             dayEx.push(exerciseLibrary.mindfulness[0]); // Body Awareness Hold
         } else if (problems.includes("Sexual Function Concerns")) {
             if (appState.gender === "Male") {
@@ -1979,7 +1982,7 @@
             const isCurrent = idx === done.length;
             
             html += `
-                <div class="exercise-card p-5 rounded-2xl flex items-center gap-5 ${isLocked?'locked':''} ${isCurrent?'current':''} ${isDone?'completed':''}" ${!isLocked && !isDone ? `onclick="playVideo('${ex.id}')"` : ''}>
+                <div class="exercise-card p-5 rounded-2xl flex items-center gap-5 ${isLocked?'locked':''} ${isCurrent?'current':''} ${isDone?'completed':''}" ${!isLocked && !isDone ? `onclick="playVideo('${ex.id}', ${day})"` : ''}>
                     <div class="w-12 h-12 rounded-xl flex items-center justify-center font-bold font-mono-tech text-lg shadow-inner ${isDone ? 'bg-[#10b981] text-black shadow-none' : (isCurrent ? 'bg-[#FFD700] text-black shadow-[0_0_15px_rgba(255,215,0,0.5)]' : 'bg-white/5 text-white/20')}">
                         ${isDone ? '<i class="fas fa-check"></i>' : (isLocked ? '<i class="fas fa-lock"></i>' : idx+1)}
                     </div>
@@ -1997,25 +2000,72 @@
         });
         
         html += `</div>`;
+        
+        // Add day completion message if all exercises done
+        if (done.length === list.length && list.length > 0) {
+            if (day < 30) {
+                html += `
+                    <div class="bg-gradient-to-br from-[#10b981]/20 to-transparent border border-[#10b981] p-6 rounded-2xl text-center mb-6">
+                        <i class="fas fa-check-circle text-3xl text-[#10b981] mb-3"></i>
+                        <h3 class="text-lg font-bold text-white font-cyber mb-2">DAY ${day} COMPLETE!</h3>
+                        <p class="text-sm text-gray-300 font-mono-tech mb-4">All exercises completed. Ready to proceed?</p>
+                        <button onclick="advanceToNextDay()" class="w-full btn-primary-glow py-4 rounded-xl text-sm font-bold font-cyber">
+                            ADVANCE TO DAY ${day + 1} <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                `;
+            } else {
+                html += `
+                    <div class="bg-gradient-to-br from-[#FFD700]/20 to-transparent border border-[#FFD700] p-6 rounded-2xl text-center mb-6">
+                        <i class="fas fa-trophy text-3xl text-[#FFD700] mb-3"></i>
+                        <h3 class="text-lg font-bold text-white font-cyber mb-2">30-DAY PROTOCOL COMPLETE!</h3>
+                        <p class="text-sm text-gray-300 font-mono-tech mb-4">Congratulations! You've completed the full program.</p>
+                        <button onclick="restartAssessment()" class="w-full btn-primary-glow py-4 rounded-xl text-sm font-bold font-cyber">
+                            RESTART ASSESSMENT <i class="fas fa-redo ml-2"></i>
+                        </button>
+                    </div>
+                `;
+            }
+        }
+        
         document.getElementById('main-view-section').innerHTML = html;
     }
 
-    // ==================== CUSTOM VIDEO PLAYER LOGIC ====================
-    let videoPlayer = null;
-    let videoCheckInterval = null;
-    let currentVideoUrl = null;
+    function advanceToNextDay() {
+        if (appState.currentDay < 30) {
+            appState.currentDay++;
+            generateDay();
+            renderDay();
+            updateReactor();
+            saveState();
+        } else {
+            // Reset to assessment after 30 days
+            appState.assessmentComplete = false;
+            appState.currentQuestion = 0;
+            appState.categoryScores = { demographic: 0, symptoms: 0, lifestyle: 0, sexual: 0, experience: 0, goals: 0, medical: 0 };
+            appState.userAnswers = {};
+            startQuiz();
+            saveState();
+        }
+    }
+
+    // ==================== YOUTUBE VIDEO PLAYER LOGIC ====================
+    let youtubePlayer = null;
+    let youtubeCheckInterval = null;
     let activeEx = null;
-    let videoCompleted = false;
+    let activeDay = null;
+    let videoStarted = false;
+    let videoProgress = 0;
     
-    function playVideo(id) {
-        const day = appState.currentDay;
-        const ex = appState.dayExercises[day].find(e => e.id === id);
+    function playVideo(exId, day = appState.currentDay) {
+        const ex = appState.dayExercises[day].find(e => e.id === exId);
         
         if (!ex) return;
         
         activeEx = ex;
-        videoCompleted = false;
-        currentVideoUrl = videoUrls[ex.videoCode] || videoUrls["foundational1"];
+        activeDay = day;
+        videoStarted = false;
+        videoProgress = 0;
         
         document.getElementById('video-title').textContent = ex.name;
         document.getElementById('video-description').textContent = ex.description || "Execute controlled contractions. Focus on breath work.";
@@ -2025,34 +2075,17 @@
         
         const frame = document.getElementById('video-frame');
         const thumbnailUrl = thumbnailImages[ex.thumbnail] || thumbnailImages["F1"];
+        const videoCode = ex.videoCode || "2ACRqePb14o";
         
         frame.innerHTML = `
-            <div class="custom-video-player" id="custom-video-container">
-                <div id="video-thumbnail-container" class="relative w-full h-full">
+            <div class="youtube-iframe-container" id="youtube-container">
+                <div id="youtube-thumbnail-container" class="relative w-full h-full">
                     <img src="${thumbnailUrl}" alt="${ex.name}" class="custom-video-thumbnail">
-                    <div class="play-button-overlay" onclick="loadAndPlayVideo()">
+                    <div class="play-button-overlay" onclick="loadYouTubeVideo('${videoCode}')">
                         <i class="fas fa-play"></i>
                     </div>
                     <div class="video-duration-badge">${ex.duration}</div>
                 </div>
-                <div class="video-controls hidden" id="video-controls">
-                    <button class="control-btn" onclick="togglePlayPause()" id="play-pause-btn">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <div class="flex-1 h-1 bg-white/20 rounded-full overflow-hidden mx-2">
-                        <div id="custom-video-progress" class="h-full bg-[#FFD700] w-0"></div>
-                    </div>
-                    <button class="control-btn" onclick="toggleMute()" id="mute-btn">
-                        <i class="fas fa-volume-up"></i>
-                    </button>
-                    <button class="control-btn" onclick="closeVideoModal()">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <video id="custom-video-element" class="hidden w-full h-full" preload="metadata">
-                    <source src="${currentVideoUrl}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
             </div>
         `;
         
@@ -2063,104 +2096,114 @@
         const completeBtn = document.getElementById('complete-btn');
         const completeBtnText = document.getElementById('complete-btn-text');
         const videoLoading = document.getElementById('video-loading');
+        const repeatBtn = document.getElementById('repeat-btn');
         
         completeBtn.disabled = true;
         completeBtnText.textContent = 'PROTOCOL IN PROGRESS...';
         videoLoading.classList.remove('hidden');
+        repeatBtn.disabled = true;
         
         document.getElementById('video-modal').classList.remove('hidden');
     }
+    
+    function playVideoFromLibrary(exId, day) {
+        playVideo(exId, day);
+    }
 
-    function loadAndPlayVideo() {
-        const videoElement = document.getElementById('custom-video-element');
-        const thumbnailContainer = document.getElementById('video-thumbnail-container');
-        const controls = document.getElementById('video-controls');
+    function loadYouTubeVideo(videoCode) {
+        const container = document.getElementById('youtube-container');
+        const thumbnailContainer = document.getElementById('youtube-thumbnail-container');
         
-        if (videoElement) {
-            thumbnailContainer.classList.add('hidden');
-            videoElement.classList.remove('hidden');
-            controls.classList.remove('hidden');
+        thumbnailContainer.classList.add('hidden');
+        
+        container.innerHTML = `
+            <iframe 
+                src="https://www.youtube.com/embed/${videoCode}?autoplay=1&controls=1&modestbranding=1&rel=0&showinfo=0&enablejsapi=1" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen
+                id="youtube-iframe">
+            </iframe>
+        `;
+        
+        // Load YouTube API if not already loaded
+        if (!window.YT) {
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
             
-            videoPlayer = videoElement;
-            
-            videoElement.addEventListener('loadedmetadata', function() {
-                document.getElementById('video-time-total').textContent = formatTime(videoElement.duration);
-                document.getElementById('video-loading').classList.add('hidden');
+            window.onYouTubeIframeAPIReady = function() {
+                initYouTubePlayer();
+            };
+        } else {
+            initYouTubePlayer();
+        }
+        
+        document.getElementById('video-loading').classList.add('hidden');
+        document.getElementById('complete-btn').disabled = false;
+        document.getElementById('complete-btn-text').textContent = 'COMPLETE & SYNC DATA';
+        document.getElementById('repeat-btn').disabled = false;
+        videoStarted = true;
+        
+        if (youtubeCheckInterval) clearInterval(youtubeCheckInterval);
+        youtubeCheckInterval = setInterval(checkYouTubeProgress, 1000);
+    }
+
+    function initYouTubePlayer() {
+        youtubePlayer = new YT.Player('youtube-iframe', {
+            events: {
+                'onStateChange': onYouTubePlayerStateChange,
+                'onReady': onYouTubePlayerReady
+            }
+        });
+    }
+
+    function onYouTubePlayerReady(event) {
+        // Player is ready
+    }
+
+    function onYouTubePlayerStateChange(event) {
+        // Update progress when video ends
+        if (event.data === YT.PlayerState.ENDED) {
+            videoProgress = 100;
+            document.getElementById('video-progress-fill').style.width = '100%';
+            document.getElementById('complete-btn').disabled = false;
+            document.getElementById('complete-btn-text').textContent = 'COMPLETE & SYNC DATA';
+        }
+    }
+
+    function checkYouTubeProgress() {
+        if (youtubePlayer && youtubePlayer.getCurrentTime && youtubePlayer.getDuration) {
+            try {
+                const currentTime = youtubePlayer.getCurrentTime();
+                const duration = youtubePlayer.getDuration();
                 
-                // Enable complete button after video loads
-                const completeBtn = document.getElementById('complete-btn');
-                const completeBtnText = document.getElementById('complete-btn-text');
-                completeBtn.disabled = false;
-                completeBtnText.textContent = 'COMPLETE & SYNC DATA';
-            });
-            
-            videoElement.addEventListener('timeupdate', updateVideoProgress);
-            videoElement.addEventListener('ended', function() {
-                videoCompleted = true;
-                document.getElementById('video-progress-fill').style.width = '100%';
-                document.getElementById('custom-video-progress').style.width = '100%';
-            });
-            
-            videoElement.play();
-            document.getElementById('play-pause-btn').innerHTML = '<i class="fas fa-pause"></i>';
-            
-            // Start progress check interval
-            if (videoCheckInterval) clearInterval(videoCheckInterval);
-            videoCheckInterval = setInterval(checkVideoCompletion, 1000);
+                if (duration > 0) {
+                    videoProgress = (currentTime / duration) * 100;
+                    document.getElementById('video-progress-fill').style.width = `${videoProgress}%`;
+                    
+                    document.getElementById('video-time-current').textContent = formatTime(currentTime);
+                    document.getElementById('video-time-total').textContent = formatTime(duration);
+                    
+                    // Auto-enable complete button at 95% progress
+                    if (videoProgress >= 95 && !document.getElementById('complete-btn').disabled) {
+                        document.getElementById('complete-btn').disabled = false;
+                        document.getElementById('complete-btn-text').textContent = 'COMPLETE & SYNC DATA';
+                    }
+                }
+            } catch (e) {
+                // YouTube API might not be ready yet
+            }
         }
     }
 
-    function togglePlayPause() {
-        if (!videoPlayer) return;
-        
-        const playPauseBtn = document.getElementById('play-pause-btn');
-        
-        if (videoPlayer.paused) {
-            videoPlayer.play();
-            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        } else {
-            videoPlayer.pause();
-            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-        }
-    }
-
-    function toggleMute() {
-        if (!videoPlayer) return;
-        
-        const muteBtn = document.getElementById('mute-btn');
-        videoPlayer.muted = !videoPlayer.muted;
-        
-        if (videoPlayer.muted) {
-            muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-        } else {
-            muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-        }
-    }
-
-    function updateVideoProgress() {
-        if (!videoPlayer) return;
-        
-        const progressPercent = (videoPlayer.currentTime / videoPlayer.duration) * 100;
-        document.getElementById('video-progress-fill').style.width = `${progressPercent}%`;
-        document.getElementById('custom-video-progress').style.width = `${progressPercent}%`;
-        
-        document.getElementById('video-time-current').textContent = formatTime(videoPlayer.currentTime);
-        
-        // Auto-enable complete button at 95% progress
-        if (progressPercent >= 95 && !videoCompleted) {
-            videoCompleted = true;
-            document.getElementById('complete-btn').disabled = false;
-            document.getElementById('complete-btn-text').textContent = 'COMPLETE & SYNC DATA';
-        }
-    }
-
-    function checkVideoCompletion() {
-        if (!videoPlayer) return;
-        
-        if (videoPlayer.currentTime >= videoPlayer.duration * 0.95 && !videoCompleted) {
-            videoCompleted = true;
-            document.getElementById('complete-btn').disabled = false;
-            document.getElementById('complete-btn-text').textContent = 'COMPLETE & SYNC DATA';
+    function repeatVideo() {
+        if (youtubePlayer && youtubePlayer.seekTo) {
+            youtubePlayer.seekTo(0);
+            youtubePlayer.playVideo();
+            videoProgress = 0;
+            document.getElementById('video-progress-fill').style.width = '0%';
         }
     }
 
@@ -2171,16 +2214,11 @@
     }
 
     function markCurrentExerciseComplete() {
-        if (!activeEx || !videoCompleted) return;
+        if (!activeEx || !videoStarted) return;
         
-        const day = appState.currentDay;
+        const day = activeDay || appState.currentDay;
         if (!appState.dayProgress[day].includes(activeEx.id)) {
             appState.dayProgress[day].push(activeEx.id);
-        }
-
-        if (appState.dayProgress[day].length === appState.dayExercises[day].length && day < 30) {
-            appState.currentDay++;
-            alert("DAY COMPLETE. SYSTEM UPGRADE.");
         }
 
         closeVideoModal();
@@ -2189,25 +2227,30 @@
     }
 
     function closeVideoModal() {
-        if (videoCheckInterval) {
-            clearInterval(videoCheckInterval);
-            videoCheckInterval = null;
+        if (youtubeCheckInterval) {
+            clearInterval(youtubeCheckInterval);
+            youtubeCheckInterval = null;
         }
         
-        if (videoPlayer) {
-            videoPlayer.pause();
-            videoPlayer = null;
+        if (youtubePlayer && youtubePlayer.stopVideo) {
+            try {
+                youtubePlayer.stopVideo();
+            } catch (e) {}
+            youtubePlayer = null;
         }
         
         document.getElementById('video-modal').classList.add('hidden');
         document.getElementById('video-frame').innerHTML = '';
         activeEx = null;
-        videoCompleted = false;
+        activeDay = null;
+        videoStarted = false;
+        videoProgress = 0;
         
         // Reset UI
         document.getElementById('complete-btn').disabled = true;
-        document.getElementById('complete-btn-text').textContent = 'INITIALIZING STREAM...';
+        document.getElementById('complete-btn-text').textContent = 'PROTOCOL IN PROGRESS...';
         document.getElementById('video-loading').classList.remove('hidden');
+        document.getElementById('repeat-btn').disabled = true;
     }
 
     function updateReactor() {
